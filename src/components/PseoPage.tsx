@@ -45,7 +45,7 @@ export default function PseoPage({
       <Navbar />
 
       <section className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] bg-brand-indigo/30 rounded-full blur-[120px] -z-10 mix-blend-screen" />
+        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-4xl">
             <p className="text-xs font-semibold text-brand-accent uppercase tracking-[0.22em] mb-5">
@@ -60,14 +60,14 @@ export default function PseoPage({
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
               <Link
                 href="/#contact"
-                className="bg-brand-accent text-white px-7 py-4 rounded-full font-bold tracking-wide hover:bg-brand-glow hover:text-black transition-all duration-300 inline-flex items-center justify-center gap-3"
+                className="button-primary text-black px-7 py-4 rounded-lg font-bold tracking-wide transition-all duration-300 inline-flex items-center justify-center gap-3"
               >
                 {primaryCta}
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/services/programmatic-seo"
-                className="px-7 py-4 rounded-full font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors inline-flex items-center justify-center"
+                className="px-7 py-4 rounded-lg font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors inline-flex items-center justify-center"
               >
                 Explore PSEO
               </Link>
@@ -82,7 +82,7 @@ export default function PseoPage({
             const Icon = icons[section.icon ?? "target"];
 
             return (
-              <article key={section.title} className="glass-panel p-8 rounded-3xl">
+              <article key={section.title} className="glass-panel p-8 rounded-lg">
                 <Icon className="w-8 h-8 text-brand-accent mb-6" />
                 <h2 className="text-2xl font-display font-bold text-white mb-4">
                   {section.title}
@@ -114,7 +114,7 @@ export default function PseoPage({
               {faqs.map((faq, index) => (
                 <details
                   key={faq.question}
-                  className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden"
+                  className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden"
                   open={index === 0}
                 >
                   <summary className="flex items-center justify-between gap-6 p-6 cursor-pointer">
@@ -129,14 +129,14 @@ export default function PseoPage({
             </div>
           </div>
 
-          <aside className="glass-panel rounded-3xl p-8 h-fit">
+          <aside className="glass-panel rounded-lg p-8 h-fit">
             <h2 className="text-xl font-display font-bold text-white mb-5">Related Growth Paths</h2>
             <div className="space-y-3">
               {relatedLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 px-4 py-3 text-gray-300 hover:text-white hover:border-brand-accent/60 transition-colors"
+                  className="flex items-center justify-between gap-4 rounded-lg border border-white/10 px-4 py-3 text-gray-300 hover:text-white hover:border-brand-accent/60 transition-colors"
                 >
                   <span>{link.label}</span>
                   <ArrowRight className="w-4 h-4 text-brand-accent" />

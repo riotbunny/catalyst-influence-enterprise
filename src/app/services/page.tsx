@@ -28,7 +28,8 @@ export default function ServicesPage() {
       <Background />
       <Navbar />
 
-      <section className="pt-36 pb-16 md:pt-48">
+      <section className="relative pt-36 pb-16 md:pt-48">
+        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-semibold text-brand-accent uppercase tracking-[0.22em] mb-5">
             Service Architecture
@@ -48,7 +49,7 @@ export default function ServicesPage() {
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="glass-panel rounded-3xl p-7 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
+              className="glass-panel rounded-lg p-7 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
             >
               <Zap className="w-7 h-7 text-brand-accent mb-5" />
               <h2 className="text-xl font-display font-bold text-white leading-snug mb-4">

@@ -3,7 +3,7 @@
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap } from "lucide-react";
+import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 
@@ -62,20 +62,19 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
       <Navbar />
       
       {/* 1. Hero Section */}
-      <section className="relative pt-40 pb-20 md:pt-52 md:pb-32 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-indigo/30 rounded-full blur-[120px] -z-10 mix-blend-screen"></div>
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-brand-accent/10 rounded-full blur-[90px] -z-10 mix-blend-screen"></div>
+      <section className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
+        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center">
         
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/[0.04] backdrop-blur-md mb-8">
           <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
           <span suppressHydrationWarning className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
             Accepting 2 established partners for {currentQuarter}
           </span>
         </div>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white leading-tight mb-6 tracking-tighter">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white leading-tight mb-6 max-w-6xl">
           PREDICTABLE <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-glow">CUSTOMER ACQUISITION.</span>
         </h1>
@@ -86,29 +85,54 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6">
-          <a href="#contact" className="group bg-brand-accent text-white px-8 py-4 rounded-full font-bold tracking-wide hover:bg-brand-glow hover:text-black transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,77,0.5)]">
+          <a href="#contact" className="button-primary group text-black px-8 py-4 rounded-lg font-bold tracking-wide transition-all duration-300 flex items-center justify-center gap-3">
             Apply For Partnership
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
-          <a href="#results" className="px-8 py-4 flex items-center justify-center rounded-full font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors">
+          <a href="#results" className="px-8 py-4 flex items-center justify-center rounded-lg font-bold tracking-wide text-white border border-white/16 bg-white/[0.03] hover:bg-white/10 transition-colors">
             See The Proof
           </a>
+        </div>
+
+        <div className="mt-14 grid w-full max-w-4xl grid-cols-1 gap-3 border-y border-white/8 bg-black/20 py-4 sm:grid-cols-3">
+          {[
+            ["21.3K", "indexed pages deployed"],
+            ["437", "qualified leads in 24 hours"],
+            ["$2.35", "documented lead cost"],
+          ].map(([value, label]) => (
+            <div key={label} className="px-5 py-3 text-center sm:border-r sm:border-white/8 last:border-r-0">
+              <div className="text-2xl font-display font-bold text-white">{value}</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
+            </div>
+          ))}
         </div>
         </div>
       </section>
 
       {/* 2. Enterprise Trust */}
-      <section className="py-12 border-y border-white/5 bg-black/20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-[0.2em] mb-8">
+      <section className="border-y border-white/5 bg-black/30 py-14">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
             {formattedCity 
               ? `Trusted by industry leaders in ${formattedCity} to architect their growth`
               : `Trusted by industry leaders to architect their growth`}
           </p>
-          <div className="flex flex-wrap justify-center gap-16 md:gap-32 opacity-50 hover:opacity-100 transition-all duration-700">
-            <div className="text-2xl font-display font-bold text-gray-400 flex items-center">Salesnet LLC</div>
-            <div className="text-2xl font-serif font-bold text-gray-400 italic flex items-center">McMaster Lawfirm</div>
-            <div className="text-2xl font-sans font-black text-gray-400 tracking-tighter flex items-center">Home Tech Dealer Inc.</div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              ["Salesnet LLC", "B2B acquisition systems"],
+              ["McMaster Lawfirm", "Legal demand capture"],
+              ["Home Tech Dealer Inc.", "Programmatic SEO + paid media"],
+            ].map(([name, detail]) => (
+              <div key={name} className="border border-white/8 bg-white/[0.025] px-6 py-5">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-lg font-display font-bold text-gray-200">{name}</div>
+                    <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">{detail}</div>
+                  </div>
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-brand-accent" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -135,7 +159,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 </div>
               </div>
 
-              <div className="glass-panel rounded-3xl p-8">
+              <div className="glass-panel rounded-lg p-8">
                 <h4 className="text-xl font-display font-bold text-white mb-6">
                   What we optimize for {formattedCity} service businesses
                 </h4>
@@ -161,73 +185,128 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
       {/* 3. Proof of Impact */}
       <section id="results" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-20 text-center">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Proof of Impact</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">We Don&apos;t Guess. We Engineer Results.</h3>
+          <div className="mb-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Proof of Impact</h2>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">Evidence a CEO can inspect in seconds.</h3>
+            </div>
+            <p className="text-lg leading-relaxed text-gray-400">
+              The point is not to look busy. It is to show whether acquisition architecture is producing indexed demand, qualified lead volume, and costs that can be scaled with confidence.
+            </p>
           </div>
 
-          <div className="glass-panel p-8 md:p-16 rounded-3xl border border-white/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[100px] -z-10"></div>
+          <div className="glass-panel p-8 md:p-16 rounded-lg border border-white/10 relative overflow-hidden">
+            <div className="premium-rule absolute left-8 right-8 top-0" />
             
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
-                  <span className="text-xs font-semibold tracking-widest text-brand-accent uppercase">Enterprise Case Study</span>
-                </div>
-                <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">Home Tech Dealer</h4>
-                <p className="text-gray-400 leading-relaxed mb-8 text-lg">
-                  Home Tech Dealer required an aggressive omnichannel scaling strategy. By deploying a custom programmatic SEO (pSEO) architecture alongside behaviorally-optimized paid media, we built a customer acquisition machine that generated over 400 highly-qualified leads in a single 24-hour period.
-                </p>
-
-                <div className="grid grid-cols-2 gap-8">
-                  <div>
-                    <BarChart3 className="w-8 h-8 text-brand-accent mb-4" />
-                    <div className="text-4xl font-display font-bold text-white mb-2">21.3k</div>
-                    <div className="text-sm text-gray-400 font-medium leading-relaxed">New Pages Indexed<br/>(Programmatic SEO)</div>
+            <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+              <div className="space-y-8">
+                <div>
+                  <div className="mb-8 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-brand-accent">Enterprise Case Study</span>
                   </div>
-                  <div>
-                    <Users className="w-8 h-8 text-brand-accent mb-4" />
-                    <div className="text-4xl font-display font-bold text-white mb-2">437</div>
-                    <div className="text-sm text-gray-400 font-medium leading-relaxed">High-Intent Leads<br/>Generated in 24 Hours</div>
+                  <h4 className="mb-6 text-3xl font-display font-bold text-white md:text-4xl">Home Tech Dealer</h4>
+                  <p className="text-lg leading-relaxed text-gray-400">
+                    A multi-channel acquisition rebuild combining programmatic SEO, paid traffic routing, landing-page trust architecture, and lead follow-up measurement.
+                  </p>
+                </div>
+
+                <div className="grid gap-3">
+                  {[
+                    ["Constraint", "Demand existed, but discovery paths and conversion evidence were fragmented."],
+                    ["Deployment", "Built search-capture assets, paid acquisition paths, and proof-led landing flows."],
+                    ["Result", "Generated a visible acquisition spike without relying on disconnected campaign activity."],
+                  ].map(([label, copy]) => (
+                    <div key={label} className="border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
+                      <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">{label}</div>
+                      <div className="mt-2 text-sm leading-relaxed text-gray-300">{copy}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="border border-white/8 bg-black/30 p-5">
+                    <BarChart3 className="mb-4 h-7 w-7 text-brand-accent" />
+                    <div className="mb-2 text-4xl font-display font-bold text-white">21.3K</div>
+                    <div className="text-sm font-medium leading-relaxed text-gray-400">New pages indexed through pSEO architecture</div>
+                  </div>
+                  <div className="border border-white/8 bg-black/30 p-5">
+                    <Users className="mb-4 h-7 w-7 text-brand-accent" />
+                    <div className="mb-2 text-4xl font-display font-bold text-white">437</div>
+                    <div className="text-sm font-medium leading-relaxed text-gray-400">High-intent leads generated in one day</div>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="bg-black/60 rounded-2xl p-6 border border-white/5 shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 px-3 py-1 bg-green-500/10 text-green-400 text-[10px] font-bold tracking-wider uppercase rounded-bl-lg">Verified Data</div>
-                  <div className="text-sm font-semibold text-gray-400 mb-4">Google Search Console (30 Days)</div>
-                  <div className="flex items-end gap-2 mb-2">
-                    <div className="text-3xl font-bold text-green-500">21.3K</div>
-                    <div className="text-sm text-gray-500 pb-1">Indexed Pages</div>
+              <div className="border border-white/10 bg-[#08080d] shadow-2xl">
+                <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+                  <div>
+                    <div className="text-sm font-bold text-white">Acquisition Command View</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">Search + paid media yield</div>
                   </div>
-                  <div className="w-full h-24 flex items-end gap-1 mt-4">
-                    {[2,3,2,4,3,2,1,2,3,45,45,47,48,48,48,48,45,45,45,35,35,35,35,34,34,34,34].map((h, i) => (
-                      <div key={i} className="flex-1 bg-green-500/80 rounded-t-sm hover:bg-green-400 transition-colors" style={{ height: `${h}%` }}></div>
-                    ))}
+                  <div className="flex items-center gap-2 rounded-md border border-green-400/20 bg-green-400/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-green-300">
+                    <LockKeyhole className="h-3.5 w-3.5" />
+                    Verified
                   </div>
                 </div>
 
-                <div className="bg-black/60 rounded-2xl p-6 border border-white/5 shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold tracking-wider uppercase rounded-bl-lg">Verified Data</div>
-                  <div className="text-sm font-semibold text-gray-400 mb-4">Meta Ads Manager (24-Hour Yield)</div>
-                  <div className="flex justify-between items-end border-b border-white/10 pb-4 mb-4">
-                    <div>
-                      <div className="text-xs text-gray-500 mb-1 uppercase tracking-wider">Results</div>
-                      <div className="text-2xl font-bold text-white">347 <span className="text-sm font-normal text-gray-500">Website Leads</span></div>
+                <div className="grid gap-4 p-5 sm:grid-cols-3">
+                  {[
+                    ["Indexed", "21.3K", Search],
+                    ["Lead Yield", "437", TrendingUp],
+                    ["CPL", "$2.35", Gauge],
+                  ].map(([label, value, Icon]) => (
+                    <div key={label as string} className="border border-white/8 bg-white/[0.025] p-4">
+                      <Icon className="mb-4 h-5 w-5 text-brand-accent" />
+                      <div className="text-xs uppercase tracking-[0.16em] text-gray-600">{label as string}</div>
+                      <div className="mt-2 text-2xl font-bold text-white">{value as string}</div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs text-gray-500 mb-1 uppercase tracking-wider">Cost Per Result</div>
-                      <div className="text-2xl font-bold text-white">$2.35</div>
+                  ))}
+                </div>
+
+                <div className="px-5 pb-5">
+                  <div className="border border-white/8 bg-black/40 p-5">
+                    <div className="mb-5 flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-semibold text-gray-300">Google Search Console</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">30 day index velocity</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-green-400">21.3K</div>
+                        <div className="text-xs text-gray-600">indexed</div>
+                      </div>
+                    </div>
+                    <div className="flex h-28 items-end gap-1">
+                      {[2,3,2,4,3,2,1,2,3,45,45,47,48,48,48,48,45,45,45,35,35,35,35,34,34,34,34].map((h, i) => (
+                        <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-green-600/70 to-green-300/80" style={{ height: `${h}%` }} />
+                      ))}
                     </div>
                   </div>
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <div className="text-2xl font-bold text-white">90 <span className="text-sm font-normal text-gray-500">Website Leads</span></div>
+                </div>
+
+                <div className="grid border-t border-white/8 md:grid-cols-[1fr_0.8fr]">
+                  <div className="p-5">
+                    <div className="mb-4 text-sm font-semibold text-gray-300">Meta Ads Manager</div>
+                    <div className="space-y-3">
+                      {[
+                        ["Website Leads", "347", "$2.35"],
+                        ["Qualified Actions", "90", "$3.35"],
+                      ].map(([label, value, cost]) => (
+                        <div key={label} className="grid grid-cols-[1fr_auto_auto] items-end gap-4 border-b border-white/8 pb-3 last:border-b-0 last:pb-0">
+                          <div className="text-xs uppercase tracking-[0.15em] text-gray-600">{label}</div>
+                          <div className="text-xl font-bold text-white">{value}</div>
+                          <div className="text-sm font-semibold text-brand-accent">{cost}</div>
+                        </div>
+                      ))}
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-white">$3.35</div>
+                  </div>
+                  <div className="border-t border-white/8 p-5 md:border-l md:border-t-0">
+                    <div className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brand-accent">
+                      <ArrowUpRight className="h-4 w-4" />
+                      Executive Readout
                     </div>
+                    <p className="font-serif text-lg italic leading-relaxed text-gray-300">
+                      &quot;The system showed where demand was coming from, which pages were being indexed, and where paid traffic could scale without guessing.&quot;
+                    </p>
                   </div>
                 </div>
               </div>
@@ -246,25 +325,25 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <Compass className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
               <h4 className="text-xl font-bold text-white mb-4">1. Discovery</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Get the right person into the environment. We engineer targeted SEO, paid media, and content structures to capture high-value intent.</p>
             </div>
             
-            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
               <h4 className="text-xl font-bold text-white mb-4">2. Trust</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Immediately reduce uncertainty. We design your visual credibility, authority markers, and consistency to make them feel safe taking the next step.</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
               <h4 className="text-xl font-bold text-white mb-4">3. Decision</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Structure information so taking action feels deeply logical. We rebuild offer architecture, messaging, and proactive objection resolution.</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(255,140,0,0.05)]">
+            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(214,154,58,0.05)]">
               <Zap className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
               <h4 className="text-xl font-bold text-white mb-4">4. Activation</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Convert intent into measurable action. We optimize forms, booking systems, automated follow-ups, and behavioral remarketing loops.</p>
@@ -275,7 +354,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
 
       {/* 5. The Flagship Offer (Execution Roadmap) */}
       <section className="py-32 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-brand-indigo/10 blur-[100px] -z-10"></div>
+        <div className="premium-rule absolute left-1/2 top-0 h-px w-[min(760px,calc(100%-3rem))] -translate-x-1/2" />
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-20 text-center">
             <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Flagship Engagement</h2>
@@ -284,7 +363,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
 
           <div className="space-y-6">
-            <div className="glass-panel p-8 rounded-2xl border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
+            <div className="glass-panel p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
               <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
                 <span className="text-2xl font-bold text-brand-accent">1</span>
               </div>
@@ -298,7 +377,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </div>
 
-            <div className="glass-panel p-8 rounded-2xl border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
+            <div className="glass-panel p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
               <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
                 <span className="text-2xl font-bold text-brand-accent">2</span>
               </div>
@@ -312,8 +391,8 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </div>
 
-            <div className="glass-panel p-8 rounded-2xl border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-8 items-start relative shadow-[0_0_30px_rgba(255,140,0,0.1)]">
-              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,140,0,0.5)]">
+            <div className="glass-panel p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-8 items-start relative shadow-[0_0_30px_rgba(214,154,58,0.1)]">
+              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(214,154,58,0.42)]">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
               <div>
@@ -332,16 +411,29 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
       {/* 6. The Brain Trust */}
       <section id="leadership" className="py-32 bg-black/40 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-brand-accent/20 rounded-[3rem] blur-2xl -z-10 transform -rotate-6 scale-95"></div>
-              <Image 
-                src="/founder-v2.jpg" 
-                alt="Principal Architect" 
-                width={600} 
-                height={600} 
-                className="rounded-[3rem] border border-white/10 shadow-2xl object-cover"
-              />
+          <div className="grid md:grid-cols-[0.88fr_1fr] gap-16 items-center">
+            <div className="relative max-w-[520px]">
+              <div className="absolute -inset-3 border border-white/8 bg-white/[0.02]" />
+              <div className="relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    src="/founder-v2.jpg"
+                    alt="Abel V., Principal Architect at Catalyst"
+                    fill
+                    sizes="(min-width: 768px) 42vw, 100vw"
+                    className="object-cover object-[52%_26%] saturate-[0.9] contrast-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_54%,rgba(0,0,0,0.72)_100%)]" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="border-t border-white/12 pt-4">
+                    <p className="text-lg font-display font-bold text-white">Abel V.</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand-accent">
+                      Principal Architect
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div>
               <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Brain Trust</h2>
@@ -356,9 +448,9 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                   <p className="text-gray-500 leading-relaxed">Leading the integration of behavioral psychology, principled negotiation, and advanced digital scaling.</p>
                 </div>
                 <ul className="space-y-4 text-gray-300 font-medium pt-4">
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Strategic Omnichannel Growth Specialist</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Relentless Focus on High-Ticket Conversions</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Strategic Omnichannel Growth Specialist</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Relentless Focus on High-Ticket Conversions</li>
                 </ul>
               </div>
             </div>
@@ -375,7 +467,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
           
           <div className="space-y-4">
-            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden" open>
+            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden" open>
               <summary className="flex items-center justify-between p-6 cursor-pointer">
                 <h4 className="text-lg font-bold text-white flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-brand-accent" /> The 90-Day Execution Guarantee</h4>
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
@@ -385,7 +477,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </details>
 
-            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
+            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between p-6 cursor-pointer">
                 <h4 className="text-lg font-bold text-white">Do you work with startups?</h4>
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
@@ -395,7 +487,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </details>
 
-            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
+            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between p-6 cursor-pointer">
                 <h4 className="text-lg font-bold text-white">What exactly are the deliverables?</h4>
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
@@ -411,31 +503,64 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
       {/* 8. CTA Section */}
       <section id="contact" className="py-32 relative overflow-hidden bg-black/40 border-t border-white/5">
         <div className="absolute inset-0 bg-brand-accent/5"></div>
-        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Partnership Application</h2>
-          <h3 className="text-5xl md:text-6xl font-display font-extrabold text-white mb-8 tracking-tighter">Start a Conversation.</h3>
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto font-serif italic">
-            We partner with businesses that have at least $10K/month in marketing capacity and the operational ability to handle additional volume.
-          </p>
-          <p className="text-lg text-white mb-12 max-w-2xl mx-auto font-medium border border-white/10 bg-white/5 py-4 px-6 rounded-xl inline-block">
-            Submit your URL below. We will review your digital footprint and invite you to a 15-minute strategic fit call.
-          </p>
-          
-          <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-12 rounded-3xl max-w-lg mx-auto text-left border border-white/10 relative overflow-hidden group">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <div className="mb-12 max-w-3xl">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">Partnership Application</h2>
+            <h3 className="mb-8 text-5xl font-display font-extrabold tracking-tight text-white md:text-6xl">Start a serious growth conversation.</h3>
+            <p className="font-serif text-xl italic leading-relaxed text-gray-400">
+              We partner with businesses that have at least $10K/month in marketing capacity and the operational ability to handle additional volume.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-[0.82fr_1fr] lg:items-start">
+            <div className="glass-panel rounded-lg p-8">
+              <div className="mb-8 flex items-center gap-3">
+                <ShieldCheck className="h-6 w-6 text-brand-accent" />
+                <h4 className="text-2xl font-display font-bold text-white">What happens after you apply</h4>
+              </div>
+              <div className="space-y-5">
+                {[
+                  ["1", "We review your current digital footprint, offer clarity, and visible trust gaps."],
+                  ["2", "We identify whether your market can support profitable acquisition scale."],
+                  ["3", "If there is a fit, we invite you to a 15-minute strategic fit call."],
+                ].map(([step, copy]) => (
+                  <div key={step} className="flex gap-4 border-b border-white/8 pb-5 last:border-b-0 last:pb-0">
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-brand-accent/40 bg-brand-accent/10 text-sm font-bold text-brand-accent">
+                      {step}
+                    </div>
+                    <p className="leading-relaxed text-gray-300">{copy}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 border border-white/8 bg-black/30 p-5">
+                <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">Fit Criteria</div>
+                <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                  Established service businesses, proven demand, high customer value, and enough operational capacity to handle additional qualified opportunities.
+                </p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-12 rounded-lg text-left border border-white/10 relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-accent to-brand-glow transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            <div className="mb-8">
+              <h4 className="text-2xl font-display font-bold text-white">Request review</h4>
+              <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                Submit your URL. We will review the acquisition environment before recommending any engagement.
+              </p>
+            </div>
             
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Executive Name</label>
-                <input name="executiveName" required type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="e.g. John Doe" />
+                <input name="executiveName" required type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="e.g. John Doe" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Corporate Email</label>
-                <input name="email" required type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
+                <input name="email" required type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Marketing Capacity</label>
-                <select name="marketingCapacity" required className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
+                <select name="marketingCapacity" required className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
                   <option value="10k-25k">$10,000 - $25,000 / month</option>
                   <option value="25k-50k">$25,000 - $50,000 / month</option>
                   <option value="50k-100k">$50,000 - $100,000 / month</option>
@@ -444,9 +569,9 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Website URL</label>
-                <input name="websiteUrl" required type="url" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
+                <input name="websiteUrl" required type="url" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
               </div>
-              <button disabled={formState === "submitting"} type="submit" className="w-full bg-brand-accent text-white text-lg font-bold py-4 rounded-xl hover:bg-brand-glow hover:text-black transition-all duration-300 mt-4 shadow-[0_0_20px_rgba(255,140,0,0.2)] hover:shadow-[0_0_40px_rgba(255,184,77,0.4)] disabled:opacity-60">
+              <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg transition-all duration-300 mt-4 disabled:opacity-60">
                 {formState === "submitting" ? "Submitting..." : "Submit Application"}
               </button>
               {formMessage ? (
@@ -459,6 +584,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </p>
             </div>
           </form>
+          </div>
         </div>
       </section>
 

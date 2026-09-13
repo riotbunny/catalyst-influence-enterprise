@@ -3,9 +3,9 @@
 
 @theme {
   --color-brand-dark: #0a0a0f;
-  --color-brand-indigo: #1a1a3a;
-  --color-brand-accent: #ff8c00;
-  --color-brand-glow: #ffb84d;
+  --color-brand-indigo: #191827;
+  --color-brand-accent: #d69a3a;
+  --color-brand-glow: #f0c16d;
   
   --font-display: 'Syncopate', sans-serif;
   --font-sans: 'Inter', sans-serif;
@@ -20,13 +20,46 @@
 body {
   color: var(--foreground);
   font-family: var(--font-sans);
+  background: var(--background);
 }
 
 .glass-panel {
-  background: rgba(25, 25, 40, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(18, 18, 28, 0.78), rgba(9, 9, 14, 0.82));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.executive-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), transparent 78%);
+}
+
+.executive-noise {
+  opacity: 0.32;
+  background-image:
+    linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.04) 48%, transparent 49%),
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.045), transparent 18%),
+    radial-gradient(circle at 70% 8%, rgba(214, 154, 58, 0.06), transparent 18%);
+  background-size: 900px 900px, 680px 680px, 760px 760px;
+}
+
+.premium-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(214, 154, 58, 0.58), rgba(255, 255, 255, 0.16), transparent);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #c9862f, #f0c16d);
+  box-shadow: 0 18px 44px rgba(214, 154, 58, 0.22);
+}
+
+.button-primary:hover {
+  box-shadow: 0 22px 60px rgba(240, 193, 109, 0.28);
 }
 
 /* Smooth scrolling */
@@ -35,5 +68,5 @@ html { scroll-behavior: smooth; }
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #0a0a0f; }
-::-webkit-scrollbar-thumb { background: #1a1a3a; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #ff8c00; }
+::-webkit-scrollbar-thumb { background: #191827; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #d69a3a; }

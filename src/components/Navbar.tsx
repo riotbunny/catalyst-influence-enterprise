@@ -19,19 +19,21 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/50 backdrop-blur-xl border-b border-white/10"
-          : "glass-panel border-b-0"
+          ? "bg-[#07070b]/82 backdrop-blur-xl border-b border-white/10"
+          : "bg-[#07070b]/48 backdrop-blur-md border-b border-white/5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Brain className="h-8 w-8 text-brand-accent" />
-          <span className="text-2xl font-display font-bold tracking-wide text-white">
+          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-accent/35 bg-brand-accent/10">
+            <Brain className="h-6 w-6 text-brand-accent" />
+          </span>
+          <span className="text-xl font-display font-bold tracking-wide text-white">
             CATALYST
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-semibold tracking-widest uppercase text-gray-300">
+        <div className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest uppercase text-gray-300">
           <Link href="#methodology" className="hover:text-brand-accent transition-colors">
             Methodology
           </Link>
@@ -43,7 +45,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="#contact"
-            className="border border-white/20 px-6 py-2 rounded-full hover:border-brand-accent hover:text-brand-accent transition-colors"
+            className="border border-brand-accent/35 bg-brand-accent/10 px-5 py-2.5 rounded-lg text-white hover:border-brand-accent hover:bg-brand-accent hover:text-black transition-colors"
           >
             Apply Now
           </Link>
