@@ -35,8 +35,11 @@ export default function Navbar() {
           <Link href="#methodology" className="hover:text-brand-accent transition-colors">
             Methodology
           </Link>
-          <Link href="#capabilities" className="hover:text-brand-accent transition-colors">
-            Capabilities
+          <Link href="/services" className="hover:text-brand-accent transition-colors">
+            Services
+          </Link>
+          <Link href="/locations" className="hover:text-brand-accent transition-colors">
+            Locations
           </Link>
           <Link
             href="#contact"

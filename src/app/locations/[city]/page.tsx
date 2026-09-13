@@ -1,46 +1,56 @@
+import JsonLd from "@/components/JsonLd";
 import LandingPage from "@/components/LandingPage";
-import type { Metadata } from 'next';
+import { getIndexableLocations, getLocation } from "@/content/locations";
+import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
-  const { city } = await params;
-  const formattedCity = city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-  
-  return {
-    title: `Digital Marketing & SEO Agency in ${formattedCity} | Catalyst Influence`,
-    description: `Partnering with industry leaders in ${formattedCity} to blend behavioral science and premium design into experiences that establish trust and drive conversions.`,
-  };
-}
+type Props = {
+  params: Promise<{ city: string }>;
+};
 
-export async function generateStaticParams() {
-  const targetCities = [
-    "new-york", "los-angeles", "chicago", "houston", "phoenix", 
-    "philadelphia", "san-antonio", "san-diego", "dallas", "san-jose", 
-    "austin", "jacksonville", "fort-worth", "columbus", "san-francisco", 
-    "charlotte", "indianapolis", "seattle", "denver", "washington-dc", 
-    "boston", "el-paso", "nashville", "detroit", "oklahoma-city", 
-    "portland", "las-vegas", "memphis", "louisville", "baltimore", 
-    "milwaukee", "albuquerque", "tucson", "fresno", "mesa", 
-    "sacramento", "atlanta", "kansas-city", "colorado-springs", "miami", 
-    "raleigh", "omaha", "long-beach", "virginia-beach", "oakland", 
-    "minneapolis", "tulsa", "arlington", "tampa", "new-orleans", 
-    "wichita", "cleveland", "bakersfield", "aurora", "anaheim", 
-    "honolulu", "santa-ana", "riverside", "corpus-christi", "lexington", 
-    "stockton", "henderson", "saint-paul", "st-louis", "cincinnati", 
-    "pittsburgh", "greensboro", "anchorage", "plano", "lincoln", 
-    "orlando", "irvine", "newark", "toledo", "durham", 
-    "chula-vista", "fort-wayne", "jersey-city", "st-petersburg", "laredo", 
-    "madison", "chandler", "buffalo", "lubbock", "scottsdale", 
-    "reno", "glendale", "gilbert", "winston-salem", "north-las-vegas", 
-    "norfolk", "chesapeake", "garland", "irving", "hialeah", 
-    "fremont", "boise", "richmond", "baton-rouge", "spokane", "des-moines"
-  ];
+export const dynamicParams = false;
 
-  return targetCities.map((city) => ({
-    city: city,
+export function generateStaticParams() {
+  return getIndexableLocations().map((location) => ({
+    city: location.slug,
   }));
 }
 
-export default async function LocationPage({ params }: { params: Promise<{ city: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city } = await params;
-  return <LandingPage city={city} />;
+  const location = getLocation(city);
+
+  if (!location) {
+    return {};
+  }
+
+  return createMetadata({
+    title: location.title,
+    description: location.metaDescription,
+    path: `/locations/${location.slug}`,
+    indexable: location.indexable,
+  });
+}
+
+export default async function LocationPage({ params }: Props) {
+  const { city } = await params;
+  const location = getLocation(city);
+
+  if (!location) {
+    notFound();
+  }
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: location.city, path: `/locations/${location.slug}` },
+        ])}
+      />
+      <LandingPage city={location.city} state={location.state} marketAngle={location.marketAngle} />
+    </>
+  );
 }

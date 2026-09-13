@@ -55,7 +55,7 @@ export default function Background() {
     const connectionDistance = 150;
     const mouseConnectionDistance = 250;
 
-    let mouse = {
+    const mouse = {
       x: width / 2,
       y: height / 2,
       isActive: false

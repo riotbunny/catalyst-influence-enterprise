@@ -3,19 +3,58 @@
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { Target, Brain, Lock, Search, TrendingUp, Share2, BrainCircuit, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap } from "lucide-react";
+import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap } from "lucide-react";
+import type { FormEvent } from "react";
+import { useState } from "react";
 
 interface LandingPageProps {
   city?: string;
+  state?: string;
+  marketAngle?: string;
 }
 
-export default function LandingPage({ city }: LandingPageProps) {
+export default function LandingPage({ city, state, marketAngle }: LandingPageProps) {
   const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formMessage, setFormMessage] = useState("");
   
   // Format city name for display (e.g., "new-york" -> "New York")
   const formattedCity = city 
     ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     : null;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setFormState("submitting");
+    setFormMessage("");
+
+    const formData = new FormData(event.currentTarget);
+
+    const response = await fetch("/api/submissions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        executiveName: formData.get("executiveName"),
+        email: formData.get("email"),
+        marketingCapacity: formData.get("marketingCapacity"),
+        websiteUrl: formData.get("websiteUrl"),
+        city: formattedCity ?? "",
+        sourcePath: window.location.pathname,
+      }),
+    });
+
+    const data = (await response.json().catch(() => null)) as { error?: string } | null;
+
+    if (!response.ok) {
+      setFormState("error");
+      setFormMessage(data?.error ?? "Something went wrong. Please try again.");
+      return;
+    }
+
+    event.currentTarget.reset();
+    setFormState("success");
+    setFormMessage("Application received. We will review your digital footprint and follow up if there is a fit.");
+  }
 
   return (
     <main className="min-h-screen">
@@ -74,12 +113,57 @@ export default function LandingPage({ city }: LandingPageProps) {
         </div>
       </section>
 
+      {formattedCity ? (
+        <section className="py-24 border-b border-white/5 bg-black/30">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
+              <div>
+                <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">
+                  Local Growth Architecture
+                </h2>
+                <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight mb-6">
+                  Customer acquisition in {formattedCity}{state ? `, ${state}` : ""}
+                </h3>
+                <div className="space-y-5 text-gray-400 leading-relaxed text-lg">
+                  <p>
+                    {marketAngle ??
+                      `Competing for service-business demand in ${formattedCity} requires more than a generic digital marketing campaign. Buyers compare fast, trust signals matter immediately, and every click needs a clear path from discovery to qualified action.`}
+                  </p>
+                  <p>
+                    Catalyst builds the acquisition environment around that local intent: search visibility, paid traffic, landing page proof, offer clarity, automated follow-up, and measurement that shows which opportunities are worth scaling.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-panel rounded-3xl p-8">
+                <h4 className="text-xl font-display font-bold text-white mb-6">
+                  What we optimize for {formattedCity} service businesses
+                </h4>
+                <ul className="space-y-4">
+                  {[
+                    "High-intent SEO pages that match local buyer demand",
+                    "Paid acquisition paths tied to stronger landing page trust",
+                    "Conversion architecture that reduces uncertainty before contact",
+                    "Follow-up and attribution systems that protect qualified leads",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 text-gray-300 leading-relaxed">
+                      <CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {/* 3. Proof of Impact */}
       <section id="results" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20 text-center">
             <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Proof of Impact</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">We Don't Guess. We Engineer Results.</h3>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">We Don&apos;t Guess. We Engineer Results.</h3>
           </div>
 
           <div className="glass-panel p-8 md:p-16 rounded-3xl border border-white/10 relative overflow-hidden">
@@ -158,7 +242,7 @@ export default function LandingPage({ city }: LandingPageProps) {
           <div className="mb-20">
             <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Our Mechanism</h2>
             <h3 className="text-4xl md:text-5xl font-display font-bold text-white max-w-3xl leading-tight">The Catalyst Influence Architecture™</h3>
-            <p className="text-xl text-gray-400 mt-6 max-w-2xl font-serif italic">We don't just "run ads". We rebuild the four layers of your customer acquisition environment.</p>
+            <p className="text-xl text-gray-400 mt-6 max-w-2xl font-serif italic">We don&apos;t just &quot;run ads&quot;. We rebuild the four layers of your customer acquisition environment.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -206,7 +290,7 @@ export default function LandingPage({ city }: LandingPageProps) {
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-white mb-3">Days 1–30: Architect & Diagnose</h4>
-                <p className="text-gray-400 leading-relaxed mb-4">We diagnose where prospects are being lost and rebuild the foundation. The major client-facing deliverable is your complete Growth Architecture Blueprint. After Month 1, you will feel: *"These people understand my customer better than any agency I've hired before."*</p>
+                <p className="text-gray-400 leading-relaxed mb-4">We diagnose where prospects are being lost and rebuild the foundation. The major client-facing deliverable is your complete Growth Architecture Blueprint. After Month 1, you will feel: *&quot;These people understand my customer better than any agency I&apos;ve hired before.&quot;*</p>
                 <div className="flex flex-wrap gap-4">
                   <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Competitor & Offer Analysis</span>
                   <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Landing Page Strategy & Trust Architecture</span>
@@ -263,7 +347,7 @@ export default function LandingPage({ city }: LandingPageProps) {
               <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Brain Trust</h2>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Elite Engineering. <br/>No Account Managers.</h3>
               <p className="text-xl text-gray-400 mb-8 font-serif italic leading-relaxed">
-                "When you partner with Catalyst, you do not get passed off to a junior intern. You get direct access to the architects building your revenue engine."
+                &quot;When you partner with Catalyst, you do not get passed off to a junior intern. You get direct access to the architects building your revenue engine.&quot;
               </p>
               <div className="space-y-6">
                 <div>
@@ -317,7 +401,7 @@ export default function LandingPage({ city }: LandingPageProps) {
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-gray-400 leading-relaxed">
-                You are not buying "SEO" or "Facebook Ads." You are buying a predictable customer-acquisition environment. Depending on your business, this includes landing-page architecture, technical SEO, programmatic builds, and multi-channel paid media funnels.
+                You are not buying &quot;SEO&quot; or &quot;Facebook Ads.&quot; You are buying a predictable customer-acquisition environment. Depending on your business, this includes landing-page architecture, technical SEO, programmatic builds, and multi-channel paid media funnels.
               </div>
             </details>
           </div>
@@ -337,21 +421,21 @@ export default function LandingPage({ city }: LandingPageProps) {
             Submit your URL below. We will review your digital footprint and invite you to a 15-minute strategic fit call.
           </p>
           
-          <form className="glass-panel p-8 md:p-12 rounded-3xl max-w-lg mx-auto text-left border border-white/10 relative overflow-hidden group">
+          <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-12 rounded-3xl max-w-lg mx-auto text-left border border-white/10 relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-accent to-brand-glow transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
             
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Executive Name</label>
-                <input type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="e.g. John Doe" />
+                <input name="executiveName" required type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="e.g. John Doe" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Corporate Email</label>
-                <input type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
+                <input name="email" required type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Marketing Capacity</label>
-                <select className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
+                <select name="marketingCapacity" required className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
                   <option value="10k-25k">$10,000 - $25,000 / month</option>
                   <option value="25k-50k">$25,000 - $50,000 / month</option>
                   <option value="50k-100k">$50,000 - $100,000 / month</option>
@@ -360,11 +444,16 @@ export default function LandingPage({ city }: LandingPageProps) {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Website URL</label>
-                <input type="url" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
+                <input name="websiteUrl" required type="url" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
               </div>
-              <button type="button" className="w-full bg-brand-accent text-white text-lg font-bold py-4 rounded-xl hover:bg-brand-glow hover:text-black transition-all duration-300 mt-4 shadow-[0_0_20px_rgba(255,140,0,0.2)] hover:shadow-[0_0_40px_rgba(255,184,77,0.4)]">
-                Submit Application
+              <button disabled={formState === "submitting"} type="submit" className="w-full bg-brand-accent text-white text-lg font-bold py-4 rounded-xl hover:bg-brand-glow hover:text-black transition-all duration-300 mt-4 shadow-[0_0_20px_rgba(255,140,0,0.2)] hover:shadow-[0_0_40px_rgba(255,184,77,0.4)] disabled:opacity-60">
+                {formState === "submitting" ? "Submitting..." : "Submit Application"}
               </button>
+              {formMessage ? (
+                <p className={`text-sm text-center leading-relaxed ${formState === "success" ? "text-green-400" : "text-red-400"}`}>
+                  {formMessage}
+                </p>
+              ) : null}
               <p suppressHydrationWarning className="text-xs text-center text-gray-500 mt-6 uppercase tracking-wider leading-relaxed">
                 <span className="text-brand-accent font-bold">Availability:</span> We only onboard 2 new established partners per {currentQuarter}.
               </p>
