@@ -2,7 +2,8 @@
 
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
-import { Target, Brain, Lock, Search, TrendingUp, Share2, BrainCircuit } from "lucide-react";
+import Image from "next/image";
+import { Target, Brain, Lock, Search, TrendingUp, Share2, BrainCircuit, BarChart3, Users, ChevronDown } from "lucide-react";
 
 interface LandingPageProps {
   city?: string;
@@ -146,15 +147,176 @@ export default function LandingPage({ city }: LandingPageProps) {
         </div>
       </section>
 
+      {/* Proof / Case Study Section */}
+      <section id="results" className="py-32 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-20 text-center">
+            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Proof of Impact</h2>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">We Don't Guess. We Engineer Results.</h3>
+          </div>
+
+          <div className="glass-panel p-8 md:p-16 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[100px] -z-10"></div>
+            
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
+                  <span className="text-xs font-semibold tracking-widest text-brand-accent uppercase">Enterprise Case Study</span>
+                </div>
+                <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">Home Tech Dealer</h4>
+                <p className="text-gray-400 leading-relaxed mb-8 text-lg">
+                  Home Tech Dealer required an aggressive omnichannel scaling strategy. By deploying our Programmatic SEO (pSEO) engine and pairing it with behaviorally-optimized Paid Media funnels, we scaled their customer acquisition to generate over 400 highly-qualified leads in a single 24-hour period.
+                </p>
+
+                <div className="grid grid-cols-2 gap-8">
+                  <div>
+                    <BarChart3 className="w-8 h-8 text-brand-accent mb-4" />
+                    <div className="text-4xl font-display font-bold text-white mb-2">21.3k</div>
+                    <div className="text-sm text-gray-400 font-medium leading-relaxed">New Pages Indexed<br/>(Programmatic SEO)</div>
+                  </div>
+                  <div>
+                    <Users className="w-8 h-8 text-brand-accent mb-4" />
+                    <div className="text-4xl font-display font-bold text-white mb-2">437</div>
+                    <div className="text-sm text-gray-400 font-medium leading-relaxed">High-Intent Leads<br/>Generated in 24 Hours</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="bg-black/60 rounded-2xl p-6 border border-white/5 shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 px-3 py-1 bg-green-500/10 text-green-400 text-[10px] font-bold tracking-wider uppercase rounded-bl-lg">Verified Data</div>
+                  <div className="text-sm font-semibold text-gray-400 mb-4">Google Search Console (30 Days)</div>
+                  <div className="flex items-end gap-2 mb-2">
+                    <div className="text-3xl font-bold text-green-500">21.3K</div>
+                    <div className="text-sm text-gray-500 pb-1">Indexed Pages</div>
+                  </div>
+                  <div className="w-full h-24 flex items-end gap-1 mt-4">
+                    {/* Simulated GSC Chart Bars based on user screenshot */}
+                    {[2,3,2,4,3,2,1,2,3,45,45,47,48,48,48,48,45,45,45,35,35,35,35,34,34,34,34].map((h, i) => (
+                      <div key={i} className="flex-1 bg-green-500/80 rounded-t-sm hover:bg-green-400 transition-colors" style={{ height: `${h}%` }}></div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-black/60 rounded-2xl p-6 border border-white/5 shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold tracking-wider uppercase rounded-bl-lg">Verified Data</div>
+                  <div className="text-sm font-semibold text-gray-400 mb-4">Meta Ads Manager (24-Hour Yield)</div>
+                  <div className="flex justify-between items-end border-b border-white/10 pb-4 mb-4">
+                    <div>
+                      <div className="text-xs text-gray-500 mb-1 uppercase tracking-wider">Results</div>
+                      <div className="text-2xl font-bold text-white">347 <span className="text-sm font-normal text-gray-500">Website Leads</span></div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs text-gray-500 mb-1 uppercase tracking-wider">Cost Per Result</div>
+                      <div className="text-2xl font-bold text-white">$2.35</div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <div className="text-2xl font-bold text-white">90 <span className="text-sm font-normal text-gray-500">Website Leads</span></div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-white">$3.35</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Brain Trust */}
+      <section id="leadership" className="py-32 bg-black/40 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-brand-accent/20 rounded-[3rem] blur-2xl -z-10 transform -rotate-6 scale-95"></div>
+              <Image 
+                src="/founder-v2.jpg" 
+                alt="Principal Architect" 
+                width={600} 
+                height={600} 
+                className="rounded-[3rem] border border-white/10 shadow-2xl object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Brain Trust</h2>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Elite Engineering. <br/>No Account Managers.</h3>
+              <p className="text-xl text-gray-400 mb-8 font-serif italic leading-relaxed">
+                "When you partner with Catalyst, you do not get passed off to a junior intern. You get direct access to the architects building your revenue engine."
+              </p>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-3xl font-display font-bold text-white mb-2">Abel V.</h4>
+                  <p className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-3">Principal Architect</p>
+                  <p className="text-gray-500 leading-relaxed">Leading the integration of behavioral psychology, principled negotiation, and advanced digital scaling.</p>
+                </div>
+                <ul className="space-y-4 text-gray-300 font-medium pt-4">
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Strategic Omnichannel Growth Specialist</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(255,140,0,0.8)]"></span> Relentless Focus on High-Ticket Conversions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Executive FAQ */}
+      <section className="py-32 relative">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="mb-16 text-center">
+            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Clarity</h2>
+            <h3 className="text-4xl font-display font-bold text-white">Executive Briefing</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between p-6 cursor-pointer">
+                <h4 className="text-lg font-bold text-white">Do you work with startups?</h4>
+                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                Only if heavily funded and prepared to scale rapidly. Our methodologies are designed for established businesses looking to dominate market share, or high-velocity startups with the infrastructure to handle enterprise volume.
+              </div>
+            </details>
+
+            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between p-6 cursor-pointer">
+                <h4 className="text-lg font-bold text-white">What is the typical contract structure?</h4>
+                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                We operate on a minimum 6-month commitment. Behavioral models and Programmatic SEO require time to compound and yield exponential returns. We do not do one-off "quick fix" projects.
+              </div>
+            </details>
+
+            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between p-6 cursor-pointer">
+                <h4 className="text-lg font-bold text-white">What exactly are the deliverables?</h4>
+                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                You get a dedicated brain trust executing an omnichannel strategy. This includes custom programmatic SEO deployment, behavioral web design overhauls, neuro-optimized paid media management, and continuous conversion rate optimization.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
       {/* Mutual Gain / Reciprocity CTA Section */}
       <section id="contact" className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-brand-accent/5"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Work With Us</h2>
           <h3 className="text-5xl md:text-6xl font-display font-extrabold text-white mb-8 tracking-tighter">Start a Conversation.</h3>
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-serif italic">
+          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto font-serif italic">
             Whether you need a complete digital overhaul, or specific execution in SEO and Paid Media, it starts here. 
             We partner with businesses that are ready to scale and serious about their digital footprint.
+          </p>
+          <p className="text-lg text-white mb-12 max-w-2xl mx-auto font-medium border border-white/10 bg-white/5 py-4 px-6 rounded-xl inline-block">
+            Submit your URL below. We will review your current digital footprint and invite you to a 15-minute strategic fit call.
           </p>
           
           <form className="glass-panel p-8 md:p-12 rounded-3xl max-w-lg mx-auto text-left border border-white/10 relative overflow-hidden group">
@@ -176,6 +338,15 @@ export default function LandingPage({ city }: LandingPageProps) {
                   <option value="seo">SEO & Search Visibility</option>
                   <option value="ppc">Paid Media & Lead Generation</option>
                   <option value="full">Full-Scale Agency Partnership</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Monthly Marketing Budget</label>
+                <select className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
+                  <option value="5k-10k">$5,000 - $10,000</option>
+                  <option value="10k-25k">$10,000 - $25,000</option>
+                  <option value="25k-50k">$25,000 - $50,000</option>
+                  <option value="50k+">$50,000+</option>
                 </select>
               </div>
               <div>
