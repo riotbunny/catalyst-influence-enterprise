@@ -3,7 +3,7 @@
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { Target, Brain, Lock, Search, TrendingUp, Share2, BrainCircuit, BarChart3, Users, ChevronDown } from "lucide-react";
+import { Target, Brain, Lock, Search, TrendingUp, Share2, BrainCircuit, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap } from "lucide-react";
 
 interface LandingPageProps {
   city?: string;
@@ -22,7 +22,7 @@ export default function LandingPage({ city }: LandingPageProps) {
       <Background />
       <Navbar />
       
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <section className="relative pt-40 pb-20 md:pt-52 md:pb-32 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-indigo/30 rounded-full blur-[120px] -z-10 mix-blend-screen"></div>
         <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-brand-accent/10 rounded-full blur-[90px] -z-10 mix-blend-screen"></div>
@@ -32,33 +32,33 @@ export default function LandingPage({ city }: LandingPageProps) {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
           <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
           <span suppressHydrationWarning className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
-            Accepting 2 new clients for {currentQuarter}
+            Accepting 2 established partners for {currentQuarter}
           </span>
         </div>
         
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white leading-tight mb-6 tracking-tighter">
-          DESIGNING <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-glow">DIGITAL INFLUENCE.</span>
+          PREDICTABLE <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-glow">CUSTOMER ACQUISITION.</span>
         </h1>
-        <p className="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-serif italic">
+        <p className="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto font-serif italic leading-relaxed">
           {formattedCity 
-            ? `Partnering with industry leaders in ${formattedCity} to blend behavioral science and premium design into experiences that establish trust.` 
-            : `We blend behavioral science and premium design to build digital experiences that naturally drive conversions and establish trust.`}
+            ? `Partnering with established service businesses in ${formattedCity} to rebuild your digital acquisition system so the right prospects find you, trust you, and take action.` 
+            : `We rebuild the critical parts of your digital acquisition system so more of the right prospects find you, trust you, and take action.`}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6">
-          <button type="button" className="group bg-brand-accent text-white px-8 py-4 rounded-full font-bold tracking-wide hover:bg-brand-glow hover:text-black transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,77,0.5)]">
+          <a href="#contact" className="group bg-brand-accent text-white px-8 py-4 rounded-full font-bold tracking-wide hover:bg-brand-glow hover:text-black transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:shadow-[0_0_40px_rgba(255,184,77,0.5)]">
             Apply For Partnership
             <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </button>
-          <button type="button" className="px-8 py-4 rounded-full font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors">
-            Our Methodology
-          </button>
+          </a>
+          <a href="#results" className="px-8 py-4 flex items-center justify-center rounded-full font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors">
+            See The Proof
+          </a>
         </div>
         </div>
       </section>
 
-      {/* Enterprise Trust */}
+      {/* 2. Enterprise Trust */}
       <section className="py-12 border-y border-white/5 bg-black/20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-[0.2em] mb-8">
@@ -66,88 +66,15 @@ export default function LandingPage({ city }: LandingPageProps) {
               ? `Trusted by industry leaders in ${formattedCity} to architect their growth`
               : `Trusted by industry leaders to architect their growth`}
           </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-            <div className="text-2xl font-display font-bold text-gray-400 flex items-center">VERTEX</div>
-            <div className="text-2xl font-serif font-bold text-gray-400 italic flex items-center">Lumina</div>
-            <div className="text-2xl font-sans font-black text-gray-400 tracking-tighter flex items-center">NEXUS.</div>
-            <div className="text-2xl font-display font-medium text-gray-400 tracking-widest uppercase flex items-center">Quantum</div>
+          <div className="flex flex-wrap justify-center gap-16 md:gap-32 opacity-50 hover:opacity-100 transition-all duration-700">
+            <div className="text-2xl font-display font-bold text-gray-400 flex items-center">Salesnet LLC</div>
+            <div className="text-2xl font-serif font-bold text-gray-400 italic flex items-center">McMaster Lawfirm</div>
+            <div className="text-2xl font-sans font-black text-gray-400 tracking-tighter flex items-center">Home Tech Dealer Inc.</div>
           </div>
         </div>
       </section>
 
-      {/* Methodology Section */}
-      <section id="methodology" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-20">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Our Approach</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white max-w-2xl leading-tight">We build digital environments that guide human behavior.</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-panel p-10 rounded-3xl hover:bg-white/5 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-brand-indigo rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Brain className="w-7 h-7 text-brand-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-white mb-4">Subconscious Alignment</h4>
-              <p className="text-gray-400 leading-relaxed">Before a user reads a single word, our design intuitively communicates trust, safety, and established expertise.</p>
-            </div>
-            
-            <div className="glass-panel p-10 rounded-3xl hover:bg-white/5 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-brand-indigo rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Target className="w-7 h-7 text-brand-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-white mb-4">The Architecture of Yes</h4>
-              <p className="text-gray-400 leading-relaxed">We structure the user journey as a collaborative conversation, presenting clear options for mutual gain and resolving natural hesitation.</p>
-            </div>
-
-            <div className="glass-panel p-10 rounded-3xl hover:bg-white/5 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-brand-indigo rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Lock className="w-7 h-7 text-brand-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-white mb-4">Ethical Activation</h4>
-              <p className="text-gray-400 leading-relaxed">We carefully weave in reciprocity, social proof, and authentic scarcity to make reaching out feel like the natural next step.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities Section */}
-      <section id="capabilities" className="py-32 bg-black/40 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-20 text-center">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">What We Do</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">Full-Service Digital Capabilities</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-panel p-12 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
-              <Search className="w-10 h-10 text-brand-accent mb-6" />
-              <h4 className="text-2xl font-bold text-white mb-4">Strategic SEO</h4>
-              <p className="text-gray-400">We build comprehensive search architectures that capture high-intent traffic and establish your brand as the definitive authority in your space.</p>
-            </div>
-            
-            <div className="glass-panel p-12 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
-              <TrendingUp className="w-10 h-10 text-brand-accent mb-6" />
-              <h4 className="text-2xl font-bold text-white mb-4">Paid Media & Growth</h4>
-              <p className="text-gray-400">Data-driven ad campaigns and conversion funnels designed to scale your revenue efficiently and predictably across all major platforms.</p>
-            </div>
-
-            <div className="glass-panel p-12 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
-              <BrainCircuit className="w-10 h-10 text-brand-accent mb-6" />
-              <h4 className="text-2xl font-bold text-white mb-4">Behavioral Web Design</h4>
-              <p className="text-gray-400">We design and develop premium, responsive websites that look incredible and are fundamentally engineered to drive user action.</p>
-            </div>
-
-            <div className="glass-panel p-12 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
-              <Share2 className="w-10 h-10 text-brand-accent mb-6" />
-              <h4 className="text-2xl font-bold text-white mb-4">Content & Social Authority</h4>
-              <p className="text-gray-400">Engaging, high-value content ecosystems that nurture trust, educate your audience, and build long-term brand loyalty.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Proof / Case Study Section */}
+      {/* 3. Proof of Impact */}
       <section id="results" className="py-32 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20 text-center">
@@ -165,7 +92,7 @@ export default function LandingPage({ city }: LandingPageProps) {
                 </div>
                 <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">Home Tech Dealer</h4>
                 <p className="text-gray-400 leading-relaxed mb-8 text-lg">
-                  Home Tech Dealer required an aggressive omnichannel scaling strategy. By deploying our Programmatic SEO (pSEO) engine and pairing it with behaviorally-optimized Paid Media funnels, we scaled their customer acquisition to generate over 400 highly-qualified leads in a single 24-hour period.
+                  Home Tech Dealer required an aggressive omnichannel scaling strategy. By deploying a custom programmatic SEO (pSEO) architecture alongside behaviorally-optimized paid media, we built a customer acquisition machine that generated over 400 highly-qualified leads in a single 24-hour period.
                 </p>
 
                 <div className="grid grid-cols-2 gap-8">
@@ -191,7 +118,6 @@ export default function LandingPage({ city }: LandingPageProps) {
                     <div className="text-sm text-gray-500 pb-1">Indexed Pages</div>
                   </div>
                   <div className="w-full h-24 flex items-end gap-1 mt-4">
-                    {/* Simulated GSC Chart Bars based on user screenshot */}
                     {[2,3,2,4,3,2,1,2,3,45,45,47,48,48,48,48,45,45,45,35,35,35,35,34,34,34,34].map((h, i) => (
                       <div key={i} className="flex-1 bg-green-500/80 rounded-t-sm hover:bg-green-400 transition-colors" style={{ height: `${h}%` }}></div>
                     ))}
@@ -226,7 +152,100 @@ export default function LandingPage({ city }: LandingPageProps) {
         </div>
       </section>
 
-      {/* The Brain Trust */}
+      {/* 4. Methodology Section (The Mechanism) */}
+      <section id="methodology" className="py-32 relative bg-black/40 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-20">
+            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Our Mechanism</h2>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white max-w-3xl leading-tight">The Catalyst Influence Architecture™</h3>
+            <p className="text-xl text-gray-400 mt-6 max-w-2xl font-serif italic">We don't just "run ads". We rebuild the four layers of your customer acquisition environment.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+              <Compass className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-4">1. Discovery</h4>
+              <p className="text-gray-400 leading-relaxed text-sm">Get the right person into the environment. We engineer targeted SEO, paid media, and content structures to capture high-value intent.</p>
+            </div>
+            
+            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+              <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-4">2. Trust</h4>
+              <p className="text-gray-400 leading-relaxed text-sm">Immediately reduce uncertainty. We design your visual credibility, authority markers, and consistency to make them feel safe taking the next step.</p>
+            </div>
+
+            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+              <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-4">3. Decision</h4>
+              <p className="text-gray-400 leading-relaxed text-sm">Structure information so taking action feels deeply logical. We rebuild offer architecture, messaging, and proactive objection resolution.</p>
+            </div>
+
+            <div className="glass-panel p-8 rounded-3xl hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(255,140,0,0.05)]">
+              <Zap className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-4">4. Activation</h4>
+              <p className="text-gray-400 leading-relaxed text-sm">Convert intent into measurable action. We optimize forms, booking systems, automated follow-ups, and behavioral remarketing loops.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. The Flagship Offer (Execution Roadmap) */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-brand-indigo/10 blur-[100px] -z-10"></div>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="mb-20 text-center">
+            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Flagship Engagement</h2>
+            <h3 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">The 90-Day Growth Architecture</h3>
+            <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">A 90-day acquisition system for established service businesses that need more qualified opportunities—not more disconnected marketing activity.</p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="glass-panel p-8 rounded-2xl border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
+              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
+                <span className="text-2xl font-bold text-brand-accent">1</span>
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-white mb-3">Days 1–30: Architect & Diagnose</h4>
+                <p className="text-gray-400 leading-relaxed mb-4">We diagnose where prospects are being lost and rebuild the foundation. The major client-facing deliverable is your complete Growth Architecture Blueprint. After Month 1, you will feel: *"These people understand my customer better than any agency I've hired before."*</p>
+                <div className="flex flex-wrap gap-4">
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Competitor & Offer Analysis</span>
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Landing Page Strategy & Trust Architecture</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="glass-panel p-8 rounded-2xl border border-white/10 flex flex-col md:flex-row gap-8 items-start relative">
+              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
+                <span className="text-2xl font-bold text-brand-accent">2</span>
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-white mb-3">Days 31–60: Deploy</h4>
+                <p className="text-gray-400 leading-relaxed mb-4">We build the acquisition machine. Not every client gets every channel. We deploy *only* the specific channels most likely to produce profitable customer acquisition for your unique business model.</p>
+                <div className="flex flex-wrap gap-4">
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Meta/Google Campaign Infrastructure</span>
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Automated Follow-up & CRM Integration</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="glass-panel p-8 rounded-2xl border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-8 items-start relative shadow-[0_0_30px_rgba(255,140,0,0.1)]">
+              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,140,0,0.5)]">
+                <span className="text-2xl font-bold text-white">3</span>
+              </div>
+              <div>
+                <h4 className="text-2xl font-bold text-white mb-3">Days 61–90: Optimize & Scale</h4>
+                <p className="text-gray-400 leading-relaxed mb-4">Working from real behavioral data, we identify winning traffic sources, messages, and variations. We shift resources toward what produces results and scale your profitable volume aggressively.</p>
+                <div className="flex flex-wrap gap-4">
+                  <span className="text-sm font-medium text-white flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-brand-accent" /> Executive Growth Review</span>
+                  <span className="text-sm font-medium text-white flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-brand-accent" /> Aggressive Budget Scaling</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. The Brain Trust */}
       <section id="leadership" className="py-32 bg-black/40 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -263,32 +282,32 @@ export default function LandingPage({ city }: LandingPageProps) {
         </div>
       </section>
 
-      {/* Executive FAQ */}
+      {/* 7. Executive FAQ & Risk Reversal */}
       <section className="py-32 relative">
         <div className="max-w-3xl mx-auto px-6">
           <div className="mb-16 text-center">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Clarity</h2>
+            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Clarity & Accountability</h2>
             <h3 className="text-4xl font-display font-bold text-white">Executive Briefing</h3>
           </div>
           
           <div className="space-y-4">
+            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden" open>
+              <summary className="flex items-center justify-between p-6 cursor-pointer">
+                <h4 className="text-lg font-bold text-white flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-brand-accent" /> The 90-Day Execution Guarantee</h4>
+                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                If Catalyst fails to complete the agreed deployment milestones during the initial 90-Day engagement, we continue working at no additional management fee until those milestones are completely satisfied. We guarantee execution and accountability.
+              </div>
+            </details>
+
             <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex items-center justify-between p-6 cursor-pointer">
                 <h4 className="text-lg font-bold text-white">Do you work with startups?</h4>
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-gray-400 leading-relaxed">
-                Only if heavily funded and prepared to scale rapidly. Our methodologies are designed for established businesses looking to dominate market share, or high-velocity startups with the infrastructure to handle enterprise volume.
-              </div>
-            </details>
-
-            <details className="group glass-panel rounded-2xl border border-white/10 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center justify-between p-6 cursor-pointer">
-                <h4 className="text-lg font-bold text-white">What is the typical contract structure?</h4>
-                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-400 leading-relaxed">
-                We operate on a minimum 6-month commitment. Behavioral models and Programmatic SEO require time to compound and yield exponential returns. We do not do one-off "quick fix" projects.
+                We generally do not. We partner with established service businesses with proven demand, where the customer value is high enough to support paid acquisition and there is operational ability to handle additional volume.
               </div>
             </details>
 
@@ -298,25 +317,24 @@ export default function LandingPage({ city }: LandingPageProps) {
                 <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-gray-400 leading-relaxed">
-                You get a dedicated brain trust executing an omnichannel strategy. This includes custom programmatic SEO deployment, behavioral web design overhauls, neuro-optimized paid media management, and continuous conversion rate optimization.
+                You are not buying "SEO" or "Facebook Ads." You are buying a predictable customer-acquisition environment. Depending on your business, this includes landing-page architecture, technical SEO, programmatic builds, and multi-channel paid media funnels.
               </div>
             </details>
           </div>
         </div>
       </section>
 
-      {/* Mutual Gain / Reciprocity CTA Section */}
-      <section id="contact" className="py-32 relative overflow-hidden">
+      {/* 8. CTA Section */}
+      <section id="contact" className="py-32 relative overflow-hidden bg-black/40 border-t border-white/5">
         <div className="absolute inset-0 bg-brand-accent/5"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Work With Us</h2>
+          <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Partnership Application</h2>
           <h3 className="text-5xl md:text-6xl font-display font-extrabold text-white mb-8 tracking-tighter">Start a Conversation.</h3>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto font-serif italic">
-            Whether you need a complete digital overhaul, or specific execution in SEO and Paid Media, it starts here. 
-            We partner with businesses that are ready to scale and serious about their digital footprint.
+            We partner with businesses that have at least $10K/month in marketing capacity and the operational ability to handle additional volume.
           </p>
           <p className="text-lg text-white mb-12 max-w-2xl mx-auto font-medium border border-white/10 bg-white/5 py-4 px-6 rounded-xl inline-block">
-            Submit your URL below. We will review your current digital footprint and invite you to a 15-minute strategic fit call.
+            Submit your URL below. We will review your digital footprint and invite you to a 15-minute strategic fit call.
           </p>
           
           <form className="glass-panel p-8 md:p-12 rounded-3xl max-w-lg mx-auto text-left border border-white/10 relative overflow-hidden group">
@@ -332,21 +350,12 @@ export default function LandingPage({ city }: LandingPageProps) {
                 <input type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Primary Objective</label>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Current Marketing Capacity</label>
                 <select className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
-                  <option value="audit">Comprehensive Digital Audit</option>
-                  <option value="seo">SEO & Search Visibility</option>
-                  <option value="ppc">Paid Media & Lead Generation</option>
-                  <option value="full">Full-Scale Agency Partnership</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Monthly Marketing Budget</label>
-                <select className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
-                  <option value="5k-10k">$5,000 - $10,000</option>
-                  <option value="10k-25k">$10,000 - $25,000</option>
-                  <option value="25k-50k">$25,000 - $50,000</option>
-                  <option value="50k+">$50,000+</option>
+                  <option value="10k-25k">$10,000 - $25,000 / month</option>
+                  <option value="25k-50k">$25,000 - $50,000 / month</option>
+                  <option value="50k-100k">$50,000 - $100,000 / month</option>
+                  <option value="100k+">$100,000+ / month</option>
                 </select>
               </div>
               <div>
@@ -357,7 +366,7 @@ export default function LandingPage({ city }: LandingPageProps) {
                 Submit Application
               </button>
               <p suppressHydrationWarning className="text-xs text-center text-gray-500 mt-6 uppercase tracking-wider leading-relaxed">
-                <span className="text-brand-accent font-bold">Availability:</span> To maintain our quality of work, we only onboard 2 new clients per {currentQuarter}.
+                <span className="text-brand-accent font-bold">Availability:</span> We only onboard 2 new established partners per {currentQuarter}.
               </p>
             </div>
           </form>
