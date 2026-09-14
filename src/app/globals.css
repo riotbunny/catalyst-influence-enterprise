@@ -91,30 +91,38 @@ body {
 .brand-glimmer {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  margin: -8px;
-  padding: 8px;
-  border-radius: 14px;
 }
 
-.brand-glimmer::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: -45%;
-  bottom: -45%;
-  width: 38px;
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.95) 42%, rgba(236, 199, 119, 0.82) 52%, transparent 100%);
-  filter: blur(0.2px);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transform: translateX(-72px) skewX(-16deg);
-  animation: brand-glimmer 1500ms ease-out 760ms both;
+.brand-logo-text {
+  color: transparent;
+  background-image: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 32%,
+    #f8e5b8 42%,
+    #d4a04a 50%,
+    #fff6dc 58%,
+    #ffffff 68%,
+    #ffffff 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 0 rgba(236, 199, 119, 0);
+  animation: logo-text-glimmer 2200ms cubic-bezier(0.22, 1, 0.36, 1) 820ms both;
 }
 
-.brand-glimmer:hover::after {
-  animation: brand-glimmer 1150ms ease-out both;
+.brand-mark-pulse {
+  animation: brand-mark-pulse 1700ms ease-out 760ms both;
+}
+
+.brand-glimmer:hover .brand-logo-text {
+  animation: logo-text-glimmer 1400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.brand-glimmer:hover .brand-mark-pulse {
+  animation: brand-mark-pulse 1200ms ease-out both;
 }
 
 .button-primary {
@@ -140,20 +148,39 @@ body {
   }
 }
 
-@keyframes brand-glimmer {
+@keyframes logo-text-glimmer {
   0% {
-    opacity: 0;
-    transform: translateX(-72px) skewX(-16deg);
+    background-position: 100% 50%;
+    text-shadow: 0 0 0 rgba(236, 199, 119, 0);
   }
-  14% {
-    opacity: 1;
+  42% {
+    text-shadow: 0 0 18px rgba(236, 199, 119, 0.22);
   }
-  68% {
-    opacity: 1;
+  72% {
+    background-position: 0% 50%;
+    text-shadow: 0 0 22px rgba(236, 199, 119, 0.32);
   }
   100% {
-    opacity: 0;
-    transform: translateX(168px) skewX(-16deg);
+    background-position: 0% 50%;
+    text-shadow: 0 0 0 rgba(236, 199, 119, 0);
+  }
+}
+
+@keyframes brand-mark-pulse {
+  0% {
+    border-color: rgba(212, 160, 74, 0.35);
+    box-shadow: 0 0 0 rgba(236, 199, 119, 0);
+    background-color: rgba(212, 160, 74, 0.1);
+  }
+  36% {
+    border-color: rgba(236, 199, 119, 0.95);
+    box-shadow: 0 0 26px rgba(236, 199, 119, 0.48), inset 0 0 18px rgba(236, 199, 119, 0.22);
+    background-color: rgba(212, 160, 74, 0.2);
+  }
+  100% {
+    border-color: rgba(212, 160, 74, 0.35);
+    box-shadow: 0 0 0 rgba(236, 199, 119, 0);
+    background-color: rgba(212, 160, 74, 0.1);
   }
 }
 
@@ -172,9 +199,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *:not(.brand-logo-text):not(.brand-mark-pulse),
+  *:not(.brand-logo-text):not(.brand-mark-pulse)::before,
+  *:not(.brand-logo-text):not(.brand-mark-pulse)::after {
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
     animation-duration: 1ms !important;
