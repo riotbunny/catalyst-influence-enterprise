@@ -1,6 +1,7 @@
 import Background from "@/components/Background";
 import JsonLd from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import { getIndexableLocations } from "@/content/locations";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -19,6 +20,7 @@ export default function LocationsPage() {
 
   return (
     <main className="min-h-screen">
+      <RevealOnScroll />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
@@ -46,10 +48,12 @@ export default function LocationsPage() {
       <section className="pb-20 sm:pb-28">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {locations.map((location) => (
+            {locations.map((location, index) => (
               <Link
                 key={location.slug}
                 href={`/locations/${location.slug}`}
+                data-reveal="card"
+                data-reveal-delay={index % 4}
                 className="glass-panel rounded-lg p-5 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
               >
                 <MapPin className="w-5 h-5 text-brand-accent mb-4" />

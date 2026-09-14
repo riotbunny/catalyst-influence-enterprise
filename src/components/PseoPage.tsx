@@ -1,5 +1,6 @@
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Compass, ShieldCheck, Target, Zap } from "lucide-react";
 
@@ -41,6 +42,7 @@ export default function PseoPage({
 }: PseoPageProps) {
   return (
     <main className="min-h-screen">
+      <RevealOnScroll />
       <Background />
       <Navbar />
 
@@ -78,11 +80,11 @@ export default function PseoPage({
 
       <section className="py-16 bg-black/30 border-y border-white/5 sm:py-20">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 grid md:grid-cols-2 gap-6">
-          {sections.map((section) => {
+          {sections.map((section, index) => {
             const Icon = icons[section.icon ?? "target"];
 
             return (
-              <article key={section.title} className="glass-panel p-6 sm:p-8 rounded-lg">
+              <article key={section.title} data-reveal="card" data-reveal-delay={index % 4} className="glass-panel p-6 sm:p-8 rounded-lg">
                 <Icon className="w-8 h-8 text-brand-accent mb-6" />
                 <h2 className="text-xl sm:text-2xl font-display font-bold text-white mb-4">
                   {section.title}
@@ -129,7 +131,7 @@ export default function PseoPage({
             </div>
           </div>
 
-          <aside className="glass-panel rounded-lg p-6 sm:p-8 h-fit">
+          <aside data-reveal="panel" className="glass-panel rounded-lg p-6 sm:p-8 h-fit">
             <h2 className="text-xl font-display font-bold text-white mb-5">Related Growth Paths</h2>
             <div className="space-y-3">
               {relatedLinks.map((link) => (

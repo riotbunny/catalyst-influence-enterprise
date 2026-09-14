@@ -1,6 +1,7 @@
 import Background from "@/components/Background";
 import JsonLd from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import { getIndexableIndustries } from "@/content/industries";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -19,6 +20,7 @@ export default function IndustriesPage() {
 
   return (
     <main className="min-h-screen">
+      <RevealOnScroll />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
@@ -45,10 +47,12 @@ export default function IndustriesPage() {
 
       <section className="pb-20 sm:pb-28">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 grid md:grid-cols-2 gap-5">
-          {industries.map((industry) => (
+          {industries.map((industry, index) => (
             <Link
               key={industry.slug}
               href={`/industries/${industry.slug}`}
+              data-reveal="card"
+              data-reveal-delay={index % 4}
               className="glass-panel rounded-lg p-6 sm:p-7 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
             >
               <Target className="w-7 h-7 text-brand-accent mb-5" />

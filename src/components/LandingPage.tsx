@@ -2,6 +2,7 @@
 
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import Image from "next/image";
 import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
@@ -58,6 +59,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
 
   return (
     <main className="min-h-screen">
+      <RevealOnScroll />
       <Background />
       <Navbar />
       
@@ -122,8 +124,8 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               ["Salesnet LLC", "B2B acquisition systems"],
               ["McMaster Lawfirm", "Legal demand capture"],
               ["Home Tech Dealer Inc.", "Programmatic SEO + paid media"],
-            ].map(([name, detail]) => (
-              <div key={name} className="border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
+            ].map(([name, detail], index) => (
+              <div key={name} data-reveal="card" data-reveal-delay={index} className="border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <div className="text-lg font-display font-bold text-gray-200">{name}</div>
@@ -159,7 +161,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 </div>
               </div>
 
-              <div className="glass-panel rounded-lg p-6 sm:p-8">
+              <div data-reveal="panel" className="glass-panel rounded-lg p-6 sm:p-8">
                 <h4 className="text-xl font-display font-bold text-white mb-6">
                   What we optimize for {formattedCity} service businesses
                 </h4>
@@ -195,7 +197,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
             </p>
           </div>
 
-          <div className="glass-panel p-5 sm:p-8 md:p-16 rounded-lg border border-white/10 relative overflow-hidden">
+          <div data-reveal="panel" className="glass-panel p-5 sm:p-8 md:p-16 rounded-lg border border-white/10 relative overflow-hidden">
             <div className="premium-rule absolute left-5 right-5 top-0 sm:left-8 sm:right-8" />
             
             <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
@@ -215,8 +217,8 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                     ["Constraint", "Demand existed, but discovery paths and conversion evidence were fragmented."],
                     ["Deployment", "Built search-capture assets, paid acquisition paths, and proof-led landing flows."],
                     ["Result", "Generated a visible acquisition spike without relying on disconnected campaign activity."],
-                  ].map(([label, copy]) => (
-                    <div key={label} className="border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
+                  ].map(([label, copy], index) => (
+                    <div key={label} data-reveal="metric" data-reveal-delay={index} className="border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
                       <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">{label}</div>
                       <div className="mt-2 text-sm leading-relaxed text-gray-300">{copy}</div>
                     </div>
@@ -224,12 +226,12 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="border border-white/8 bg-black/30 p-5">
+                  <div data-reveal="metric" className="border border-white/8 bg-black/30 p-5">
                     <BarChart3 className="mb-4 h-7 w-7 text-brand-accent" />
                     <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">21.3K</div>
                     <div className="text-sm font-medium leading-relaxed text-gray-400">New pages indexed through pSEO architecture</div>
                   </div>
-                  <div className="border border-white/8 bg-black/30 p-5">
+                  <div data-reveal="metric" data-reveal-delay="1" className="border border-white/8 bg-black/30 p-5">
                     <Users className="mb-4 h-7 w-7 text-brand-accent" />
                     <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">437</div>
                     <div className="text-sm font-medium leading-relaxed text-gray-400">High-intent leads generated in one day</div>
@@ -237,7 +239,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 </div>
               </div>
 
-              <div className="border border-white/10 bg-[#08080d] shadow-2xl">
+              <div data-reveal="panel" data-reveal-delay="1" className="border border-white/10 bg-[#08080d] shadow-2xl">
                 <div className="flex flex-col gap-4 border-b border-white/8 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
                   <div>
                     <div className="text-sm font-bold text-white">Acquisition Command View</div>
@@ -254,8 +256,8 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                     ["Indexed", "21.3K", Search],
                     ["Lead Yield", "437", TrendingUp],
                     ["CPL", "$2.35", Gauge],
-                  ].map(([label, value, Icon]) => (
-                    <div key={label as string} className="border border-white/8 bg-white/[0.025] p-4">
+                  ].map(([label, value, Icon], index) => (
+                    <div key={label as string} data-reveal="metric" data-reveal-delay={index} className="border border-white/8 bg-white/[0.025] p-4">
                       <Icon className="mb-4 h-5 w-5 text-brand-accent" />
                       <div className="text-xs uppercase tracking-[0.16em] text-gray-600">{label as string}</div>
                       <div className="mt-2 text-2xl font-bold text-white">{value as string}</div>
@@ -325,25 +327,25 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div data-reveal="card" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <Compass className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">1. Discovery</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Get the right person into the environment. We engineer targeted SEO, paid media, and content structures to capture high-value intent.</p>
             </div>
             
-            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div data-reveal="card" data-reveal-delay="1" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">2. Trust</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Immediately reduce uncertainty. We design your visual credibility, authority markers, and consistency to make them feel safe taking the next step.</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
+            <div data-reveal="card" data-reveal-delay="2" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
               <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">3. Decision</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Structure information so taking action feels deeply logical. We rebuild offer architecture, messaging, and proactive objection resolution.</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-colors duration-200 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(212,160,74,0.05)]">
+            <div data-reveal="card" data-reveal-delay="3" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-colors duration-200 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(212,160,74,0.05)]">
               <Zap className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">4. Activation</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Convert intent into measurable action. We optimize forms, booking systems, automated follow-ups, and behavioral remarketing loops.</p>
@@ -363,7 +365,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
 
           <div className="space-y-6">
-            <div className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
+            <div data-reveal="panel" className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
               <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
                 <span className="text-2xl font-bold text-brand-accent">1</span>
               </div>
@@ -377,7 +379,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </div>
 
-            <div className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
+            <div data-reveal="panel" data-reveal-delay="1" className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
               <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
                 <span className="text-2xl font-bold text-brand-accent">2</span>
               </div>
@@ -391,7 +393,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </div>
 
-            <div className="glass-panel p-6 sm:p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative shadow-[0_0_30px_rgba(212,160,74,0.09)]">
+            <div data-reveal="panel" data-reveal-delay="2" className="glass-panel p-6 sm:p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative shadow-[0_0_30px_rgba(212,160,74,0.09)]">
               <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(212,160,74,0.36)]">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
@@ -412,7 +414,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
       <section id="leadership" className="py-24 bg-black/40 border-y border-white/5 sm:py-32">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid md:grid-cols-[0.88fr_1fr] gap-16 items-center">
-            <div className="relative max-w-[520px]">
+            <div data-reveal="panel" className="relative max-w-[520px]">
               <div className="absolute -inset-3 border border-white/8 bg-white/[0.02]" />
               <div className="relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
                 <div className="relative aspect-[4/5]">
