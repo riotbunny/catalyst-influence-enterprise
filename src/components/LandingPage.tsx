@@ -315,6 +315,82 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 </div>
               </div>
             </div>
+
+            <div className="mt-12 border-t border-white/8 pt-10">
+              <div className="mb-8 grid gap-4 md:grid-cols-[0.78fr_1fr] md:items-end">
+                <div>
+                  <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+                    Verified Platform Evidence
+                  </h4>
+                  <p className="mt-3 text-2xl font-display font-bold leading-tight text-white">
+                    Screenshots from the systems where the results were measured.
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed text-gray-500">
+                  These views are included as supporting proof: Google Search Console indexation, Meta reach and traffic, and campaign-level click efficiency.
+                </p>
+              </div>
+
+              <div className="grid gap-5 lg:grid-cols-[1.18fr_0.82fr]">
+                <figure data-reveal="panel" className="overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                  <div className="relative aspect-[1400/650]">
+                    <Image
+                      src="/proof-home-tech-search-console.webp"
+                      alt="Google Search Console page indexing screenshot showing 21.3K indexed pages for Home Tech Dealer"
+                      fill
+                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <figcaption className="border-t border-white/8 px-5 py-4">
+                    <div className="text-sm font-bold text-white">Home Tech Dealer | Programmatic SEO</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">21.3K indexed pages in Google Search Console</div>
+                  </figcaption>
+                </figure>
+
+                <div className="grid gap-5">
+                  {[
+                    {
+                      src: "/proof-home-tech-meta.webp",
+                      alt: "Meta Ads reporting screenshot for Home Tech Dealer showing reach, impressions, spend, views, and clicks",
+                      title: "Home Tech Dealer | Paid Acquisition",
+                      detail: "18,464 clicks from 297,895 impressions",
+                      aspect: "aspect-[1400/342]",
+                    },
+                    {
+                      src: "/proof-whitestone-meta.webp",
+                      alt: "Meta Ads reporting screenshot for Whitestone Capital Advisors showing reach, impressions, views, link clicks, and spend",
+                      title: "Whitestone Capital Advisors | Paid Visibility",
+                      detail: "952,009 impressions and 9,090 link clicks",
+                      aspect: "aspect-[1400/362]",
+                    },
+                    {
+                      src: "/proof-campaign-click-cost.webp",
+                      alt: "Campaign-level reporting screenshot showing 14,291 link clicks at $0.39 per link click",
+                      title: "Campaign Proof | Click Efficiency",
+                      detail: "14,291 link clicks at $0.39 per link click",
+                      aspect: "aspect-[1200/91]",
+                    },
+                  ].map((proof, index) => (
+                    <figure key={proof.src} data-reveal="metric" data-reveal-delay={index} className="overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                      <div className={`relative ${proof.aspect}`}>
+                        <Image
+                          src={proof.src}
+                          alt={proof.alt}
+                          fill
+                          sizes="(min-width: 1024px) 38vw, 100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                      <figcaption className="border-t border-white/8 px-5 py-4">
+                        <div className="text-sm font-bold text-white">{proof.title}</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">{proof.detail}</div>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
