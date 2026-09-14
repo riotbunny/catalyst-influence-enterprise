@@ -88,30 +88,33 @@ body {
   animation: header-light-sweep 1500ms ease-out 920ms both;
 }
 
-.brand-mark-glimmer::after,
-.brand-word-glimmer::after {
+.brand-glimmer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: -8px;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.brand-glimmer::after {
   content: "";
   position: absolute;
-  inset: -45%;
+  z-index: 2;
+  top: -45%;
+  bottom: -45%;
+  width: 38px;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 34%, rgba(255, 255, 255, 0.94) 47%, rgba(236, 199, 119, 0.62) 53%, transparent 66%);
-  transform: translateX(-150%) skewX(-18deg);
-  animation: brand-glimmer 1320ms ease-out 780ms both;
-}
-
-.brand-mark-glimmer::after {
-  filter: blur(0.35px);
-  opacity: 0.98;
-}
-
-.brand-word-glimmer::after {
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.95) 42%, rgba(236, 199, 119, 0.82) 52%, transparent 100%);
+  filter: blur(0.2px);
   mix-blend-mode: screen;
-  opacity: 0.82;
+  opacity: 0;
+  transform: translateX(-72px) skewX(-16deg);
+  animation: brand-glimmer 1500ms ease-out 760ms both;
 }
 
-.brand-glimmer:hover .brand-mark-glimmer::after,
-.brand-glimmer:hover .brand-word-glimmer::after {
-  animation: brand-glimmer 1000ms ease-out both;
+.brand-glimmer:hover::after {
+  animation: brand-glimmer 1150ms ease-out both;
 }
 
 .button-primary {
@@ -139,10 +142,18 @@ body {
 
 @keyframes brand-glimmer {
   0% {
-    transform: translateX(-150%) skewX(-18deg);
+    opacity: 0;
+    transform: translateX(-72px) skewX(-16deg);
+  }
+  14% {
+    opacity: 1;
+  }
+  68% {
+    opacity: 1;
   }
   100% {
-    transform: translateX(150%) skewX(-18deg);
+    opacity: 0;
+    transform: translateX(168px) skewX(-16deg);
   }
 }
 
