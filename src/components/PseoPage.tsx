@@ -44,20 +44,20 @@ export default function PseoPage({
       <Background />
       <Navbar />
 
-      <section className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
+      <section className="relative pt-32 pb-16 md:pt-48 md:pb-28 overflow-hidden">
         <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
           <div className="max-w-4xl">
-            <p className="text-xs font-semibold text-brand-accent uppercase tracking-[0.22em] mb-5">
+            <p className="text-[10px] font-semibold text-brand-accent uppercase tracking-[0.18em] mb-5 sm:text-xs sm:tracking-[0.22em]">
               {eyebrow}
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-tight mb-7">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-tight mb-7">
               {title}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
+            <p className="text-lg md:text-2xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
               {intro}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+            <div className="flex max-w-sm flex-col gap-4 mt-10 sm:max-w-none sm:flex-row">
               <Link
                 href="/#contact"
                 className="button-primary text-black px-7 py-4 rounded-lg font-bold tracking-wide inline-flex items-center justify-center gap-3"
@@ -76,15 +76,15 @@ export default function PseoPage({
         </div>
       </section>
 
-      <section className="py-20 bg-black/30 border-y border-white/5">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-6">
+      <section className="py-16 bg-black/30 border-y border-white/5 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 grid md:grid-cols-2 gap-6">
           {sections.map((section) => {
             const Icon = icons[section.icon ?? "target"];
 
             return (
-              <article key={section.title} className="glass-panel p-8 rounded-lg">
+              <article key={section.title} className="glass-panel p-6 sm:p-8 rounded-lg">
                 <Icon className="w-8 h-8 text-brand-accent mb-6" />
-                <h2 className="text-2xl font-display font-bold text-white mb-4">
+                <h2 className="text-xl sm:text-2xl font-display font-bold text-white mb-4">
                   {section.title}
                 </h2>
                 {section.description ? (
@@ -104,8 +104,8 @@ export default function PseoPage({
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1fr_360px] gap-12">
+      <section className="py-20 sm:py-24">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 grid lg:grid-cols-[1fr_360px] gap-10 lg:gap-12">
           <div>
             <p className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">
               Executive FAQ
@@ -117,19 +117,19 @@ export default function PseoPage({
                   className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden"
                   open={index === 0}
                 >
-                  <summary className="flex items-center justify-between gap-6 p-6 cursor-pointer">
-                    <h2 className="text-lg font-bold text-white">{faq.question}</h2>
+                  <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
+                    <h2 className="text-base sm:text-lg font-bold text-white">{faq.question}</h2>
                     <span className="text-brand-accent text-2xl leading-none group-open:rotate-45 transition-transform">
                       +
                     </span>
                   </summary>
-                  <p className="px-6 pb-6 text-gray-400 leading-relaxed">{faq.answer}</p>
+                  <p className="px-5 pb-5 sm:px-6 sm:pb-6 text-gray-400 leading-relaxed">{faq.answer}</p>
                 </details>
               ))}
             </div>
           </div>
 
-          <aside className="glass-panel rounded-lg p-8 h-fit">
+          <aside className="glass-panel rounded-lg p-6 sm:p-8 h-fit">
             <h2 className="text-xl font-display font-bold text-white mb-5">Related Growth Paths</h2>
             <div className="space-y-3">
               {relatedLinks.map((link) => (

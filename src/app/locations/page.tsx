@@ -28,23 +28,23 @@ export default function LocationsPage() {
       <Background />
       <Navbar />
 
-      <section className="relative pt-36 pb-16 md:pt-48">
+      <section className="relative pt-32 pb-14 md:pt-48 md:pb-16">
         <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-xs font-semibold text-brand-accent uppercase tracking-[0.22em] mb-5">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <p className="text-[10px] font-semibold text-brand-accent uppercase tracking-[0.18em] mb-5 sm:text-xs sm:tracking-[0.22em]">
             Major U.S. Markets
           </p>
-          <h1 className="text-4xl md:text-6xl font-display font-black text-white leading-tight max-w-4xl mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-display font-black text-white leading-tight max-w-4xl mb-6">
             Customer acquisition systems for established service businesses by city.
           </h1>
-          <p className="text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
+          <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
             Each city page uses the same conversion-focused Catalyst architecture, with local metadata and market copy for service businesses competing in that market.
           </p>
         </div>
       </section>
 
-      <section className="pb-28">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="pb-20 sm:pb-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {locations.map((location) => (
               <Link
