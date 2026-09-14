@@ -60,7 +60,7 @@ export default function PseoPage({
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
               <Link
                 href="/#contact"
-                className="button-primary text-black px-7 py-4 rounded-lg font-bold tracking-wide transition-all duration-300 inline-flex items-center justify-center gap-3"
+                className="button-primary text-black px-7 py-4 rounded-lg font-bold tracking-wide inline-flex items-center justify-center gap-3"
               >
                 {primaryCta}
                 <ArrowRight className="w-4 h-4" />

@@ -83,7 +83,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-accent text-white font-bold py-4 rounded-xl hover:bg-brand-glow hover:text-black transition-all duration-300 mt-6 disabled:opacity-60"
+              className="button-primary w-full text-black font-bold py-4 rounded-lg mt-6 disabled:opacity-60"
             >
               {loading ? "Unlocking..." : "Unlock Admin"}
             </button>

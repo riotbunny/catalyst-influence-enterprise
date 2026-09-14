@@ -68,7 +68,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center">
         
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/[0.04] backdrop-blur-md mb-8">
-          <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+          <span className="h-2 w-2 rounded-full bg-brand-accent shadow-[0_0_14px_rgba(212,160,74,0.52)]"></span>
           <span suppressHydrationWarning className="text-xs font-semibold tracking-widest text-gray-300 uppercase">
             Accepting 2 established partners for {currentQuarter}
           </span>
@@ -85,11 +85,11 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6">
-          <a href="#contact" className="button-primary group text-black px-8 py-4 rounded-lg font-bold tracking-wide transition-all duration-300 flex items-center justify-center gap-3">
+          <a href="#contact" className="button-primary group text-black px-8 py-4 rounded-lg font-bold tracking-wide flex items-center justify-center gap-3">
             Apply For Partnership
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
-          <a href="#results" className="px-8 py-4 flex items-center justify-center rounded-lg font-bold tracking-wide text-white border border-white/16 bg-white/[0.03] hover:bg-white/10 transition-colors">
+          <a href="#results" className="px-8 py-4 flex items-center justify-center rounded-lg font-bold tracking-wide text-white border border-white/16 bg-white/[0.03] hover:border-white/28 hover:bg-white/10 transition-colors duration-200">
             See The Proof
           </a>
         </div>
@@ -326,25 +326,25 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <Compass className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <Compass className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">1. Discovery</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Get the right person into the environment. We engineer targeted SEO, paid media, and content structures to capture high-value intent.</p>
             </div>
             
             <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">2. Trust</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Immediately reduce uncertainty. We design your visual credibility, authority markers, and consistency to make them feel safe taking the next step.</p>
             </div>
 
             <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+              <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">3. Decision</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Structure information so taking action feels deeply logical. We rebuild offer architecture, messaging, and proactive objection resolution.</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(214,154,58,0.05)]">
-              <Zap className="w-8 h-8 text-brand-accent mb-6 group-hover:scale-110 transition-transform" />
+            <div className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-colors duration-200 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(212,160,74,0.05)]">
+              <Zap className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
               <h4 className="text-xl font-bold text-white mb-4">4. Activation</h4>
               <p className="text-gray-400 leading-relaxed text-sm">Convert intent into measurable action. We optimize forms, booking systems, automated follow-ups, and behavioral remarketing loops.</p>
             </div>
@@ -391,8 +391,8 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
               </div>
             </div>
 
-            <div className="glass-panel p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-8 items-start relative shadow-[0_0_30px_rgba(214,154,58,0.1)]">
-              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(214,154,58,0.42)]">
+            <div className="glass-panel p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-8 items-start relative shadow-[0_0_30px_rgba(212,160,74,0.09)]">
+              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(212,160,74,0.36)]">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
               <div>
@@ -448,9 +448,9 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                   <p className="text-gray-500 leading-relaxed">Leading the integration of behavioral psychology, principled negotiation, and advanced digital scaling.</p>
                 </div>
                 <ul className="space-y-4 text-gray-300 font-medium pt-4">
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Strategic Omnichannel Growth Specialist</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(214,154,58,0.72)]"></span> Relentless Focus on High-Ticket Conversions</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Strategic Omnichannel Growth Specialist</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Relentless Focus on High-Ticket Conversions</li>
                 </ul>
               </div>
             </div>
@@ -541,7 +541,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
             </div>
 
             <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-12 rounded-lg text-left border border-white/10 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-accent to-brand-glow transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-accent to-brand-glow opacity-80"></div>
             <div className="mb-8">
               <h4 className="text-2xl font-display font-bold text-white">Request review</h4>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
@@ -571,7 +571,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Website URL</label>
                 <input name="websiteUrl" required type="url" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
               </div>
-              <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg transition-all duration-300 mt-4 disabled:opacity-60">
+              <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg mt-4 disabled:opacity-60">
                 {formState === "submitting" ? "Submitting..." : "Submit Application"}
               </button>
               {formMessage ? (
