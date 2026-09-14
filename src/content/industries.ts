@@ -170,9 +170,35 @@ export const industries: IndustryPage[] = [
 ];
 
 export function getIndustry(slug: string) {
-  return industries.find((industry) => industry.slug === slug);
+  const industry = industries.find((industry) => industry.slug === slug);
+
+  return industry ? enrichIndustryFaqs(industry) : undefined;
 }
 
 export function getIndexableIndustries() {
-  return industries.filter((industry) => industry.indexable);
+  return industries.filter((industry) => industry.indexable).map(enrichIndustryFaqs);
+}
+
+function enrichIndustryFaqs(industry: IndustryPage): IndustryPage {
+  return {
+    ...industry,
+    faqs: [
+      ...industry.faqs,
+      {
+        question: `What makes customer acquisition different for ${industry.name.toLowerCase()}?`,
+        answer:
+          "The acquisition system has to match the buyer's urgency, trust requirements, service economics, and decision process. Catalyst adapts the page architecture, channel mix, proof, and follow-up path around those realities instead of using a generic agency template.",
+      },
+      {
+        question: `How long does it take to improve acquisition for ${industry.name.toLowerCase()}?`,
+        answer:
+          "The first 30 days usually clarify the biggest leaks and highest-leverage opportunities. Stronger signals build as pages, campaigns, conversion paths, and follow-up systems are deployed and measured through the 90-day architecture.",
+      },
+      {
+        question: `Which channels work best for ${industry.name.toLowerCase()}?`,
+        answer:
+          "The best channel mix depends on search demand, competition, customer value, sales cycle, and operational capacity. Catalyst chooses channels by commercial role: what captures demand, what builds trust, what converts, and what can be measured cleanly.",
+      },
+    ],
+  };
 }

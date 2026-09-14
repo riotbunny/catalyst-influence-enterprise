@@ -2,7 +2,7 @@ import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getIndexableIndustries, getIndustry } from "@/content/industries";
 import { getIndexableServices, getService } from "@/content/services";
-import { breadcrumbJsonLd, createMetadata, serviceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd, serviceJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -75,6 +75,7 @@ export default async function ServicePage({ params }: Props) {
           path: `/services/${service.slug}`,
         })}
       />
+      <JsonLd data={faqJsonLd(service.faqs)} />
       <PseoPage
         eyebrow={service.eyebrow}
         title={service.heroTitle}

@@ -3,6 +3,7 @@
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import { getExecutiveFaqs } from "@/content/faqs";
 import Image from "next/image";
 import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
@@ -23,6 +24,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
   const formattedCity = city 
     ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     : null;
+  const executiveFaqs = getExecutiveFaqs(formattedCity);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -469,35 +471,20 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
           </div>
           
           <div className="space-y-4">
-            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden" open>
-              <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
-                <h4 className="text-lg font-bold text-white flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-brand-accent" /> The 90-Day Execution Guarantee</h4>
-                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
-              </summary>
-              <div className="px-5 pb-5 text-gray-400 leading-relaxed sm:px-6 sm:pb-6">
-                If Catalyst fails to complete the agreed deployment milestones during the initial 90-Day engagement, we continue working at no additional management fee until those milestones are completely satisfied. We guarantee execution and accountability.
-              </div>
-            </details>
-
-            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
-                <h4 className="text-lg font-bold text-white">Do you work with startups?</h4>
-                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
-              </summary>
-              <div className="px-5 pb-5 text-gray-400 leading-relaxed sm:px-6 sm:pb-6">
-                We generally do not. We partner with established service businesses with proven demand, where the customer value is high enough to support paid acquisition and there is operational ability to handle additional volume.
-              </div>
-            </details>
-
-            <details className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
-                <h4 className="text-lg font-bold text-white">What exactly are the deliverables?</h4>
-                <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
-              </summary>
-              <div className="px-5 pb-5 text-gray-400 leading-relaxed sm:px-6 sm:pb-6">
-                You are not buying &quot;SEO&quot; or &quot;Facebook Ads.&quot; You are buying a predictable customer-acquisition environment. Depending on your business, this includes landing-page architecture, technical SEO, programmatic builds, and multi-channel paid media funnels.
-              </div>
-            </details>
+            {executiveFaqs.map((faq, index) => (
+              <details key={faq.question} className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden" open={index === 0}>
+                <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-3">
+                    {index === 0 ? <ShieldCheck className="w-5 h-5 text-brand-accent" /> : null}
+                    {faq.question}
+                  </h4>
+                  <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-400 leading-relaxed sm:px-6 sm:pb-6">
+                  {faq.answer}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>

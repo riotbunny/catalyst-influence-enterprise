@@ -283,9 +283,35 @@ export const services: ServicePage[] = [
 ];
 
 export function getService(slug: string) {
-  return services.find((service) => service.slug === slug);
+  const service = services.find((service) => service.slug === slug);
+
+  return service ? enrichServiceFaqs(service) : undefined;
 }
 
 export function getIndexableServices() {
-  return services.filter((service) => service.indexable);
+  return services.filter((service) => service.indexable).map(enrichServiceFaqs);
+}
+
+function enrichServiceFaqs(service: ServicePage): ServicePage {
+  return {
+    ...service,
+    faqs: [
+      ...service.faqs,
+      {
+        question: `How long does ${service.title.toLowerCase()} take to show useful signals?`,
+        answer:
+          "The first useful signals usually come from the diagnostic and deployment phase: clearer tracking, better page behavior, higher-quality inquiries, and more confidence about which acquisition paths deserve more investment.",
+      },
+      {
+        question: "What does Catalyst need from our team to start?",
+        answer:
+          "We need access to the current website, analytics or Search Console where available, ad account context if paid media is involved, CRM or lead-handling context, and a clear view of the services or customer segments that matter most.",
+      },
+      {
+        question: "How do you measure whether this is working?",
+        answer:
+          "Catalyst measures more than traffic or lead count. The important signals are qualified actions, source quality, conversion path performance, speed-to-lead, booked opportunities, and whether spend or SEO effort can scale with confidence.",
+      },
+    ],
+  };
 }

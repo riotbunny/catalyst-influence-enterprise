@@ -2,7 +2,7 @@ import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getIndexableIndustries, getIndustry } from "@/content/industries";
 import { getService } from "@/content/services";
-import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -59,6 +59,7 @@ export default async function IndustryPage({ params }: Props) {
           { name: industry.name, path: `/industries/${industry.slug}` },
         ])}
       />
+      <JsonLd data={faqJsonLd(industry.faqs)} />
       <PseoPage
         eyebrow={`${industry.name} Growth System`}
         title={industry.heroTitle}

@@ -1,7 +1,8 @@
 import JsonLd from "@/components/JsonLd";
 import LandingPage from "@/components/LandingPage";
+import { getExecutiveFaqs } from "@/content/faqs";
 import { getIndexableLocations, getLocation } from "@/content/locations";
-import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -50,6 +51,7 @@ export default async function LocationPage({ params }: Props) {
           { name: location.city, path: `/locations/${location.slug}` },
         ])}
       />
+      <JsonLd data={faqJsonLd(getExecutiveFaqs(location.city))} />
       <LandingPage city={location.city} state={location.state} marketAngle={location.marketAngle} />
     </>
   );
