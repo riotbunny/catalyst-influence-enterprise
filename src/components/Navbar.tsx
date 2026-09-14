@@ -17,18 +17,18 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-colors duration-200 ${
+      className={`nav-settle fixed w-full z-50 transition-colors duration-200 ${
         scrolled
           ? "bg-[#07070b]/82 backdrop-blur-xl border-b border-white/10"
           : "bg-[#07070b]/48 backdrop-blur-md border-b border-white/5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-accent/35 bg-brand-accent/10">
+        <Link href="/" className="brand-glimmer group flex items-center gap-3">
+          <span className="brand-mark-glimmer relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-brand-accent/35 bg-brand-accent/10">
             <Brain className="h-6 w-6 text-brand-accent" />
           </span>
-          <span className="text-xl font-display font-bold tracking-wide text-white">
+          <span className="brand-word-glimmer relative overflow-hidden text-xl font-display font-bold tracking-wide text-white">
             CATALYST
           </span>
         </Link>
