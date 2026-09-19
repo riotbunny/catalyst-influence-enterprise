@@ -17,7 +17,9 @@ export function createMetadata({
   const url = absoluteUrl(path);
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
     alternates: {
       canonical: url,
@@ -116,6 +118,53 @@ export function serviceJsonLd({
     },
     url: absoluteUrl(path),
     areaServed: "United States",
+  };
+}
+
+export function localServiceJsonLd({
+  city,
+  state,
+  description,
+  path,
+  services,
+}: {
+  city: string;
+  state: string;
+  description: string;
+  path: string;
+  services: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `${siteConfig.name} - ${city}, ${state}`,
+    description,
+    url: absoluteUrl(path),
+    email: siteConfig.email,
+    areaServed: {
+      "@type": "City",
+      name: city,
+      containedInPlace: {
+        "@type": "State",
+        name: state,
+      },
+    },
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Customer acquisition services in ${city}`,
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service,
+        },
+      })),
+    },
   };
 }
 

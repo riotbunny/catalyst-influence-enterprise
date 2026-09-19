@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { getExecutiveFaqs } from "@/content/faqs";
 import Image from "next/image";
+import Link from "next/link";
 import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
@@ -13,9 +14,23 @@ interface LandingPageProps {
   city?: string;
   state?: string;
   marketAngle?: string;
+  localBuyerIntent?: string;
+  localSearchFocus?: string[];
+  localServices?: string[];
+  serviceAreaCopy?: string;
+  relatedCityServiceLinks?: { href: string; label: string }[];
 }
 
-export default function LandingPage({ city, state, marketAngle }: LandingPageProps) {
+export default function LandingPage({
+  city,
+  state,
+  marketAngle,
+  localBuyerIntent,
+  localSearchFocus = [],
+  localServices = [],
+  serviceAreaCopy,
+  relatedCityServiceLinks = [],
+}: LandingPageProps) {
   const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formMessage, setFormMessage] = useState("");
@@ -160,6 +175,7 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                   <p>
                     Catalyst builds the acquisition environment around that local intent: search visibility, paid traffic, landing page proof, offer clarity, automated follow-up, and measurement that shows which opportunities are worth scaling.
                   </p>
+                  {localBuyerIntent ? <p>{localBuyerIntent}</p> : null}
                 </div>
               </div>
 
@@ -180,6 +196,75 @@ export default function LandingPage({ city, state, marketAngle }: LandingPagePro
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+              <div data-reveal="panel" className="glass-panel rounded-lg p-6 sm:p-8">
+                <h4 className="mb-5 text-xl font-display font-bold text-white">
+                  Search demand we build around in {formattedCity}
+                </h4>
+                <div className="flex flex-wrap gap-3">
+                  {(localSearchFocus.length
+                    ? localSearchFocus
+                    : [
+                        `customer acquisition agency in ${formattedCity}`,
+                        `lead generation for service businesses in ${formattedCity}`,
+                        `local SEO and paid acquisition in ${formattedCity}`,
+                      ]
+                  ).map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm font-medium text-gray-300"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div data-reveal="panel" data-reveal-delay="1" className="glass-panel rounded-lg p-6 sm:p-8">
+                <h4 className="mb-5 text-xl font-display font-bold text-white">
+                  {formattedCity} acquisition services
+                </h4>
+                <ul className="space-y-4">
+                  {(localServices.length
+                    ? localServices
+                    : [
+                        `${formattedCity} customer acquisition system design`,
+                        `${formattedCity} programmatic SEO and landing page architecture`,
+                        `${formattedCity} CRM follow-up and attribution planning`,
+                      ]
+                  ).map((service) => (
+                    <li key={service} className="flex gap-3 text-gray-300 leading-relaxed">
+                      <CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+                {serviceAreaCopy ? (
+                  <p className="mt-6 border-t border-white/8 pt-5 text-sm leading-relaxed text-gray-500">
+                    {serviceAreaCopy}
+                  </p>
+                ) : null}
+                {relatedCityServiceLinks.length ? (
+                  <div className="mt-6 border-t border-white/8 pt-5">
+                    <div className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-accent">
+                      Deeper {formattedCity} pages
+                    </div>
+                    <div className="space-y-2">
+                      {relatedCityServiceLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="block rounded-md border border-white/10 bg-black/24 px-3 py-2 text-sm text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

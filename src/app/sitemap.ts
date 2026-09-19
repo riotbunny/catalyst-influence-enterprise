@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/content/site";
 import { getIndexableIndustries } from "@/content/industries";
 import { getIndexableLocations } from "@/content/locations";
+import { getMarketIntentPages } from "@/content/marketIntents";
 import { getIndexableServices } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -47,11 +48,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const locationPages = getIndexableLocations().map((location) => ({
-    url: absoluteUrl(`/locations/${location.slug}`),
+    url: absoluteUrl(`/locations/${location.marketSlug}`),
     lastModified: new Date(location.lastModified),
     changeFrequency: "monthly" as const,
     priority: location.priority,
   }));
 
-  return [...staticPages, ...servicePages, ...industryPages, ...locationPages];
+  const marketIntentPages = getMarketIntentPages().map((page) => ({
+    url: absoluteUrl(`/${page.intentSlug}/${page.marketSlug}`),
+    lastModified: new Date(page.lastModified),
+    changeFrequency: "monthly" as const,
+    priority: page.priority,
+  }));
+
+  return [...staticPages, ...servicePages, ...industryPages, ...locationPages, ...marketIntentPages];
 }

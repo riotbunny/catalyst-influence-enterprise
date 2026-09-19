@@ -2,9 +2,15 @@ export type LocationPage = {
   slug: string;
   city: string;
   state: string;
+  stateCode: string;
+  marketSlug: string;
   title: string;
   metaDescription: string;
   marketAngle: string;
+  localBuyerIntent: string;
+  localSearchFocus: string[];
+  localServices: string[];
+  serviceAreaCopy: string;
   priorityServices: string[];
   priorityIndustries: string[];
   priority: number;
@@ -124,20 +130,148 @@ const majorCities: CityRecord[] = [
 
 export const locations: LocationPage[] = majorCities.map((location, index) => ({
   ...location,
-  title: `Customer Acquisition Agency in ${location.city}`,
-  metaDescription: `Catalyst Influence helps established ${location.city} service businesses build predictable customer acquisition systems across SEO, paid media, conversion, and follow-up.`,
-  marketAngle: `${location.city} service businesses compete in a market where buyers compare quickly and trust signals matter immediately. Catalyst connects local search visibility, paid acquisition, landing page proof, automated follow-up, and measurement into one customer acquisition system.`,
+  stateCode: getStateCode(location.state),
+  marketSlug: buildMarketSlug(location),
+  title: `Customer Acquisition Agency in ${location.city}, ${getStateCode(location.state)} | Catalyst Influence`,
+  metaDescription: `Customer acquisition agency in ${location.city}, ${getStateCode(location.state)} for established service businesses. Catalyst connects local SEO, lead generation, paid media, landing pages, automation, and lead attribution.`,
+  marketAngle: buildMarketAngle(location),
+  localBuyerIntent: buildBuyerIntent(location),
+  localSearchFocus: buildSearchFocus(location),
+  localServices: buildLocalServices(location),
+  serviceAreaCopy: buildServiceAreaCopy(location),
   priorityServices: ["customer-acquisition-system", "programmatic-seo", "conversion-architecture"],
   priorityIndustries: ["law-firms", "home-services", "dental-practices"],
   priority: index < 20 ? 0.7 : index < 50 ? 0.6 : 0.5,
   indexable: true,
-  lastModified: "2026-09-13",
+  lastModified: "2026-09-18",
 }));
 
 export function getLocation(slug: string) {
-  return locations.find((location) => location.slug === slug);
+  return locations.find((location) => location.slug === slug || location.marketSlug === slug);
 }
 
 export function getIndexableLocations() {
   return locations.filter((location) => location.indexable);
+}
+
+function buildMarketSlug(location: CityRecord) {
+  const stateCode = getStateCode(location.state).toLowerCase();
+
+  if (location.slug === "washington-dc") {
+    return location.slug;
+  }
+
+  return `${location.slug}-${stateCode}`;
+}
+
+function buildMarketAngle(location: CityRecord) {
+  const stateAngle = getStateAngle(location.state);
+
+  return `${location.city} service businesses compete for buyers who compare options quickly across search, paid media, reviews, and referral signals. ${stateAngle} Catalyst connects local SEO, programmatic SEO, paid acquisition, landing page proof, automated follow-up, and source attribution into one customer acquisition system built for qualified inquiries.`;
+}
+
+function buildBuyerIntent(location: CityRecord) {
+  return `In ${location.city}, the valuable search terms are rarely just broad marketing phrases. They are commercial searches around customer acquisition agency, lead generation, local SEO, programmatic SEO, paid acquisition, landing page conversion, and marketing automation for established service businesses.`;
+}
+
+function buildSearchFocus(location: CityRecord) {
+  return [
+    `customer acquisition agency in ${location.city}`,
+    `lead generation for service businesses in ${location.city}`,
+    `programmatic SEO agency in ${location.city}`,
+    `local SEO and paid acquisition in ${location.city}`,
+    `${location.city} conversion-focused landing pages`,
+    `${location.city} marketing automation and lead follow-up`,
+  ];
+}
+
+function buildLocalServices(location: CityRecord) {
+  return [
+    `${location.city} customer acquisition system design`,
+    `${location.city} programmatic SEO and local landing page architecture`,
+    `${location.city} paid acquisition strategy for high-value services`,
+    `${location.city} conversion architecture for landing pages and forms`,
+    `${location.city} CRM follow-up and source attribution planning`,
+  ];
+}
+
+function buildServiceAreaCopy(location: CityRecord) {
+  return `Catalyst serves established businesses in ${location.city} and the surrounding ${location.state} market when there is proven demand, enough customer value to support serious acquisition investment, and an operator who wants SEO, paid traffic, conversion, and follow-up measured as one system.`;
+}
+
+function getStateAngle(state: string) {
+  const stateAngles: Record<string, string> = {
+    California: "Dense competition, high ad costs, and sophisticated buyers make trust architecture and long-tail search coverage especially important.",
+    Texas: "Fast-growing service markets create opportunity, but they also reward companies that can separate qualified demand from noisy lead volume.",
+    Florida: "Local search demand is broad and competitive, so service businesses need pages and follow-up systems that turn intent into booked conversations.",
+    "New York": "Competitive search results and high buyer expectations make proof, positioning, and page quality critical before prospects inquire.",
+    Illinois: "Established local competitors and regional search demand require a clearer acquisition system than disconnected campaigns can provide.",
+    Arizona: "Growth-market competition makes it important to capture search intent early and convert quickly on mobile.",
+    Nevada: "Service buyers compare quickly across crowded local options, which makes landing page trust and follow-up speed central.",
+    "North Carolina": "Growing business corridors reward companies with strong local search coverage and clear conversion paths.",
+    Virginia: "Multi-city service areas need structured local pages and attribution that show which markets create quality opportunities.",
+    Colorado: "Competitive regional service demand requires sharper local relevance, proof, and paid traffic discipline.",
+    Ohio: "Mature service markets reward companies that can improve lead quality instead of chasing raw volume.",
+    Pennsylvania: "Established competitors make it important to show authority quickly across SEO pages, ads, and follow-up.",
+  };
+
+  return stateAngles[state] ?? "Local service buyers reward the companies that make expertise, proof, offer clarity, and response speed visible before the first conversation.";
+}
+
+export function getStateCode(state: string) {
+  const stateCodes: Record<string, string> = {
+    Alabama: "AL",
+    Alaska: "AK",
+    Arizona: "AZ",
+    Arkansas: "AR",
+    California: "CA",
+    Colorado: "CO",
+    Connecticut: "CT",
+    Delaware: "DE",
+    "District of Columbia": "DC",
+    Florida: "FL",
+    Georgia: "GA",
+    Hawaii: "HI",
+    Idaho: "ID",
+    Illinois: "IL",
+    Indiana: "IN",
+    Iowa: "IA",
+    Kansas: "KS",
+    Kentucky: "KY",
+    Louisiana: "LA",
+    Maine: "ME",
+    Maryland: "MD",
+    Massachusetts: "MA",
+    Michigan: "MI",
+    Minnesota: "MN",
+    Mississippi: "MS",
+    Missouri: "MO",
+    Montana: "MT",
+    Nebraska: "NE",
+    Nevada: "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    Ohio: "OH",
+    Oklahoma: "OK",
+    Oregon: "OR",
+    Pennsylvania: "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    Tennessee: "TN",
+    Texas: "TX",
+    Utah: "UT",
+    Vermont: "VT",
+    Virginia: "VA",
+    Washington: "WA",
+    "West Virginia": "WV",
+    Wisconsin: "WI",
+    Wyoming: "WY",
+  };
+
+  return stateCodes[state] ?? state;
 }

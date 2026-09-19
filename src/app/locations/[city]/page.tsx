@@ -2,7 +2,8 @@ import JsonLd from "@/components/JsonLd";
 import LandingPage from "@/components/LandingPage";
 import { getExecutiveFaqs } from "@/content/faqs";
 import { getIndexableLocations, getLocation } from "@/content/locations";
-import { breadcrumbJsonLd, createMetadata, faqJsonLd } from "@/lib/seo";
+import { marketIntents } from "@/content/marketIntents";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -14,7 +15,7 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getIndexableLocations().map((location) => ({
-    city: location.slug,
+    city: location.marketSlug,
   }));
 }
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return createMetadata({
     title: location.title,
     description: location.metaDescription,
-    path: `/locations/${location.slug}`,
+    path: `/locations/${location.marketSlug}`,
     indexable: location.indexable,
   });
 }
@@ -42,17 +43,40 @@ export default async function LocationPage({ params }: Props) {
     notFound();
   }
 
+  const relatedCityServiceLinks = marketIntents.map((intent) => ({
+    href: `/${intent.slug}/${location.marketSlug}`,
+    label: `${intent.title} in ${location.city}, ${location.stateCode}`,
+  }));
+
   return (
     <>
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
           { name: "Locations", path: "/locations" },
-          { name: location.city, path: `/locations/${location.slug}` },
+          { name: location.city, path: `/locations/${location.marketSlug}` },
         ])}
       />
       <JsonLd data={faqJsonLd(getExecutiveFaqs(location.city))} />
-      <LandingPage city={location.city} state={location.state} marketAngle={location.marketAngle} />
+      <JsonLd
+        data={localServiceJsonLd({
+          city: location.city,
+          state: location.state,
+          description: location.metaDescription,
+          path: `/locations/${location.marketSlug}`,
+          services: location.localServices,
+        })}
+      />
+      <LandingPage
+        city={location.city}
+        state={location.state}
+        marketAngle={location.marketAngle}
+        localBuyerIntent={location.localBuyerIntent}
+        localSearchFocus={location.localSearchFocus}
+        localServices={location.localServices}
+        serviceAreaCopy={location.serviceAreaCopy}
+        relatedCityServiceLinks={relatedCityServiceLinks}
+      />
     </>
   );
 }

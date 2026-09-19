@@ -9,9 +9,9 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
-  title: "Customer Acquisition Agency Locations",
+  title: "Customer Acquisition Agency Locations | Major U.S. City PSEO Pages",
   description:
-    "Browse Catalyst Influence customer acquisition pages for major U.S. cities, built for established service businesses that need predictable growth.",
+    "Browse Catalyst Influence customer acquisition, programmatic SEO, local SEO, paid acquisition, and conversion architecture pages for major U.S. cities.",
   path: "/locations",
 });
 
@@ -40,25 +40,40 @@ export default function LocationsPage() {
             Customer acquisition systems for established service businesses by city.
           </h1>
           <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
-            Each city page uses the same conversion-focused Catalyst architecture, with local metadata and market copy for service businesses competing in that market.
+            Each city page uses the same conversion-focused Catalyst architecture, with local metadata, customer acquisition keywords, service-area language, and market copy for established service businesses competing in that market.
           </p>
         </div>
       </section>
 
       <section className="pb-20 sm:pb-28">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <div className="mb-10 grid gap-4 md:grid-cols-3">
+            {[
+              ["100+", "major U.S. markets"],
+              ["6", "local acquisition keyword clusters per city"],
+              ["5", "core acquisition services mapped per city"],
+            ].map(([value, label]) => (
+              <div key={label} className="border border-white/8 bg-white/[0.025] p-5">
+                <div className="text-3xl font-display font-bold text-white">{value}</div>
+                <div className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
+              </div>
+            ))}
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {locations.map((location, index) => (
               <Link
                 key={location.slug}
-                href={`/locations/${location.slug}`}
+              href={`/locations/${location.marketSlug}`}
                 data-reveal="card"
                 data-reveal-delay={index % 4}
                 className="glass-panel rounded-lg p-5 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
               >
                 <MapPin className="w-5 h-5 text-brand-accent mb-4" />
                 <h2 className="text-lg font-bold text-white">{location.city}</h2>
-                <p className="text-sm text-gray-500 mt-1">{location.state}</p>
+                <p className="text-sm text-gray-500 mt-1">{location.stateCode}</p>
+                <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                  Customer acquisition, local SEO, PSEO, paid media, and conversion architecture for {location.city} service businesses.
+                </p>
               </Link>
             ))}
           </div>
