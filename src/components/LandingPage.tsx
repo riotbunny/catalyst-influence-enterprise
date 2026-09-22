@@ -6,7 +6,7 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import { getExecutiveFaqs } from "@/content/faqs";
 import Image from "next/image";
 import Link from "next/link";
-import { Brain, BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
+import { BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 
@@ -18,6 +18,9 @@ interface LandingPageProps {
   localSearchFocus?: string[];
   localServices?: string[];
   serviceAreaCopy?: string;
+  localMarketSummary?: string;
+  localMarketSignals?: string[];
+  extraFaqs?: { question: string; answer: string }[];
   relatedCityServiceLinks?: { href: string; label: string }[];
 }
 
@@ -29,6 +32,7 @@ export default function LandingPage({
   localSearchFocus = [],
   localServices = [],
   serviceAreaCopy,
+  extraFaqs = [],
   relatedCityServiceLinks = [],
 }: LandingPageProps) {
   const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
@@ -39,7 +43,7 @@ export default function LandingPage({
   const formattedCity = city 
     ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     : null;
-  const executiveFaqs = getExecutiveFaqs(formattedCity);
+  const executiveFaqs = [...getExecutiveFaqs(formattedCity), ...extraFaqs];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -737,17 +741,6 @@ export default function LandingPage({
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 bg-black py-12 text-center">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-3 mb-6 md:mb-0">
-            <Brain className="h-6 w-6 text-brand-accent" />
-            <span className="text-lg font-display font-bold tracking-wide text-white">CATALYST</span>
-          </div>
-          <p className="text-gray-600 text-sm">&copy; 2026 Catalyst Influence. Engineered Success.</p>
-        </div>
-      </footer>
     </main>
   );
 }

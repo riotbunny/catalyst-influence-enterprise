@@ -1,6 +1,8 @@
 import JsonLd from "@/components/JsonLd";
 import LandingPage from "@/components/LandingPage";
 import { getExecutiveFaqs } from "@/content/faqs";
+import { getIndexableIndustries } from "@/content/industries";
+import { getLocalMarketSignals, getLocalMarketSummary, getLocationFaqs } from "@/content/localMarket";
 import { getIndexableLocations, getLocation } from "@/content/locations";
 import { marketIntents } from "@/content/marketIntents";
 import { breadcrumbJsonLd, createMetadata, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
@@ -46,7 +48,13 @@ export default async function LocationPage({ params }: Props) {
   const relatedCityServiceLinks = marketIntents.map((intent) => ({
     href: `/${intent.slug}/${location.marketSlug}`,
     label: `${intent.title} in ${location.city}, ${location.stateCode}`,
-  }));
+  })).concat(
+    getIndexableIndustries().map((industry) => ({
+      href: `/industries/${industry.slug}/${location.marketSlug}`,
+      label: `${industry.title} in ${location.city}, ${location.stateCode}`,
+    })),
+  );
+  const locationFaqs = getLocationFaqs(location);
 
   return (
     <>
@@ -57,7 +65,7 @@ export default async function LocationPage({ params }: Props) {
           { name: location.city, path: `/locations/${location.marketSlug}` },
         ])}
       />
-      <JsonLd data={faqJsonLd(getExecutiveFaqs(location.city))} />
+      <JsonLd data={faqJsonLd([...getExecutiveFaqs(location.city), ...locationFaqs])} />
       <JsonLd
         data={localServiceJsonLd({
           city: location.city,
@@ -75,6 +83,9 @@ export default async function LocationPage({ params }: Props) {
         localSearchFocus={location.localSearchFocus}
         localServices={location.localServices}
         serviceAreaCopy={location.serviceAreaCopy}
+        localMarketSummary={getLocalMarketSummary(location)}
+        localMarketSignals={getLocalMarketSignals(location)}
+        extraFaqs={locationFaqs}
         relatedCityServiceLinks={relatedCityServiceLinks}
       />
     </>

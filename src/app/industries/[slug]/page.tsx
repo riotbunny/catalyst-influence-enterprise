@@ -1,6 +1,7 @@
 import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getIndexableIndustries, getIndustry } from "@/content/industries";
+import { getIndexableLocations } from "@/content/locations";
 import { getService } from "@/content/services";
 import { breadcrumbJsonLd, createMetadata, faqJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -48,6 +49,12 @@ export default async function IndustryPage({ params }: Props) {
     .map((service) => ({
       href: `/services/${service.slug}`,
       label: service.title,
+    }));
+  const priorityMarketLinks = getIndexableLocations()
+    .slice(0, 10)
+    .map((location) => ({
+      href: `/industries/${industry.slug}/${location.marketSlug}`,
+      label: `${industry.title} in ${location.city}, ${location.stateCode}`,
     }));
 
   return (
@@ -97,7 +104,7 @@ export default async function IndustryPage({ params }: Props) {
           },
         ]}
         faqs={industry.faqs}
-        relatedLinks={relatedLinks}
+        relatedLinks={[...relatedLinks, ...priorityMarketLinks]}
       />
     </>
   );

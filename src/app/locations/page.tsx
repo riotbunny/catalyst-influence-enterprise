@@ -2,6 +2,7 @@ import Background from "@/components/Background";
 import JsonLd from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import { getStateHubs } from "@/content/localMarket";
 import { getIndexableLocations } from "@/content/locations";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -17,6 +18,7 @@ export const metadata: Metadata = createMetadata({
 
 export default function LocationsPage() {
   const locations = getIndexableLocations();
+  const stateHubs = getStateHubs();
 
   return (
     <main className="min-h-screen">
@@ -58,6 +60,20 @@ export default function LocationsPage() {
                 <div className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
               </div>
             ))}
+          </div>
+          <div className="mb-10">
+            <h2 className="mb-4 text-xl font-display font-bold text-white">Regional service-area hubs</h2>
+            <div className="flex flex-wrap gap-3">
+              {stateHubs.map((hub) => (
+                <Link
+                  key={hub.slug}
+                  href={`/locations/states/${hub.slug}`}
+                  className="rounded-md border border-white/10 bg-black/24 px-4 py-2 text-sm font-semibold text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
+                >
+                  {hub.state} ({hub.locations.length})
+                </Link>
+              ))}
+            </div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {locations.map((location, index) => (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative overflow-x-hidden antialiased selection:bg-brand-accent selection:text-white">
         {children}
+        <Footer />
       </body>
     </html>
   );

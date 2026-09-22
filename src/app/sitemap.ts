@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/content/site";
 import { getIndexableIndustries } from "@/content/industries";
+import { getIndustryMarketPages, getStateHubs } from "@/content/localMarket";
 import { getIndexableLocations } from "@/content/locations";
 import { getMarketIntentPages } from "@/content/marketIntents";
 import { getIndexableServices } from "@/content/services";
@@ -54,6 +55,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: location.priority,
   }));
 
+  const stateHubPages = getStateHubs().map((hub) => ({
+    url: absoluteUrl(`/locations/states/${hub.slug}`),
+    lastModified: new Date(hub.lastModified),
+    changeFrequency: "monthly" as const,
+    priority: Math.max(hub.priority - 0.03, 0.45),
+  }));
+
   const marketIntentPages = getMarketIntentPages().map((page) => ({
     url: absoluteUrl(`/${page.intentSlug}/${page.marketSlug}`),
     lastModified: new Date(page.lastModified),
@@ -61,5 +69,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority,
   }));
 
-  return [...staticPages, ...servicePages, ...industryPages, ...locationPages, ...marketIntentPages];
+  const industryMarketPages = getIndustryMarketPages().map((page) => ({
+    url: absoluteUrl(`/industries/${page.industrySlug}/${page.marketSlug}`),
+    lastModified: new Date(page.lastModified),
+    changeFrequency: "monthly" as const,
+    priority: page.priority,
+  }));
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...industryPages,
+    ...locationPages,
+    ...stateHubPages,
+    ...marketIntentPages,
+    ...industryMarketPages,
+  ];
 }

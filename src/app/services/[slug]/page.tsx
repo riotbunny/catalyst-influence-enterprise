@@ -1,6 +1,7 @@
 import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getIndexableIndustries, getIndustry } from "@/content/industries";
+import { getIndexableLocations } from "@/content/locations";
 import { getIndexableServices, getService } from "@/content/services";
 import { breadcrumbJsonLd, createMetadata, faqJsonLd, serviceJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -58,6 +59,18 @@ export default async function ServicePage({ params }: Props) {
     }));
 
   const relatedLinks = relatedIndustryLinks.length > 0 ? relatedIndustryLinks : fallbackIndustryLinks;
+  const intentSlug =
+    service.slug === "programmatic-seo"
+      ? "local-seo"
+      : service.slug === "marketing-automation"
+        ? "lead-generation"
+        : "customer-acquisition";
+  const marketLinks = getIndexableLocations()
+    .slice(0, 10)
+    .map((location) => ({
+      href: `/${intentSlug}/${location.marketSlug}`,
+      label: `${service.title} in ${location.city}, ${location.stateCode}`,
+    }));
 
   return (
     <>
@@ -109,7 +122,7 @@ export default async function ServicePage({ params }: Props) {
           },
         ]}
         faqs={service.faqs}
-        relatedLinks={relatedLinks}
+        relatedLinks={[...relatedLinks, ...marketLinks]}
       />
     </>
   );

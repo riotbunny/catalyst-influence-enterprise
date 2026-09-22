@@ -34,7 +34,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest uppercase text-gray-300">
-          <Link href="#methodology" className="hover:text-brand-accent transition-colors">
+          <Link href="/#methodology" className="hover:text-brand-accent transition-colors">
             Methodology
           </Link>
           <Link href="/services" className="hover:text-brand-accent transition-colors">
@@ -44,7 +44,7 @@ export default function Navbar() {
             Locations
           </Link>
           <Link
-            href="#contact"
+            href="/#contact"
             className="border border-brand-accent/35 bg-brand-accent/10 px-5 py-2.5 rounded-lg text-white hover:border-brand-accent hover:bg-brand-accent hover:text-black transition-colors"
           >
             Apply Now

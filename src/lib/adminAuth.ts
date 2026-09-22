@@ -28,6 +28,10 @@ export function isAdminPassword(password: string) {
   return safeEqual(password, expected);
 }
 
+export function isAdminConfigured() {
+  return Boolean(getAdminPassword());
+}
+
 export function isAdminToken(token?: string) {
   if (!token) {
     return false;

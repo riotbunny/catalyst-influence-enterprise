@@ -1,6 +1,7 @@
 import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getExecutiveFaqs } from "@/content/faqs";
+import { getLocalMarketSignals, getLocalMarketSummary } from "@/content/localMarket";
 import { getIndexableLocations, getLocation } from "@/content/locations";
 import { getMarketIntent, marketIntents } from "@/content/marketIntents";
 import { breadcrumbJsonLd, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
@@ -37,6 +38,7 @@ export async function renderMarketIntentPage({
     },
     ...getExecutiveFaqs(location.city).slice(2, 6),
   ];
+  const marketSignals = getLocalMarketSignals(location);
 
   const siblingIntentLinks = marketIntents
     .filter((relatedIntent) => relatedIntent.slug !== intent.slug)
@@ -82,8 +84,8 @@ export async function renderMarketIntentPage({
         sections={[
           {
             title: `Why ${location.city} buyers matter`,
-            description: location.marketAngle,
-            items: location.localSearchFocus.slice(0, 4),
+            description: getLocalMarketSummary(location),
+            items: [...location.localSearchFocus.slice(0, 3), ...marketSignals.slice(0, 2)],
             icon: "target",
           },
           {
