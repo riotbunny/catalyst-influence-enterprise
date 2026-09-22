@@ -14,7 +14,8 @@ const resendApiUrl = "https://api.resend.com/emails";
 export async function sendSubmissionEmails(submission: Submission) {
   const apiKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL ?? "Catalyst <onboarding@resend.dev>";
+  const fromEmail = process.env.FROM_EMAIL ?? "Catalyst Influence <hello@catalystintellegence.com>";
+  const replyToEmail = process.env.REPLY_TO_EMAIL ?? adminEmail;
 
   if (!apiKey || !adminEmail) {
     console.warn("Submission email skipped: RESEND_API_KEY or ADMIN_NOTIFICATION_EMAIL is not configured.");
@@ -34,6 +35,7 @@ export async function sendSubmissionEmails(submission: Submission) {
     from: fromEmail,
     to: submission.email,
     subject: "Your Catalyst review request is confirmed",
+    reply_to: replyToEmail,
     html: renderSubmitterEmail(submission),
     text: renderSubmitterText(submission),
   };
