@@ -713,17 +713,19 @@ export default function LandingPage({
                 <input name="email" required type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Current Marketing Capacity</label>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Current Acquisition Investment</label>
                 <select name="marketingCapacity" required className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
+                  <option value="under-10k">Under $10,000 / month</option>
                   <option value="10k-25k">$10,000 - $25,000 / month</option>
                   <option value="25k-50k">$25,000 - $50,000 / month</option>
                   <option value="50k-100k">$50,000 - $100,000 / month</option>
                   <option value="100k+">$100,000+ / month</option>
+                  <option value="not-sure">Not sure yet</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Current Website URL</label>
-                <input name="websiteUrl" required type="url" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="https://..." />
+                <label className="block text-sm font-medium text-gray-400 mb-2">Current Website <span className="text-gray-600">(optional)</span></label>
+                <input name="websiteUrl" type="text" inputMode="url" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="company.com" />
               </div>
               <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg mt-4 disabled:opacity-60">
                 {formState === "submitting" ? "Submitting..." : "Submit Application"}

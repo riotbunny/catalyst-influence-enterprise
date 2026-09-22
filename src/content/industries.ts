@@ -167,6 +167,49 @@ export const industries: IndustryPage[] = [
     indexable: true,
     lastModified: "2026-09-13",
   },
+  {
+    slug: "service-businesses",
+    name: "Service Businesses",
+    title: "Customer Acquisition for Established Service Businesses",
+    metaDescription:
+      "Customer acquisition strategy for established service businesses that need stronger SEO, lead generation, paid acquisition, landing pages, and follow-up.",
+    heroTitle: "Customer acquisition for service businesses that do not fit a generic agency template.",
+    intro:
+      "Not every qualified company fits neatly into one vertical page. Catalyst works with established service businesses where customer value, search demand, sales process, and operational capacity justify a serious acquisition system.",
+    acquisitionProblems: [
+      "The business has strong service delivery but no clear acquisition system",
+      "Traffic, ads, referrals, and follow-up are managed as separate pieces",
+      "The website explains the service but does not create enough trust to convert",
+      "Leadership cannot tell which channels create qualified opportunities",
+    ],
+    systemPriorities: [
+      "Buyer-intent and market-demand mapping",
+      "Service page and landing page conversion architecture",
+      "Paid and organic acquisition channel roles",
+      "Follow-up, attribution, and qualification workflow",
+    ],
+    recommendedServices: [
+      "customer-acquisition-system",
+      "growth-architecture",
+      "conversion-architecture",
+      "programmatic-seo",
+    ],
+    faqs: [
+      {
+        question: "What kinds of service businesses does Catalyst consider?",
+        answer:
+          "Catalyst considers established service companies with meaningful customer value, proven demand, and enough operational capacity to handle more qualified opportunities. The fit depends less on the label of the industry and more on the economics and acquisition path.",
+      },
+      {
+        question: "Why not create a page for every possible industry?",
+        answer:
+          "A smaller number of useful pages is stronger than a large set of thin industry pages. This page gives non-listed service businesses a relevant path without weakening the site with low-value duplicate pages.",
+      },
+    ],
+    priority: 0.78,
+    indexable: true,
+    lastModified: "2026-09-22",
+  },
 ];
 
 export function getIndustry(slug: string) {

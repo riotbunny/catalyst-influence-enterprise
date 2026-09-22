@@ -74,7 +74,7 @@ function renderAdminEmail(submission: Submission) {
     content: `
       ${field("Name", submission.executiveName)}
       ${field("Email", `<a href="mailto:${escapeHtml(submission.email)}" style="color:#1d4ed8;text-decoration:none;">${escapeHtml(submission.email)}</a>`)}
-      ${field("Marketing capacity", submission.marketingCapacity)}
+      ${field("Acquisition investment", submission.marketingCapacity)}
       ${field("Website", formatWebsiteField(submission))}
       ${field("City context", submission.city || "Homepage")}
       ${field("Source path", submission.sourcePath || "/")}
@@ -110,7 +110,7 @@ function renderAdminText(submission: Submission) {
     "",
     `Name: ${submission.executiveName}`,
     `Email: ${submission.email}`,
-    `Marketing capacity: ${submission.marketingCapacity}`,
+    `Acquisition investment: ${submission.marketingCapacity}`,
     `Website: ${submission.websiteUrl || "Not provided"}`,
     `City context: ${submission.city || "Homepage"}`,
     `Source path: ${submission.sourcePath || "/"}`,

@@ -42,6 +42,18 @@ export default function IndustriesPage() {
           <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
             Industry pages give each vertical a stronger acquisition argument than a generic agency page can carry.
           </p>
+          <div className="mt-8 max-w-3xl border-l border-brand-accent/60 bg-white/[0.025] px-5 py-4">
+            <p className="text-sm leading-relaxed text-gray-300">
+              Do not see your exact industry? Catalyst also evaluates established service businesses with strong
+              customer value, proven demand, and enough operational capacity to benefit from a serious acquisition system.
+            </p>
+            <Link
+              href="/industries/service-businesses"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-accent"
+            >
+              View the service-business fallback <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

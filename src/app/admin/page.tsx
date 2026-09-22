@@ -113,7 +113,7 @@ export default function AdminPage() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 text-sm">
                   <Info label="Website" value={submission.websiteUrl} />
-                  <Info label="Capacity" value={submission.marketingCapacity} />
+                  <Info label="Acquisition Investment" value={submission.marketingCapacity} />
                   <Info label="City" value={submission.city || "Homepage"} />
                   <Info label="Source" value={submission.sourcePath || "/"} />
                 </div>
