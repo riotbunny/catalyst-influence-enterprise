@@ -7,6 +7,7 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import { getExecutiveFaqs } from "@/content/faqs";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
@@ -37,6 +38,7 @@ export default function LandingPage({
   relatedCityServiceLinks = [],
 }: LandingPageProps) {
   const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
+  const router = useRouter();
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formMessage, setFormMessage] = useState("");
   
@@ -76,7 +78,8 @@ export default function LandingPage({
 
     event.currentTarget.reset();
     setFormState("success");
-    setFormMessage("Application received. We will review your digital footprint and follow up if there is a fit.");
+    setFormMessage("Application received. Redirecting you to the next step.");
+    router.push("/thank-you");
   }
 
   return (
@@ -642,20 +645,37 @@ export default function LandingPage({
             </div>
             <div>
               <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Brain Trust</h2>
-              <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">Elite Engineering. <br/>No Account Managers.</h3>
+              <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">Direct senior strategy. <br/>Built close to the numbers.</h3>
               <p className="text-lg text-gray-400 mb-8 font-serif italic leading-relaxed sm:text-xl">
-                &quot;When you partner with Catalyst, you do not get passed off to a junior intern. You get direct access to the architects building your revenue engine.&quot;
+                &quot;When you work with Catalyst, the person diagnosing the acquisition path is the same person shaping the page system, offer architecture, and performance signal loop.&quot;
               </p>
               <div className="space-y-6">
                 <div>
                   <h4 className="text-2xl sm:text-3xl font-display font-bold text-white mb-2">Abel V.</h4>
                   <p className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-3">Principal Architect</p>
-                  <p className="text-gray-500 leading-relaxed">Leading the integration of behavioral psychology, principled negotiation, and advanced digital scaling.</p>
+                  <p className="text-gray-500 leading-relaxed">Architecting acquisition systems across programmatic SEO, paid media routing, landing page conversion, CRM follow-up, and executive reporting.</p>
                 </div>
-                <ul className="space-y-4 text-gray-300 font-medium pt-4">
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Strategic Omnichannel Growth Specialist</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Authority in Subconscious CRO & Programmatic SEO</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Relentless Focus on High-Ticket Conversions</li>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    "PSEO architecture",
+                    "Paid acquisition systems",
+                    "Conversion + follow-up",
+                  ].map((item) => (
+                    <div key={item} className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-4">
+                      <p className="text-sm font-bold uppercase tracking-[0.16em] text-gray-300">{item}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="glass-panel rounded-lg p-5">
+                  <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent">What that means for clients</p>
+                  <p className="text-gray-400 leading-relaxed">
+                    The work stays connected from search demand to sales follow-up, so strategy, page experience, form behavior, and reporting are not treated as separate problems.
+                  </p>
+                </div>
+                <ul className="space-y-4 text-gray-300 font-medium pt-2">
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Builds page systems around real buyer intent</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Connects acquisition channels to conversion behavior</li>
+                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Prioritizes measurable pipeline over vanity metrics</li>
                 </ul>
               </div>
             </div>
