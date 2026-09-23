@@ -568,9 +568,9 @@ export default function LandingPage({
           </div>
 
           <div className="space-y-6">
-            <div data-reveal="panel" className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
-              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
-                <span className="text-2xl font-bold text-brand-accent">1</span>
+            <div data-reveal="panel" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
+              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
+                <span className="text-2xl font-bold">1</span>
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-white mb-3">Days 1–30: Architect & Diagnose</h4>
@@ -582,9 +582,9 @@ export default function LandingPage({
               </div>
             </div>
 
-            <div data-reveal="panel" data-reveal-delay="1" className="glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
-              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/50">
-                <span className="text-2xl font-bold text-brand-accent">2</span>
+            <div data-reveal="panel" data-reveal-delay="1" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
+              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
+                <span className="text-2xl font-bold">2</span>
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-white mb-3">Days 31–60: Deploy</h4>
@@ -596,16 +596,16 @@ export default function LandingPage({
               </div>
             </div>
 
-            <div data-reveal="panel" data-reveal-delay="2" className="glass-panel p-6 sm:p-8 rounded-lg border-brand-accent/30 bg-brand-accent/5 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative shadow-[0_0_30px_rgba(212,160,74,0.09)]">
-              <div className="flex-shrink-0 w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(212,160,74,0.36)]">
-                <span className="text-2xl font-bold text-white">3</span>
+            <div data-reveal="panel" data-reveal-delay="2" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
+              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
+                <span className="text-2xl font-bold">3</span>
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-white mb-3">Days 61–90: Optimize & Scale</h4>
                 <p className="text-gray-400 leading-relaxed mb-4">Working from real behavioral data, we identify winning traffic sources, messages, and variations. We shift resources toward what produces results and scale your profitable volume aggressively.</p>
                 <div className="flex flex-wrap gap-4">
-                  <span className="text-sm font-medium text-white flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-brand-accent" /> Executive Growth Review</span>
-                  <span className="text-sm font-medium text-white flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-brand-accent" /> Aggressive Budget Scaling</span>
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Executive Growth Review</span>
+                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Aggressive Budget Scaling</span>
                 </div>
               </div>
             </div>
