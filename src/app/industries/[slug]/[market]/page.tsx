@@ -124,6 +124,10 @@ export default async function IndustryMarketPage({ params }: Props) {
           { href: `/customer-acquisition/${location.marketSlug}`, label: `Customer Acquisition Agency in ${location.city}, ${location.stateCode}` },
           ...relatedIndustries,
         ]}
+        websiteSystem={{
+          audience: industry.name,
+          market: `${location.city}, ${location.stateCode}`,
+        }}
       />
     </>
   );

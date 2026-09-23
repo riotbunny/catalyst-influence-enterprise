@@ -105,6 +105,9 @@ export default async function IndustryPage({ params }: Props) {
         ]}
         faqs={industry.faqs}
         relatedLinks={[...relatedLinks, ...priorityMarketLinks]}
+        websiteSystem={{
+          audience: industry.name,
+        }}
       />
     </>
   );

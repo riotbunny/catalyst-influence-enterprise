@@ -2,7 +2,7 @@ import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Compass, ShieldCheck, Target, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Compass, Route, ShieldCheck, Target, Zap } from "lucide-react";
 
 type LinkItem = {
   href: string;
@@ -22,6 +22,10 @@ type PseoPageProps = {
   }[];
   faqs: { question: string; answer: string }[];
   relatedLinks: LinkItem[];
+  websiteSystem?: {
+    audience: string;
+    market?: string;
+  };
 };
 
 const icons = {
@@ -39,7 +43,12 @@ export default function PseoPage({
   sections,
   faqs,
   relatedLinks,
+  websiteSystem,
 }: PseoPageProps) {
+  const websiteSystemTitle = websiteSystem
+    ? `Websites built as acquisition systems for ${websiteSystem.audience}${websiteSystem.market ? ` in ${websiteSystem.market}` : ""}.`
+    : "";
+
   return (
     <main className="min-h-screen">
       <RevealOnScroll />
@@ -105,6 +114,79 @@ export default function PseoPage({
           })}
         </div>
       </section>
+
+      {websiteSystem ? (
+        <section className="relative overflow-hidden border-b border-white/5 bg-black/20 py-20 sm:py-24">
+          <div className="premium-rule absolute left-1/2 top-0 h-px w-[min(760px,calc(100%-3rem))] -translate-x-1/2" />
+          <div className="mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="mb-10 grid gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
+              <div>
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+                  Website Systems
+                </p>
+                <h2 className="text-3xl font-display font-bold leading-tight text-white md:text-5xl">
+                  {websiteSystemTitle}
+                </h2>
+              </div>
+              <p className="text-base leading-relaxed text-gray-400 sm:text-lg">
+                Catalyst does not treat the website as a brochure. The site is built as the acquisition layer:
+                page architecture, proof, routing, conversion paths, and measurement working together.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  title: "Conversion Architecture",
+                  copy: "Messaging hierarchy, objection handling, CTA placement, and mobile decision flow shaped around qualified action.",
+                  icon: Target,
+                },
+                {
+                  title: "Programmatic SEO Infrastructure",
+                  copy: "Service, industry, city, and buyer-intent pages connected through crawl-friendly structure and internal links.",
+                  icon: Route,
+                },
+                {
+                  title: "Trust & Proof Design",
+                  copy: "Proof modules, screenshots, authority signals, and case-study framing that reduce uncertainty before contact.",
+                  icon: ShieldCheck,
+                },
+                {
+                  title: "Performance & Technical SEO",
+                  copy: "Fast static pages, clean metadata, structured data, indexable routes, and forms built for measurable acquisition.",
+                  icon: Zap,
+                },
+              ].map(({ title, copy, icon: Icon }, index) => (
+                <article
+                  key={title}
+                  data-reveal="card"
+                  data-reveal-delay={index % 4}
+                  className="glass-panel rounded-lg p-6 sm:p-7"
+                >
+                  <Icon className="mb-5 h-7 w-7 text-brand-accent" />
+                  <h3 className="mb-3 text-xl font-display font-bold text-white">{title}</h3>
+                  <p className="text-sm leading-relaxed text-gray-400">{copy}</p>
+                </article>
+              ))}
+            </div>
+
+            <div data-reveal="panel" className="mt-6 glass-panel rounded-lg p-5 sm:p-6">
+              <div className="grid gap-3 sm:grid-cols-5">
+                {["Homepage", "Service Pages", "Industry Pages", "City Pages", "Lead Form"].map((step, index) => (
+                  <div key={step} className="premium-hover-card border border-white/8 bg-black/30 p-4 text-center">
+                    <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-brand-accent/40 bg-brand-accent/10 text-xs font-bold text-brand-accent">
+                      {index + 1}
+                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.13em] text-gray-400 sm:text-xs">
+                      {step}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-20 sm:py-24">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 grid lg:grid-cols-[1fr_360px] gap-10 lg:gap-12">
