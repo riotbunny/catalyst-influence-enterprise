@@ -1,6 +1,7 @@
 "use client";
 
 import Background from "@/components/Background";
+import AnimatedStat from "@/components/AnimatedStat";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { getExecutiveFaqs } from "@/content/faqs";
@@ -119,12 +120,21 @@ export default function LandingPage({
 
         <div className="mt-14 grid w-full max-w-4xl grid-cols-1 gap-3 border-y border-white/8 bg-black/20 py-4 sm:grid-cols-3">
           {[
-            ["21.3K", "indexed pages deployed"],
-            ["437", "qualified leads in 24 hours"],
-            ["$2.35", "documented lead cost"],
-          ].map(([value, label]) => (
+            {
+              label: "indexed pages deployed",
+              stat: <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />,
+            },
+            {
+              label: "qualified leads in 24 hours",
+              stat: <AnimatedStat to={437} className="tabular-nums" />,
+            },
+            {
+              label: "documented lead cost",
+              stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
+            },
+          ].map(({ stat, label }) => (
             <div key={label} className="px-5 py-3 text-center sm:border-r sm:border-white/8 last:border-r-0">
-              <div className="text-2xl font-display font-bold text-white">{value}</div>
+              <div className="text-2xl font-display font-bold text-white">{stat}</div>
               <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
             </div>
           ))}
@@ -319,12 +329,16 @@ export default function LandingPage({
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div data-reveal="metric" className="border border-white/8 bg-black/30 p-5">
                     <BarChart3 className="mb-4 h-7 w-7 text-brand-accent" />
-                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">21.3K</div>
+                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
+                      <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />
+                    </div>
                     <div className="text-sm font-medium leading-relaxed text-gray-400">New pages indexed through pSEO architecture</div>
                   </div>
                   <div data-reveal="metric" data-reveal-delay="1" className="border border-white/8 bg-black/30 p-5">
                     <Users className="mb-4 h-7 w-7 text-brand-accent" />
-                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">437</div>
+                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
+                      <AnimatedStat to={437} className="tabular-nums" />
+                    </div>
                     <div className="text-sm font-medium leading-relaxed text-gray-400">High-intent leads generated in one day</div>
                   </div>
                 </div>
@@ -344,14 +358,26 @@ export default function LandingPage({
 
                 <div className="grid gap-4 p-5 sm:grid-cols-3">
                   {[
-                    ["Indexed", "21.3K", Search],
-                    ["Lead Yield", "437", TrendingUp],
-                    ["CPL", "$2.35", Gauge],
-                  ].map(([label, value, Icon], index) => (
+                    {
+                      label: "Indexed",
+                      stat: <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />,
+                      Icon: Search,
+                    },
+                    {
+                      label: "Lead Yield",
+                      stat: <AnimatedStat to={437} className="tabular-nums" />,
+                      Icon: TrendingUp,
+                    },
+                    {
+                      label: "CPL",
+                      stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
+                      Icon: Gauge,
+                    },
+                  ].map(({ label, stat, Icon }, index) => (
                     <div key={label as string} data-reveal="metric" data-reveal-delay={index} className="border border-white/8 bg-white/[0.025] p-4">
                       <Icon className="mb-4 h-5 w-5 text-brand-accent" />
                       <div className="text-xs uppercase tracking-[0.16em] text-gray-600">{label as string}</div>
-                      <div className="mt-2 text-2xl font-bold text-white">{value as string}</div>
+                      <div className="mt-2 text-2xl font-bold text-white">{stat}</div>
                     </div>
                   ))}
                 </div>
@@ -364,7 +390,9 @@ export default function LandingPage({
                         <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-gray-600 sm:text-xs sm:tracking-[0.16em]">30 day index velocity</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-400">21.3K</div>
+                        <div className="text-2xl font-bold text-green-400">
+                          <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />
+                        </div>
                         <div className="text-xs text-gray-600">indexed</div>
                       </div>
                     </div>
@@ -381,9 +409,17 @@ export default function LandingPage({
                     <div className="mb-4 text-sm font-semibold text-gray-300">Meta Ads Manager</div>
                     <div className="space-y-3">
                       {[
-                        ["Website Leads", "347", "$2.35"],
-                        ["Qualified Actions", "90", "$3.35"],
-                      ].map(([label, value, cost]) => (
+                        {
+                          label: "Website Leads",
+                          value: <AnimatedStat to={347} className="tabular-nums" />,
+                          cost: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
+                        },
+                        {
+                          label: "Qualified Actions",
+                          value: <AnimatedStat to={90} className="tabular-nums" />,
+                          cost: "$3.35",
+                        },
+                      ].map(({ label, value, cost }) => (
                         <div key={label} className="grid grid-cols-[1fr_auto_auto] items-end gap-3 border-b border-white/8 pb-3 last:border-b-0 last:pb-0 sm:gap-4">
                           <div className="text-[10px] uppercase tracking-[0.13em] text-gray-600 sm:text-xs sm:tracking-[0.15em]">{label}</div>
                           <div className="text-xl font-bold text-white">{value}</div>
