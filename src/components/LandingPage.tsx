@@ -156,7 +156,7 @@ export default function LandingPage({
               ["McMaster Lawfirm", "Legal demand capture"],
               ["Home Tech Dealer Inc.", "Programmatic SEO + paid media"],
             ].map(([name, detail], index) => (
-              <div key={name} data-reveal="card" data-reveal-delay={index} className="border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
+              <div key={name} data-reveal="card" data-reveal-delay={index} className="premium-hover-card border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <div className="text-lg font-display font-bold text-gray-200">{name}</div>
@@ -229,7 +229,7 @@ export default function LandingPage({
                   ).map((keyword) => (
                     <span
                       key={keyword}
-                      className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm font-medium text-gray-300"
+                      className="premium-hover-card rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm font-medium text-gray-300"
                     >
                       {keyword}
                     </span>
@@ -271,7 +271,7 @@ export default function LandingPage({
                         <Link
                           key={link.href}
                           href={link.href}
-                          className="block rounded-md border border-white/10 bg-black/24 px-3 py-2 text-sm text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
+                          className="premium-hover-card block rounded-md border border-white/10 bg-black/24 px-3 py-2 text-sm text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
                         >
                           {link.label}
                         </Link>
@@ -319,7 +319,7 @@ export default function LandingPage({
                     ["Deployment", "Built search-capture assets, paid acquisition paths, and proof-led landing flows."],
                     ["Result", "Generated a visible acquisition spike without relying on disconnected campaign activity."],
                   ].map(([label, copy], index) => (
-                    <div key={label} data-reveal="metric" data-reveal-delay={index} className="border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
+                    <div key={label} data-reveal="metric" data-reveal-delay={index} className="premium-hover-card border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
                       <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">{label}</div>
                       <div className="mt-2 text-sm leading-relaxed text-gray-300">{copy}</div>
                     </div>
@@ -327,14 +327,14 @@ export default function LandingPage({
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div data-reveal="metric" className="border border-white/8 bg-black/30 p-5">
+                  <div data-reveal="metric" className="premium-hover-card border border-white/8 bg-black/30 p-5">
                     <BarChart3 className="mb-4 h-7 w-7 text-brand-accent" />
                     <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
                       <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />
                     </div>
                     <div className="text-sm font-medium leading-relaxed text-gray-400">New pages indexed through pSEO architecture</div>
                   </div>
-                  <div data-reveal="metric" data-reveal-delay="1" className="border border-white/8 bg-black/30 p-5">
+                  <div data-reveal="metric" data-reveal-delay="1" className="premium-hover-card border border-white/8 bg-black/30 p-5">
                     <Users className="mb-4 h-7 w-7 text-brand-accent" />
                     <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
                       <AnimatedStat to={437} className="tabular-nums" />
@@ -374,7 +374,7 @@ export default function LandingPage({
                       Icon: Gauge,
                     },
                   ].map(({ label, stat, Icon }, index) => (
-                    <div key={label as string} data-reveal="metric" data-reveal-delay={index} className="border border-white/8 bg-white/[0.025] p-4">
+                    <div key={label as string} data-reveal="metric" data-reveal-delay={index} className="premium-hover-card border border-white/8 bg-white/[0.025] p-4">
                       <Icon className="mb-4 h-5 w-5 text-brand-accent" />
                       <div className="text-xs uppercase tracking-[0.16em] text-gray-600">{label as string}</div>
                       <div className="mt-2 text-2xl font-bold text-white">{stat}</div>
@@ -383,7 +383,7 @@ export default function LandingPage({
                 </div>
 
                 <div className="px-4 pb-4 sm:px-5 sm:pb-5">
-                  <div className="border border-white/8 bg-black/40 p-4 sm:p-5">
+                  <div className="premium-hover-card border border-white/8 bg-black/40 p-4 sm:p-5">
                     <div className="mb-5 flex items-center justify-between gap-4">
                       <div>
                         <div className="text-sm font-semibold text-gray-300">Google Search Console</div>
@@ -457,7 +457,7 @@ export default function LandingPage({
               </div>
 
               <div className="grid gap-5 lg:grid-cols-[1.18fr_0.82fr]">
-                <figure data-reveal="panel" className="overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                <figure data-reveal="panel" className="premium-hover-image overflow-hidden rounded-lg border border-white/10 bg-black/40">
                   <div className="relative aspect-[1400/650]">
                     <Image
                       src="/proof-home-tech-search-console.webp"
@@ -497,7 +497,7 @@ export default function LandingPage({
                       aspect: "aspect-[1200/91]",
                     },
                   ].map((proof, index) => (
-                    <figure key={proof.src} data-reveal="metric" data-reveal-delay={index} className="overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                    <figure key={proof.src} data-reveal="metric" data-reveal-delay={index} className="premium-hover-image overflow-hidden rounded-lg border border-white/10 bg-black/40">
                       <div className={`relative ${proof.aspect}`}>
                         <Image
                           src={proof.src}
@@ -619,7 +619,7 @@ export default function LandingPage({
           <div className="grid md:grid-cols-[0.88fr_1fr] gap-16 items-center">
             <div data-reveal="panel" className="relative max-w-[520px]">
               <div className="absolute -inset-3 border border-white/8 bg-white/[0.02]" />
-              <div className="relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
+              <div className="premium-hover-image relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
                 <div className="relative aspect-[4/5]">
                   <Image
                     src="/founder-v2.jpg"
@@ -722,7 +722,7 @@ export default function LandingPage({
                   </div>
                 ))}
               </div>
-              <div className="mt-8 border border-white/8 bg-black/30 p-5">
+              <div className="premium-hover-card mt-8 border border-white/8 bg-black/30 p-5">
                 <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">Fit Criteria</div>
                 <p className="mt-3 text-sm leading-relaxed text-gray-400">
                   Established service businesses, proven demand, high customer value, and enough operational capacity to handle additional qualified opportunities.
@@ -742,15 +742,15 @@ export default function LandingPage({
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Executive Name</label>
-                <input name="executiveName" required type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="e.g. John Doe" />
+                <input name="executiveName" required type="text" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="e.g. John Doe" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Corporate Email</label>
-                <input name="email" required type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="john@company.com" />
+                <input name="email" required type="email" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="john@company.com" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Acquisition Investment</label>
-                <select name="marketingCapacity" required className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors appearance-none">
+                <select name="marketingCapacity" required className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none appearance-none">
                   <option value="under-10k">Under $10,000 / month</option>
                   <option value="10k-25k">$10,000 - $25,000 / month</option>
                   <option value="25k-50k">$25,000 - $50,000 / month</option>
@@ -761,7 +761,7 @@ export default function LandingPage({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Current Website <span className="text-gray-600">(optional)</span></label>
-                <input name="websiteUrl" type="text" inputMode="url" className="w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none focus:border-brand-accent transition-colors" placeholder="company.com" />
+                <input name="websiteUrl" type="text" inputMode="url" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="company.com" />
               </div>
               <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg mt-4 disabled:opacity-60">
                 {formState === "submitting" ? "Submitting..." : "Submit Application"}

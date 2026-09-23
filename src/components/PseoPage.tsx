@@ -138,7 +138,7 @@ export default function PseoPage({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center justify-between gap-4 rounded-lg border border-white/10 px-4 py-3 text-gray-300 hover:text-white hover:border-brand-accent/60 transition-colors"
+                  className="premium-hover-card flex items-center justify-between gap-4 rounded-lg border border-white/10 px-4 py-3 text-gray-300 hover:text-white hover:border-brand-accent/60 transition-colors"
                 >
                   <span>{link.label}</span>
                   <ArrowRight className="w-4 h-4 text-brand-accent" />

@@ -76,7 +76,7 @@ export default async function StateLocationPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="mb-10 grid gap-4 md:grid-cols-3">
             {signals.map((signal) => (
-              <div key={signal} className="border border-white/8 bg-white/[0.025] p-5 text-sm leading-relaxed text-gray-300">
+              <div key={signal} className="premium-hover-card border border-white/8 bg-white/[0.025] p-5 text-sm leading-relaxed text-gray-300">
                 {signal}
               </div>
             ))}

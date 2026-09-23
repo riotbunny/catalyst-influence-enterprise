@@ -55,7 +55,7 @@ export default function LocationsPage() {
               ["6", "local acquisition keyword clusters per city"],
               ["5", "core acquisition services mapped per city"],
             ].map(([value, label]) => (
-              <div key={label} className="border border-white/8 bg-white/[0.025] p-5">
+              <div key={label} className="premium-hover-card border border-white/8 bg-white/[0.025] p-5">
                 <div className="text-3xl font-display font-bold text-white">{value}</div>
                 <div className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
               </div>
@@ -68,7 +68,7 @@ export default function LocationsPage() {
                 <Link
                   key={hub.slug}
                   href={`/locations/states/${hub.slug}`}
-                  className="rounded-md border border-white/10 bg-black/24 px-4 py-2 text-sm font-semibold text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
+                  className="premium-hover-card rounded-md border border-white/10 bg-black/24 px-4 py-2 text-sm font-semibold text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
                 >
                   {hub.state} ({hub.locations.length})
                 </Link>
