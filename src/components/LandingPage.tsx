@@ -122,15 +122,15 @@ export default function LandingPage({
           {[
             {
               label: "indexed pages deployed",
-              stat: <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />,
+              stat: <AnimatedStat to={21.3} decimals={1} suffix="K" durationMs={2200} className="tabular-nums" />,
             },
             {
               label: "qualified leads in 24 hours",
-              stat: <AnimatedStat to={437} className="tabular-nums" />,
+              stat: <AnimatedStat to={437} durationMs={2200} className="tabular-nums" />,
             },
             {
               label: "documented lead cost",
-              stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
+              stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" durationMs={2200} className="tabular-nums" />,
             },
           ].map(({ stat, label }) => (
             <div key={label} className="px-5 py-3 text-center sm:border-r sm:border-white/8 last:border-r-0">

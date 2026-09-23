@@ -10,6 +10,7 @@ type AnimatedStatProps = {
   suffix?: string;
   className?: string;
   durationMs?: number;
+  respectReducedMotion?: boolean;
 };
 
 function easeOutCubic(progress: number) {
@@ -20,6 +21,12 @@ function formatValue(value: number, decimals: number, prefix: string, suffix: st
   return `${prefix}${value.toFixed(decimals)}${suffix}`;
 }
 
+function isElementInViewport(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+
+  return rect.bottom >= 0 && rect.top <= window.innerHeight * 0.9;
+}
+
 export default function AnimatedStat({
   from = 0,
   to,
@@ -28,24 +35,25 @@ export default function AnimatedStat({
   suffix = "",
   className,
   durationMs = 1400,
+  respectReducedMotion = false,
 }: AnimatedStatProps) {
   const elementRef = useRef<HTMLSpanElement>(null);
   const frameRef = useRef<number | null>(null);
+  const hasAnimatedRef = useRef(false);
   const [value, setValue] = useState(from);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const element = elementRef.current;
 
-    if (!element || hasAnimated) {
+    if (!element || hasAnimatedRef.current) {
       return;
     }
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = respectReducedMotion && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const runAnimation = () => {
       const startedAt = performance.now();
-      setHasAnimated(true);
+      hasAnimatedRef.current = true;
 
       const animate = (now: number) => {
         const progress = Math.min((now - startedAt) / durationMs, 1);
@@ -63,14 +71,27 @@ export default function AnimatedStat({
 
     if (reduceMotion) {
       frameRef.current = requestAnimationFrame(() => {
+        hasAnimatedRef.current = true;
         setValue(to);
-        setHasAnimated(true);
       });
       return;
     }
 
     if (!("IntersectionObserver" in window)) {
-      runAnimation();
+      const watchForVisibility = () => {
+        if (hasAnimatedRef.current) {
+          return;
+        }
+
+        if (isElementInViewport(element)) {
+          runAnimation();
+          return;
+        }
+
+        frameRef.current = requestAnimationFrame(watchForVisibility);
+      };
+
+      frameRef.current = requestAnimationFrame(watchForVisibility);
       return;
     }
 
@@ -93,7 +114,7 @@ export default function AnimatedStat({
         cancelAnimationFrame(frameRef.current);
       }
     };
-  }, [decimals, durationMs, from, hasAnimated, to]);
+  }, [decimals, durationMs, from, respectReducedMotion, to]);
 
   return (
     <span ref={elementRef} className={className} suppressHydrationWarning>
