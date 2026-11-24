@@ -8,7 +8,7 @@ export const siteConfig = {
   founder: "Abel V.",
   email: "hello@catalystintellegence.com",
   availability: "Accepting 2 established partners per quarter",
-  defaultOgImage: "/founder-v2.jpg",
+  defaultOgImage: "/founder-abel-v3.png",
 };
 
 export function absoluteUrl(path = "/") {

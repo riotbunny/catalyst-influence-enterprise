@@ -403,11 +403,11 @@ export default function LandingPage({
         </div>
       </section>
 
-      <section id="leadership" className="bg-[#101513] py-20 sm:py-28">
+      <section id="leadership" className="scroll-mt-20 bg-[#101513] py-20 sm:scroll-mt-24 sm:py-28">
         <div className="site-shell grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
           <div data-reveal="panel" className="premium-hover-image relative mx-auto w-full max-w-[480px] overflow-hidden rounded-lg border border-white/12 bg-[#171d1a]">
             <div className="relative aspect-[4/5]">
-              <Image src="/founder-v2.jpg" alt="Abel V., Principal Architect at Catalyst Influence" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover object-[52%_26%] contrast-[1.02]" />
+              <Image src="/founder-abel-v3.png" alt="Abel V., Principal Architect at Catalyst Influence" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover object-[50%_32%] contrast-[1.02]" />
             </div>
             <div className="border-t border-white/10 bg-[#151b18] px-6 py-5">
               <p className="text-lg font-extrabold text-white">Abel V.</p>
