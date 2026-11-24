@@ -4,168 +4,138 @@ import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { getIndexableServices } from "@/content/services";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
+import { ArrowRight, Check, Compass, Gauge, Target } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Compass, Gauge, Target, Zap } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
   title: "Customer Acquisition Services",
   description:
-    "Explore Catalyst Influence services for programmatic SEO, paid acquisition, conversion architecture, automation, and growth architecture.",
+    "Explore Catalyst Influence services for acquisition strategy, website design and development, programmatic SEO, local SEO, paid media, conversion, automation, and attribution.",
   path: "/services",
 });
 
+const engagementPaths = [
+  {
+    icon: Compass,
+    label: "Diagnose",
+    title: "Find the constraint",
+    copy: "For teams with activity already moving but no reliable answer on why lead quality, conversion, or pipeline is inconsistent.",
+  },
+  {
+    icon: Target,
+    label: "Build",
+    title: "Connect the system",
+    copy: "For businesses ready to align the website, search, paid demand, forms, CRM routing, follow-up, and measurement.",
+  },
+  {
+    icon: Gauge,
+    label: "Scale",
+    title: "Fund what proves itself",
+    copy: "For operators who need a disciplined way to expand qualified demand and make decisions from commercial signal.",
+  },
+];
+
 export default function ServicesPage() {
   const services = getIndexableServices();
-  const engagementPaths = [
-    {
-      icon: Compass,
-      label: "Diagnose",
-      title: "Find the acquisition leak",
-      copy: "For teams with traffic, ad spend, or referrals already moving, but no clear answer on why lead quality or conversion is inconsistent.",
-    },
-    {
-      icon: Target,
-      label: "Build",
-      title: "Create the demand capture system",
-      copy: "For businesses ready to connect SEO, paid media, landing pages, forms, CRM routing, and follow-up into one measurable path.",
-    },
-    {
-      icon: Gauge,
-      label: "Scale",
-      title: "Shift resources toward what proves itself",
-      copy: "For operators who need a disciplined way to expand page coverage, increase qualified volume, and make spend decisions from real signal.",
-    },
-  ];
 
   return (
     <main className="min-h-screen">
       <RevealOnScroll />
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Services", path: "/services" },
-        ])}
-      />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])} />
       <Background />
       <Navbar />
 
-      <section className="relative pt-32 pb-14 md:pt-48 md:pb-16">
-        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold text-brand-accent uppercase tracking-[0.18em] mb-5 sm:text-xs sm:tracking-[0.22em]">
-            Service Architecture
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-display font-black text-white leading-tight max-w-4xl mb-6">
-            The acquisition systems Catalyst builds.
+      <section className="relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-44">
+        <div className="executive-grid absolute inset-0 -z-10" />
+        <div className="site-shell">
+          <p className="page-label mb-6">Capabilities</p>
+          <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] text-white sm:text-6xl lg:text-7xl">
+            Build the acquisition system, not another isolated campaign.
           </h1>
-          <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
-            These are the core service paths behind the 90-day growth architecture: demand capture, conversion, follow-up, and measurement.
+          <p className="mt-7 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
+            Catalyst combines strategy, websites, search, paid demand, conversion, automation, and attribution around the commercial path your buyers actually take.
           </p>
+          <Link href="/#contact" className="button-primary mt-9 inline-flex items-center gap-3 rounded-md px-7 py-4 text-sm font-extrabold">
+            Request a review <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
-      <section className="pb-16">
-        <div className="mx-auto grid max-w-7xl gap-5 px-5 sm:px-6 md:grid-cols-3">
-          {engagementPaths.map((path, index) => {
-            const Icon = path.icon;
-
-            return (
-              <div
-                key={path.title}
-                data-reveal="card"
-                data-reveal-delay={index}
-                className="premium-hover-card glass-panel rounded-lg p-6 sm:p-7"
-              >
-                <div className="mb-6 flex items-center justify-between gap-4">
-                  <Icon className="h-7 w-7 text-brand-accent" />
-                  <span className="rounded-full border border-brand-accent/25 bg-brand-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-accent">
-                    {path.label}
-                  </span>
-                </div>
-                <h2 className="mb-3 font-display text-xl font-bold leading-snug text-white">{path.title}</h2>
-                <p className="leading-relaxed text-gray-400">{path.copy}</p>
+      <section className="bg-white py-16 text-[#18201d] sm:py-20">
+        <div className="site-shell grid border-y border-[#d4dcd7] md:grid-cols-3">
+          {engagementPaths.map(({ icon: Icon, label, title, copy }, index) => (
+            <article key={title} data-reveal="card" data-reveal-delay={index} className="border-b border-[#d4dcd7] py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+              <div className="flex items-center justify-between">
+                <Icon className="h-6 w-6 text-brand-forest" />
+                <span className="text-xs font-extrabold uppercase text-brand-coral">{label}</span>
               </div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="pb-20 sm:pb-28">
-        <div className="mx-auto mb-10 max-w-7xl px-5 sm:px-6">
-          <div className="max-w-3xl">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-              Service menu
-            </p>
-            <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-              Choose the pressure point that is limiting growth.
-            </h2>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((service, index) => (
-            <Link
-              key={service.slug}
-              href={`/services/${service.slug}`}
-              data-reveal="card"
-              data-reveal-delay={index % 4}
-              className="premium-hover-card glass-panel flex min-h-full flex-col rounded-lg p-6 transition-colors hover:border-brand-accent/60 hover:bg-white/5 sm:p-7"
-            >
-              <Zap className="w-7 h-7 text-brand-accent mb-5" />
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white leading-snug mb-4">
-                {service.title}
-              </h2>
-              <p className="mb-6 leading-relaxed text-gray-400">{service.metaDescription}</p>
-              <div className="mb-6 mt-auto space-y-4 border-t border-white/10 pt-5">
-                <div>
-                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">Best when</p>
-                  <p className="text-sm leading-relaxed text-gray-300">{service.fit[0]}</p>
-                </div>
-                <div>
-                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">Core deliverable</p>
-                  <p className="text-sm leading-relaxed text-gray-300">{service.deliverables[0]}</p>
-                </div>
-              </div>
-              <span className="inline-flex items-center gap-2 text-sm font-bold text-brand-accent uppercase tracking-widest">
-                Explore <ArrowRight className="w-4 h-4" />
-              </span>
-            </Link>
+              <h2 className="mt-8 font-display text-3xl">{title}</h2>
+              <p className="mt-4 text-sm leading-7 text-[#5a6660]">{copy}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="pb-24 sm:pb-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="glass-panel grid gap-8 rounded-lg p-6 sm:p-8 md:grid-cols-[1fr_0.72fr] md:p-10">
+      <section className="bg-brand-paper py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-                Decision support
-              </p>
-              <h2 className="mb-5 font-display text-3xl font-bold text-white sm:text-4xl">
-                Not sure which service is the right entry point?
-              </h2>
-              <p className="max-w-3xl font-serif text-lg italic leading-relaxed text-gray-400">
-                Start with a review. Catalyst will look at the current acquisition environment first, then recommend the service path only if there is a clear commercial reason to move forward.
-              </p>
+              <p className="page-label mb-5">Service architecture</p>
+              <h2 className="section-display">Choose the pressure point limiting growth.</h2>
             </div>
-            <div className="space-y-4">
-              {[
-                "Search, paid traffic, page flow, and follow-up reviewed together",
-                "Clearer priority order before committing to execution",
-                "No recommendation without a measurable acquisition thesis",
-              ].map((item) => (
-                <div key={item} className="flex gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-accent" />
-                  <p className="text-sm font-medium leading-relaxed text-gray-300">{item}</p>
+            <p className="max-w-2xl text-base leading-8 text-[#5a6660]">
+              Every service can stand alone, but the highest-value work usually connects several layers around one measurable acquisition thesis.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-5 md:grid-cols-2">
+            {services.map((service, index) => (
+              <Link key={service.slug} href={`/services/${service.slug}`} data-reveal="card" data-reveal-delay={index % 4} className="premium-hover-card light-panel group flex min-h-[350px] flex-col rounded-lg p-6 sm:p-8">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-xs font-extrabold uppercase text-brand-coral">{service.eyebrow}</span>
+                  <ArrowRight className="h-5 w-5 text-brand-forest transition-transform group-hover:translate-x-1" />
                 </div>
-              ))}
-              <Link
-                href="/#contact"
-                className="button-primary inline-flex w-full items-center justify-center gap-3 rounded-lg px-6 py-4 font-bold text-black"
-              >
-                Request Review <ArrowRight className="h-4 w-4" />
+                <h3 className="mt-8 max-w-xl font-display text-3xl leading-tight">{service.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-[#5c6862]">{service.metaDescription}</p>
+                <div className="mt-auto grid gap-4 border-t border-[#d7ddd8] pt-6 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-extrabold uppercase text-[#7a8580]">Best when</p>
+                    <p className="mt-2 text-sm leading-6 text-[#38443f]">{service.fit[0]}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-extrabold uppercase text-[#7a8580]">First deliverable</p>
+                    <p className="mt-2 text-sm leading-6 text-[#38443f]">{service.deliverables[0]}</p>
+                  </div>
+                </div>
               </Link>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-forest py-20 sm:py-24">
+        <div className="site-shell grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+          <div>
+            <p className="page-label mb-5 text-[#ead6ad]">Decision support</p>
+            <h2 className="section-display text-white">Not sure where the engagement should begin?</h2>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-[#c9d7d0]">
+              Start with the acquisition environment. We recommend a service path only when there is a specific commercial reason to build it.
+            </p>
+          </div>
+          <div>
+            {[
+              "Search, paid traffic, pages, and follow-up reviewed together",
+              "Priority order defined before execution expands",
+              "No recommendation without a measurable thesis",
+            ].map((item) => (
+              <div key={item} className="flex gap-3 border-b border-white/14 py-4 text-sm font-semibold text-[#e2ebe6]">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" /> {item}
+              </div>
+            ))}
+            <Link href="/#contact" className="button-primary mt-7 inline-flex w-full items-center justify-center gap-3 rounded-md px-7 py-4 text-sm font-extrabold sm:w-auto">
+              Request an acquisition review <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

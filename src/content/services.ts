@@ -280,6 +280,94 @@ export const services: ServicePage[] = [
     indexable: true,
     lastModified: "2026-09-13",
   },
+  {
+    slug: "conversion-focused-web-design",
+    title: "Conversion-Focused Website Design and Development",
+    metaDescription:
+      "Design and develop a fast, credible website that connects positioning, SEO architecture, conversion paths, lead capture, and measurement.",
+    eyebrow: "Website Systems",
+    heroTitle: "A website that does the work between attention and revenue.",
+    intro:
+      "Catalyst designs and develops acquisition websites for established service businesses. The work connects positioning, page architecture, proof, performance, forms, automation, and analytics instead of treating the site as a visual brochure.",
+    fit: [
+      "Established businesses whose current site no longer reflects the quality of the company",
+      "Teams preparing to scale SEO or paid acquisition",
+      "Operators who need the website, forms, CRM handoff, and reporting to work as one system",
+    ],
+    symptoms: [
+      "The website looks dated or generic compared with the actual business",
+      "Visitors cannot quickly understand the offer, fit, or evidence",
+      "SEO pages and paid landing pages feel disconnected from the main brand",
+      "Forms capture information without a reliable routing or measurement layer",
+    ],
+    deliverables: [
+      "Positioning and page hierarchy",
+      "Responsive interface design and development",
+      "Service, industry, proof, and conversion page system",
+      "Technical SEO, performance, forms, and analytics implementation",
+      "CRM handoff and post-submission experience",
+    ],
+    faqs: [
+      {
+        question: "Is this a template-based website?",
+        answer:
+          "No. Catalyst uses a reusable technical system, but the information hierarchy, visual direction, proof structure, and conversion path are shaped around the business and its buyers.",
+      },
+      {
+        question: "Can you rebuild an existing live site without breaking SEO?",
+        answer:
+          "Yes. The rebuild includes URL inventory, canonical and redirect planning, metadata preservation, structured data, sitemap review, and post-launch Search Console monitoring.",
+      },
+    ],
+    relatedIndustries: ["law-firms", "home-services", "dental-practices", "service-businesses"],
+    priority: 0.88,
+    indexable: true,
+    lastModified: "2026-11-24",
+  },
+  {
+    slug: "local-seo",
+    title: "Local SEO Systems for Service Businesses",
+    metaDescription:
+      "Build focused local SEO architecture around priority markets, useful service-area pages, internal links, conversion proof, and disciplined indexation.",
+    eyebrow: "Local Demand",
+    heroTitle: "Local visibility built around markets that can produce revenue.",
+    intro:
+      "Catalyst builds local search systems around real service coverage and buyer intent. Priority markets receive differentiated pages, internal support, conversion paths, and indexation controls instead of hundreds of interchangeable city swaps.",
+    fit: [
+      "Service businesses competing across several real operating markets",
+      "Companies with strong local demand but weak city and service-area visibility",
+      "Teams that need local SEO connected to lead quality and booked revenue",
+    ],
+    symptoms: [
+      "The site has thin city pages that Google discovers but does not index",
+      "Multiple location pages compete for the same broad terms",
+      "Local traffic reaches pages with weak proof or no clear next step",
+      "Rankings are tracked without connection to qualified inquiries",
+    ],
+    deliverables: [
+      "Priority-market and demand map",
+      "Local page taxonomy and quality gate",
+      "Market-specific content and internal-link architecture",
+      "Canonical, sitemap, redirect, and Search Console controls",
+      "Local conversion and lead-quality measurement plan",
+    ],
+    faqs: [
+      {
+        question: "Should every city page be indexed?",
+        answer:
+          "No. Every useful city page can remain available to visitors, but only markets with sufficient demand, differentiation, and supporting structure should be presented to Google for indexation.",
+      },
+      {
+        question: "Do you create fake local offices?",
+        answer:
+          "No. Catalyst uses accurate service-area language and never invents an address or physical presence that the business does not have.",
+      },
+    ],
+    relatedIndustries: ["home-services", "hvac", "law-firms", "dental-practices"],
+    priority: 0.84,
+    indexable: true,
+    lastModified: "2026-11-24",
+  },
 ];
 
 export function getService(slug: string) {

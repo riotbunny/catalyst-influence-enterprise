@@ -37,22 +37,20 @@ export default function ThankYouPage() {
       <Background />
       <Navbar />
 
-      <section className="relative px-5 pb-20 pt-32 sm:px-6 md:pb-28 md:pt-48">
-        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 inline-flex items-center gap-3 rounded-lg border border-brand-accent/30 bg-brand-accent/10 px-4 py-3 text-sm font-bold text-brand-accent">
+      <section className="relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-44">
+        <div className="executive-grid absolute inset-0 -z-10" />
+        <div className="site-shell">
+          <div className="mb-10 inline-flex items-center gap-3 rounded-md border border-brand-accent/30 bg-brand-accent/10 px-4 py-3 text-sm font-bold text-brand-accent">
             <CheckCircle2 className="h-5 w-5" />
             Application received
           </div>
 
           <div className="max-w-4xl">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-              Review underway
-            </p>
-            <h1 className="mb-6 font-display text-4xl font-black leading-tight text-white sm:text-5xl md:text-7xl">
+            <p className="page-label mb-6">Review underway</p>
+            <h1 className="font-display text-5xl font-normal leading-[0.98] text-white sm:text-6xl lg:text-7xl">
               Your request is in the right hands.
             </h1>
-            <p className="max-w-3xl font-serif text-lg italic leading-relaxed text-gray-400 sm:text-xl">
+            <p className="mt-7 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
               We will review your acquisition environment before recommending any engagement. The goal is to determine whether Catalyst can create a meaningful path toward more qualified demand, stronger trust, and cleaner conversion.
             </p>
           </div>
@@ -69,8 +67,8 @@ export default function ThankYouPage() {
                   data-reveal-delay={index}
                 >
                   <Icon className="mb-5 h-7 w-7 text-brand-accent" />
-                  <h2 className="mb-3 font-display text-xl font-bold text-white">{step.title}</h2>
-                  <p className="leading-relaxed text-gray-400">{step.copy}</p>
+                  <h2 className="mb-3 font-display text-2xl font-normal text-white">{step.title}</h2>
+                  <p className="leading-7 text-gray-400">{step.copy}</p>
                 </div>
               );
             })}

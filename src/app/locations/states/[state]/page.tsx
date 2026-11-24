@@ -61,48 +61,51 @@ export default async function StateLocationPage({ params }: Props) {
       <Background />
       <Navbar />
 
-      <section className="relative pt-32 pb-14 md:pt-48 md:pb-16">
-        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold text-brand-accent uppercase tracking-[0.18em] mb-5 sm:text-xs sm:tracking-[0.22em]">
-            {hub.stateCode} Service Area Hub
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-display font-black text-white leading-tight max-w-4xl mb-6">
+      <section className="relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-44">
+        <div className="executive-grid absolute inset-0 -z-10" />
+        <div className="site-shell">
+          <p className="page-label mb-6">{hub.stateCode} market portfolio</p>
+          <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] text-white sm:text-6xl lg:text-7xl">
             Customer acquisition strategy across {hub.state}.
           </h1>
-          <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
-            A regional crawl hub connecting {hub.state} service-area city pages, buyer-intent pages, and local acquisition strategy.
+          <p className="mt-7 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
+            A focused market hub connecting service-area intelligence, buyer-intent pages, local SEO, and conversion strategy across {hub.state}.
           </p>
         </div>
       </section>
 
-      <section className="pb-20 sm:pb-28">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="mb-10 grid gap-4 md:grid-cols-3">
+      <section className="bg-brand-paper py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <div className="mb-12 grid gap-4 md:grid-cols-3">
             {signals.map((signal) => (
-              <div key={signal} className="premium-hover-card border border-white/8 bg-white/[0.025] p-5 text-sm leading-relaxed text-gray-300">
+              <div key={signal} className="light-panel premium-hover-card rounded-lg p-5 text-sm leading-7 text-[#52605a]">
                 {signal}
               </div>
             ))}
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mb-10 max-w-3xl">
+            <p className="page-label mb-5">Active markets</p>
+            <h2 className="section-display">Where Catalyst builds local advantage.</h2>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {visibleLocations.map((location, index) => (
               <Link
                 key={location.marketSlug}
                 href={`/locations/${location.marketSlug}`}
                 data-reveal="card"
                 data-reveal-delay={index % 4}
-                className="glass-panel rounded-lg p-5 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
+                className="light-panel premium-hover-card group rounded-lg p-6"
               >
-                <MapPin className="w-5 h-5 text-brand-accent mb-4" />
-                <h2 className="text-lg font-bold text-white">{location.city}</h2>
-                <p className="text-sm text-gray-500 mt-1">{location.stateCode}</p>
-                <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                <MapPin className="mb-5 h-5 w-5 text-brand-forest" />
+                <h2 className="font-display text-2xl text-[#18201d]">{location.city}</h2>
+                <p className="mt-1 text-sm font-bold uppercase text-[#76817c]">{location.stateCode}</p>
+                <p className="mt-4 text-sm leading-7 text-[#5b6761]">
                   Customer acquisition, lead generation, and local SEO strategy for {location.city} service businesses.
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-accent">
-                  View city page <ArrowRight className="w-4 h-4" />
+                <span className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase text-brand-forest">
+                  View city page <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             ))}

@@ -1,14 +1,29 @@
 "use client";
 
-import Background from "@/components/Background";
 import AnimatedStat from "@/components/AnimatedStat";
+import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { getExecutiveFaqs } from "@/content/faqs";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BarChart3,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  Compass,
+  Gauge,
+  MapPinned,
+  MonitorSmartphone,
+  MousePointerClick,
+  Search,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BarChart3, Users, ChevronDown, CheckCircle2, Compass, ShieldCheck, MousePointerClick, Zap, Search, TrendingUp, Gauge, LockKeyhole, ArrowUpRight } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 
@@ -26,6 +41,78 @@ interface LandingPageProps {
   relatedCityServiceLinks?: { href: string; label: string }[];
 }
 
+const capabilities = [
+  {
+    icon: Compass,
+    title: "Acquisition architecture",
+    copy: "Diagnose the buyer path, channel roles, offer, qualification, and measurement before adding more activity.",
+    href: "/services/customer-acquisition-system",
+  },
+  {
+    icon: MonitorSmartphone,
+    title: "Conversion-first websites",
+    copy: "Design and develop fast, credible websites that act as the operating layer for search, paid demand, and lead capture.",
+    href: "/services/conversion-focused-web-design",
+  },
+  {
+    icon: Search,
+    title: "Programmatic SEO",
+    copy: "Build useful service, industry, intent, and market page systems with disciplined indexation controls.",
+    href: "/services/programmatic-seo",
+  },
+  {
+    icon: MapPinned,
+    title: "Local SEO systems",
+    copy: "Turn priority markets into distinct demand-capture assets supported by local relevance and internal structure.",
+    href: "/services/local-seo",
+  },
+  {
+    icon: MousePointerClick,
+    title: "Paid acquisition",
+    copy: "Align targeting, creative, landing pages, qualification, and revenue feedback across the channels that matter.",
+    href: "/services/paid-acquisition",
+  },
+  {
+    icon: Gauge,
+    title: "Conversion architecture",
+    copy: "Clarify the offer, surface proof, handle objections, and make the next step feel proportionate to buyer trust.",
+    href: "/services/conversion-architecture",
+  },
+  {
+    icon: Workflow,
+    title: "CRM and lead automation",
+    copy: "Route, enrich, follow up, and preserve source context so qualified opportunities do not disappear after submission.",
+    href: "/services/marketing-automation",
+  },
+  {
+    icon: BarChart3,
+    title: "Attribution and reporting",
+    copy: "Connect acquisition activity to qualified pipeline so leadership can see what deserves the next dollar.",
+    href: "/services/growth-architecture",
+  },
+];
+
+const methodology = [
+  {
+    number: "01",
+    title: "Diagnose",
+    window: "Days 1-21",
+    copy: "Map demand, inspect the website and funnel, define qualified action, and identify where trust or follow-up breaks.",
+  },
+  {
+    number: "02",
+    title: "Build",
+    window: "Days 22-60",
+    copy: "Deploy the priority pages, conversion paths, campaigns, tracking, and automation around one acquisition thesis.",
+  },
+  {
+    number: "03",
+    title: "Prove and scale",
+    window: "Days 61-90",
+    copy: "Read actual behavior and lead quality, reinforce what works, and stop funding activity that cannot prove its role.",
+  },
+];
+
 export default function LandingPage({
   city,
   state,
@@ -34,18 +121,19 @@ export default function LandingPage({
   localSearchFocus = [],
   localServices = [],
   serviceAreaCopy,
+  localMarketSummary,
+  localMarketSignals = [],
   extraFaqs = [],
   relatedCityServiceLinks = [],
 }: LandingPageProps) {
-  const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
   const router = useRouter();
+  const currentQuarter = `Q${Math.floor(new Date().getMonth() / 3) + 1}`;
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formMessage, setFormMessage] = useState("");
-  
-  // Format city name for display (e.g., "new-york" -> "New York")
-  const formattedCity = city 
-    ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  const formattedCity = city
+    ? city.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
     : null;
+  const marketName = formattedCity ? `${formattedCity}${state ? `, ${state}` : ""}` : null;
   const executiveFaqs = [...getExecutiveFaqs(formattedCity), ...extraFaqs];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -54,7 +142,6 @@ export default function LandingPage({
     setFormMessage("");
 
     const formData = new FormData(event.currentTarget);
-
     const response = await fetch("/api/submissions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -87,716 +174,380 @@ export default function LandingPage({
       <RevealOnScroll />
       <Background />
       <Navbar />
-      
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden px-0 pt-32 pb-16 md:pt-48 md:pb-28">
-        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10 text-center flex flex-col items-center">
-        
-        <div className="inline-flex max-w-full items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 backdrop-blur-md mb-8 sm:px-4">
-          <span className="h-2 w-2 rounded-full bg-brand-accent shadow-[0_0_14px_rgba(212,160,74,0.52)]"></span>
-          <span suppressHydrationWarning className="text-[10px] font-semibold tracking-[0.16em] text-gray-300 uppercase sm:text-xs sm:tracking-widest">
-            Accepting 2 established partners for {currentQuarter}
-          </span>
-        </div>
-        
-        <h1 className="max-w-6xl text-[2.7rem] font-display font-black leading-[1.04] text-white mb-6 sm:text-6xl md:text-7xl lg:text-8xl">
-          PREDICTABLE <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-glow">CUSTOMER ACQUISITION.</span>
-        </h1>
-        <p className="text-lg md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto font-serif italic leading-relaxed">
-          {formattedCity 
-            ? `Partnering with established service businesses in ${formattedCity} to rebuild your digital acquisition system so the right prospects find you, trust you, and take action.` 
-            : `We rebuild the critical parts of your digital acquisition system so more of the right prospects find you, trust you, and take action.`}
-        </p>
-        
-        <div className="flex w-full max-w-sm flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center sm:gap-6">
-          <a href="#contact" className="button-primary group text-black px-6 py-4 rounded-lg font-bold tracking-wide flex items-center justify-center gap-3 sm:px-8">
-            Apply For Partnership
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-          <a href="#results" className="px-6 py-4 flex items-center justify-center rounded-lg font-bold tracking-wide text-white border border-white/16 bg-white/[0.03] hover:border-white/28 hover:bg-white/10 transition-colors duration-200 sm:px-8">
-            See The Proof
-          </a>
-        </div>
 
-        <div className="mt-14 grid w-full max-w-4xl grid-cols-1 gap-3 border-y border-white/8 bg-black/20 py-4 sm:grid-cols-3">
-          {[
-            {
-              label: "indexed pages deployed",
-              stat: <AnimatedStat to={21.3} decimals={1} suffix="K" durationMs={2200} className="tabular-nums" />,
-            },
-            {
-              label: "qualified leads in 24 hours",
-              stat: <AnimatedStat to={437} durationMs={2200} className="tabular-nums" />,
-            },
-            {
-              label: "documented lead cost",
-              stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" durationMs={2200} className="tabular-nums" />,
-            },
-          ].map(({ stat, label }) => (
-            <div key={label} className="px-5 py-3 text-center sm:border-r sm:border-white/8 last:border-r-0">
-              <div className="text-2xl font-display font-bold text-white">{stat}</div>
-              <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
+      <section className="relative isolate flex min-h-[92svh] items-end overflow-hidden border-b border-white/10 pb-10 pt-36 sm:pb-12 lg:pt-44">
+        <Image
+          src="/proof-automation-flow-redacted-v2.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="absolute inset-0 z-0 object-cover object-center opacity-[0.48] saturate-[0.7]"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#0b100e]/95 via-[#0b100e]/80 to-[#0b100e]/45" />
+        <div className="executive-grid absolute inset-0 z-10" />
+
+        <div className="site-shell relative z-20">
+          <div className="max-w-5xl">
+            <p className="page-label mb-7">
+              {marketName ? `Acquisition systems for ${marketName}` : "Independent acquisition architecture"}
+            </p>
+            <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] text-white sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+              {formattedCity ? (
+                <>Customer acquisition in {formattedCity}, engineered end to end.</>
+              ) : (
+                <>Customer acquisition, engineered end to end.</>
+              )}
+            </h1>
+            <p className="mt-7 max-w-3xl text-base leading-8 text-gray-300 sm:text-lg lg:text-xl">
+              {formattedCity
+                ? `Catalyst connects search visibility, conversion-first websites, paid demand, automation, and attribution for established service businesses competing in ${formattedCity}.`
+                : "Catalyst connects search visibility, conversion-first websites, paid demand, automation, and attribution into one accountable growth system for established service businesses."}
+            </p>
+            <div className="mt-9 flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row">
+              <a href="#contact" className="button-primary inline-flex items-center justify-center gap-3 rounded-md px-6 py-4 text-sm font-extrabold sm:px-7">
+                Request an acquisition review <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href="#results" className="button-secondary inline-flex items-center justify-center gap-3 rounded-md px-6 py-4 text-sm font-extrabold sm:px-7">
+                Inspect the proof <ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
+
+          <div className="mt-14 grid border-y border-white/14 bg-[#101513]/64 sm:grid-cols-3">
+            {[
+              { label: "indexed pages deployed", value: <AnimatedStat to={21.3} decimals={1} suffix="K" durationMs={1900} /> },
+              { label: "qualified leads in 24 hours", value: <AnimatedStat to={437} durationMs={1900} /> },
+              { label: "documented lead cost", value: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" durationMs={1900} /> },
+            ].map((item) => (
+              <div key={item.label} className="border-b border-white/10 px-5 py-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+                <div className="text-2xl font-extrabold text-white sm:text-3xl">{item.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase text-gray-500">{item.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 2. Enterprise Trust */}
-      <section className="border-y border-white/5 bg-black/30 py-12 sm:py-14">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-            {formattedCity 
-              ? `Trusted by industry leaders in ${formattedCity} to architect their growth`
-              : `Trusted by industry leaders to architect their growth`}
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
+      <section className="bg-brand-paper py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <p className="page-label mb-5">The operating problem</p>
+              <h2 className="section-display">Revenue leaks between the channels.</h2>
+            </div>
+            <p className="max-w-2xl text-base leading-8 text-[#53605b] sm:text-lg">
+              Most businesses do not have a traffic problem in isolation. They have a system problem: search, ads, the website, sales follow-up, and reporting are optimized by different people toward different definitions of success.
+            </p>
+          </div>
+
+          <div className="mt-14 grid border-y border-[#cfd7d2] md:grid-cols-3">
             {[
-              ["Salesnet LLC", "B2B acquisition systems"],
-              ["McMaster Lawfirm", "Legal demand capture"],
-              ["Consumer Connectivity Marketplace", "Programmatic SEO + paid media"],
-            ].map(([name, detail], index) => (
-              <div key={name} data-reveal="card" data-reveal-delay={index} className="premium-hover-card border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <div className="text-lg font-display font-bold text-gray-200">{name}</div>
-                    <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">{detail}</div>
-                  </div>
-                  <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-brand-accent" />
-                </div>
-              </div>
+              ["Demand without trust", "The right buyer arrives, but the website cannot make expertise, fit, or proof clear enough to earn action."],
+              ["Leads without follow-through", "Forms and calls enter a disconnected process where speed, source context, and qualification disappear."],
+              ["Activity without judgment", "Reports show traffic and leads while leadership still cannot see which work is creating valuable pipeline."],
+            ].map(([title, copy], index) => (
+              <article key={title} data-reveal="card" data-reveal-delay={index} className="border-b border-[#cfd7d2] py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                <span className="text-sm font-extrabold text-brand-coral">0{index + 1}</span>
+                <h3 className="mt-5 font-display text-3xl leading-tight text-[#18201d]">{title}</h3>
+                <p className="mt-4 text-sm leading-7 text-[#5b6762]">{copy}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {formattedCity ? (
-        <section className="py-20 border-b border-white/5 bg-black/30 sm:py-24">
-          <div className="max-w-7xl mx-auto px-5 sm:px-6">
-            <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
+        <section className="border-y border-[#c9d7d0] bg-brand-sage py-20 text-[#18201d] sm:py-24">
+          <div className="site-shell">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
               <div>
-                <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">
-                  Local Growth Architecture
-                </h2>
-                <h3 className="text-3xl md:text-5xl font-display font-bold text-white leading-tight mb-6">
-                  Customer acquisition in {formattedCity}{state ? `, ${state}` : ""}
-                </h3>
-                <div className="space-y-5 text-gray-400 leading-relaxed text-lg">
-                  <p>
-                    {marketAngle ??
-                      `Competing for service-business demand in ${formattedCity} requires more than a generic digital marketing campaign. Buyers compare fast, trust signals matter immediately, and every click needs a clear path from discovery to qualified action.`}
-                  </p>
-                  <p>
-                    Catalyst builds the acquisition environment around that local intent: search visibility, paid traffic, landing page proof, offer clarity, automated follow-up, and measurement that shows which opportunities are worth scaling.
-                  </p>
-                  {localBuyerIntent ? <p>{localBuyerIntent}</p> : null}
-                </div>
+                <p className="page-label mb-5">Market intelligence</p>
+                <h2 className="section-display">What acquisition requires in {formattedCity}.</h2>
+                <p className="mt-6 max-w-xl text-base leading-8 text-[#53605b]">{localMarketSummary ?? marketAngle}</p>
               </div>
-
-              <div data-reveal="panel" className="glass-panel rounded-lg p-6 sm:p-8">
-                <h4 className="text-xl font-display font-bold text-white mb-6">
-                  What we optimize for {formattedCity} service businesses
-                </h4>
-                <ul className="space-y-4">
-                  {[
-                    "High-intent SEO pages that match local buyer demand",
-                    "Paid acquisition paths tied to stronger landing page trust",
-                    "Conversion architecture that reduces uncertainty before contact",
-                    "Follow-up and attribution systems that protect qualified leads",
-                  ].map((item) => (
-                    <li key={item} className="flex gap-3 text-gray-300 leading-relaxed">
-                      <CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-              <div data-reveal="panel" className="glass-panel rounded-lg p-6 sm:p-8">
-                <h4 className="mb-5 text-xl font-display font-bold text-white">
-                  Search demand we build around in {formattedCity}
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {(localSearchFocus.length
-                    ? localSearchFocus
-                    : [
-                        `customer acquisition agency in ${formattedCity}`,
-                        `lead generation for service businesses in ${formattedCity}`,
-                        `local SEO and paid acquisition in ${formattedCity}`,
-                      ]
-                  ).map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="premium-hover-card rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm font-medium text-gray-300"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div data-reveal="panel" data-reveal-delay="1" className="glass-panel rounded-lg p-6 sm:p-8">
-                <h4 className="mb-5 text-xl font-display font-bold text-white">
-                  {formattedCity} acquisition services
-                </h4>
-                <ul className="space-y-4">
-                  {(localServices.length
-                    ? localServices
-                    : [
-                        `${formattedCity} customer acquisition system design`,
-                        `${formattedCity} programmatic SEO and landing page architecture`,
-                        `${formattedCity} CRM follow-up and attribution planning`,
-                      ]
-                  ).map((service) => (
-                    <li key={service} className="flex gap-3 text-gray-300 leading-relaxed">
-                      <CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />
-                      <span>{service}</span>
-                    </li>
-                  ))}
-                </ul>
-                {serviceAreaCopy ? (
-                  <p className="mt-6 border-t border-white/8 pt-5 text-sm leading-relaxed text-gray-500">
-                    {serviceAreaCopy}
-                  </p>
-                ) : null}
-                {relatedCityServiceLinks.length ? (
-                  <div className="mt-6 border-t border-white/8 pt-5">
-                    <div className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-accent">
-                      Deeper {formattedCity} pages
-                    </div>
-                    <div className="space-y-2">
-                      {relatedCityServiceLinks.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className="premium-hover-card block rounded-md border border-white/10 bg-black/24 px-3 py-2 text-sm text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
+              <div className="space-y-3">
+                {(localMarketSignals.length ? localMarketSignals : localSearchFocus.slice(0, 3)).map((signal, index) => (
+                  <div key={signal} data-reveal="metric" data-reveal-delay={index} className="flex gap-4 border-b border-[#b9c9c1] py-5 first:pt-0">
+                    <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-brand-forest" />
+                    <p className="leading-7 text-[#45524d]">{signal}</p>
                   </div>
-                ) : null}
+                ))}
               </div>
             </div>
+
+            {(localBuyerIntent || serviceAreaCopy) ? (
+              <div className="mt-12 grid gap-6 border-t border-[#b9c9c1] pt-9 md:grid-cols-2">
+                <div>
+                  <h3 className="font-display text-2xl">Commercial intent</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#53605b]">{localBuyerIntent}</p>
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl">Service-area fit</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#53605b]">{serviceAreaCopy}</p>
+                </div>
+              </div>
+            ) : null}
+            {localServices.length ? (
+              <div className="mt-9 flex flex-wrap gap-2">
+                {localServices.map((service) => (
+                  <span key={service} className="rounded-md border border-[#afc1b8] bg-white/45 px-4 py-2 text-xs font-bold text-[#3f5149]">
+                    {service}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
         </section>
       ) : null}
 
-      {/* 3. Proof of Impact */}
-      <section id="results" className="py-24 relative sm:py-32">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="mb-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+      <section id="services" className="bg-[#101513] py-20 sm:py-28">
+        <div className="site-shell">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Proof of Impact</h2>
-              <h3 className="text-3xl md:text-5xl font-display font-bold text-white leading-tight">Evidence a CEO can inspect in seconds.</h3>
+              <p className="page-label mb-5">Capabilities</p>
+              <h2 className="section-display text-white">One system. Every critical layer.</h2>
             </div>
-            <p className="text-base leading-relaxed text-gray-400 sm:text-lg">
-              The point is not to look busy. It is to show whether acquisition architecture is producing indexed demand, qualified lead volume, and costs that can be scaled with confidence.
+            <p className="max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
+              Catalyst works across the full buyer journey. Engagements are shaped around the actual constraint, not a predetermined channel retainer.
             </p>
           </div>
 
-          <div data-reveal="panel" className="glass-panel p-5 sm:p-8 md:p-16 rounded-lg border border-white/10 relative overflow-hidden">
-            <div className="premium-rule absolute left-5 right-5 top-0 sm:left-8 sm:right-8" />
-            
-            <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
-              <div className="space-y-8">
-                <div>
-                  <div className="mb-8 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-md sm:px-4">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-accent sm:text-xs sm:tracking-widest">Enterprise Case Study</span>
-                  </div>
-                  <h4 className="mb-6 text-2xl font-display font-bold text-white md:text-4xl">National Connectivity Marketplace</h4>
-                  <p className="text-base leading-relaxed text-gray-400 sm:text-lg">
-                    A multi-channel acquisition rebuild combining programmatic SEO, paid traffic routing, landing-page trust architecture, and lead follow-up measurement.
-                  </p>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+            {capabilities.map(({ icon: Icon, title, copy, href }, index) => (
+              <Link key={title} href={href} data-reveal="card" data-reveal-delay={index % 4} className="group min-h-[280px] bg-[#151b18] p-6 transition-colors hover:bg-[#1b2420] sm:p-7">
+                <div className="flex items-center justify-between">
+                  <Icon className="h-6 w-6 text-brand-accent" />
+                  <ArrowUpRight className="h-4 w-4 text-gray-600 transition-colors group-hover:text-brand-accent" />
                 </div>
-
-                <div className="grid gap-3">
-                  {[
-                    ["Constraint", "Demand existed, but discovery paths and conversion evidence were fragmented."],
-                    ["Deployment", "Built search-capture assets, paid acquisition paths, and proof-led landing flows."],
-                    ["Result", "Generated a visible acquisition spike without relying on disconnected campaign activity."],
-                  ].map(([label, copy], index) => (
-                    <div key={label} data-reveal="metric" data-reveal-delay={index} className="premium-hover-card border-l-2 border-brand-accent/70 bg-black/24 px-5 py-4">
-                      <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">{label}</div>
-                      <div className="mt-2 text-sm leading-relaxed text-gray-300">{copy}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div data-reveal="metric" className="premium-hover-card border border-white/8 bg-black/30 p-5">
-                    <BarChart3 className="mb-4 h-7 w-7 text-brand-accent" />
-                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
-                      <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />
-                    </div>
-                    <div className="text-sm font-medium leading-relaxed text-gray-400">New pages indexed through pSEO architecture</div>
-                  </div>
-                  <div data-reveal="metric" data-reveal-delay="1" className="premium-hover-card border border-white/8 bg-black/30 p-5">
-                    <Users className="mb-4 h-7 w-7 text-brand-accent" />
-                    <div className="mb-2 text-3xl font-display font-bold text-white sm:text-4xl">
-                      <AnimatedStat to={437} className="tabular-nums" />
-                    </div>
-                    <div className="text-sm font-medium leading-relaxed text-gray-400">High-intent leads generated in one day</div>
-                  </div>
-                </div>
-              </div>
-
-              <div data-reveal="panel" data-reveal-delay="1" className="border border-white/10 bg-[#08080d] shadow-2xl">
-                <div className="flex flex-col gap-4 border-b border-white/8 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                  <div>
-                    <div className="text-sm font-bold text-white">Acquisition Command View</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">Search + paid media yield</div>
-                  </div>
-                  <div className="flex items-center gap-2 rounded-md border border-green-400/20 bg-green-400/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-green-300">
-                    <LockKeyhole className="h-3.5 w-3.5" />
-                    Verified
-                  </div>
-                </div>
-
-                <div className="grid gap-4 p-5 sm:grid-cols-3">
-                  {[
-                    {
-                      label: "Indexed",
-                      stat: <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />,
-                      Icon: Search,
-                    },
-                    {
-                      label: "Lead Yield",
-                      stat: <AnimatedStat to={437} className="tabular-nums" />,
-                      Icon: TrendingUp,
-                    },
-                    {
-                      label: "CPL",
-                      stat: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
-                      Icon: Gauge,
-                    },
-                  ].map(({ label, stat, Icon }, index) => (
-                    <div key={label as string} data-reveal="metric" data-reveal-delay={index} className="premium-hover-card border border-white/8 bg-white/[0.025] p-4">
-                      <Icon className="mb-4 h-5 w-5 text-brand-accent" />
-                      <div className="text-xs uppercase tracking-[0.16em] text-gray-600">{label as string}</div>
-                      <div className="mt-2 text-2xl font-bold text-white">{stat}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="px-4 pb-4 sm:px-5 sm:pb-5">
-                  <div className="premium-hover-card border border-white/8 bg-black/40 p-4 sm:p-5">
-                    <div className="mb-5 flex items-center justify-between gap-4">
-                      <div>
-                        <div className="text-sm font-semibold text-gray-300">Google Search Console</div>
-                        <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-gray-600 sm:text-xs sm:tracking-[0.16em]">30 day index velocity</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-green-400">
-                          <AnimatedStat to={21.3} decimals={1} suffix="K" className="tabular-nums" />
-                        </div>
-                        <div className="text-xs text-gray-600">indexed</div>
-                      </div>
-                    </div>
-                    <div className="flex h-28 items-end gap-1">
-                      {[2,3,2,4,3,2,1,2,3,45,45,47,48,48,48,48,45,45,45,35,35,35,35,34,34,34,34].map((h, i) => (
-                        <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-green-600/70 to-green-300/80" style={{ height: `${h}%` }} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid border-t border-white/8 md:grid-cols-[1fr_0.8fr]">
-                  <div className="p-4 sm:p-5">
-                    <div className="mb-4 text-sm font-semibold text-gray-300">Meta Ads Manager</div>
-                    <div className="space-y-3">
-                      {[
-                        {
-                          label: "Website Leads",
-                          value: <AnimatedStat to={347} className="tabular-nums" />,
-                          cost: <AnimatedStat from={10.57} to={2.35} decimals={2} prefix="$" className="tabular-nums" />,
-                        },
-                        {
-                          label: "Qualified Actions",
-                          value: <AnimatedStat to={90} className="tabular-nums" />,
-                          cost: "$3.35",
-                        },
-                      ].map(({ label, value, cost }) => (
-                        <div key={label} className="grid grid-cols-[1fr_auto_auto] items-end gap-3 border-b border-white/8 pb-3 last:border-b-0 last:pb-0 sm:gap-4">
-                          <div className="text-[10px] uppercase tracking-[0.13em] text-gray-600 sm:text-xs sm:tracking-[0.15em]">{label}</div>
-                          <div className="text-xl font-bold text-white">{value}</div>
-                          <div className="text-sm font-semibold text-brand-accent">{cost}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="border-t border-white/8 p-4 sm:p-5 md:border-l md:border-t-0">
-                    <div className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brand-accent">
-                      <ArrowUpRight className="h-4 w-4" />
-                      Executive Readout
-                    </div>
-                    <p className="font-serif text-base italic leading-relaxed text-gray-300 sm:text-lg">
-                      &quot;The system showed where demand was coming from, which pages were being indexed, and where paid traffic could scale without guessing.&quot;
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 border-t border-white/8 pt-10">
-              <div className="mb-8 grid gap-4 md:grid-cols-[0.78fr_1fr] md:items-end">
-                <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-                    Verified Platform Evidence
-                  </h4>
-                  <p className="mt-3 text-2xl font-display font-bold leading-tight text-white">
-                    Screenshots from the systems where the results were measured.
-                  </p>
-                </div>
-                <p className="text-sm leading-relaxed text-gray-500">
-                  These views are included as supporting proof: Google Search Console indexation, Meta reach and traffic, and campaign-level click efficiency.
-                </p>
-              </div>
-
-              <div className="grid gap-5 lg:grid-cols-[1.18fr_0.82fr]">
-                <figure data-reveal="panel" className="premium-hover-image overflow-hidden rounded-lg border border-white/10 bg-black/40">
-                  <div className="relative aspect-[1400/650]">
-                    <Image
-                      src="/proof-home-tech-search-console.webp"
-                      alt="Google Search Console screenshot showing 21.3K indexed pages for a national connectivity marketplace"
-                      fill
-                      sizes="(min-width: 1024px) 58vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <figcaption className="border-t border-white/8 px-5 py-4">
-                    <div className="text-sm font-bold text-white">Connectivity Marketplace | Programmatic SEO</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">21.3K indexed pages in Google Search Console</div>
-                  </figcaption>
-                </figure>
-
-                <div className="grid gap-5">
-                  {[
-                    {
-                      src: "/proof-home-tech-meta.webp",
-                      alt: "Meta Ads reporting screenshot for a connectivity marketplace showing reach, impressions, spend, views, and clicks",
-                      title: "Connectivity Marketplace | Paid Acquisition",
-                      detail: "18,464 clicks from 297,895 impressions",
-                      aspect: "aspect-[1400/342]",
-                    },
-                    {
-                      src: "/proof-whitestone-meta.webp",
-                      alt: "Meta Ads reporting screenshot for a financial advisory firm showing reach, impressions, views, link clicks, and spend",
-                      title: "Financial Advisory Firm | Paid Visibility",
-                      detail: "952,009 impressions and 9,090 link clicks",
-                      aspect: "aspect-[1400/362]",
-                    },
-                    {
-                      src: "/proof-campaign-click-cost.webp",
-                      alt: "Campaign-level reporting screenshot showing 14,291 link clicks at $0.39 per link click",
-                      title: "Campaign Proof | Click Efficiency",
-                      detail: "14,291 link clicks at $0.39 per link click",
-                      aspect: "aspect-[1200/91]",
-                    },
-                  ].map((proof, index) => (
-                    <figure key={proof.src} data-reveal="metric" data-reveal-delay={index} className="premium-hover-image overflow-hidden rounded-lg border border-white/10 bg-black/40">
-                      <div className={`relative ${proof.aspect}`}>
-                        <Image
-                          src={proof.src}
-                          alt={proof.alt}
-                          fill
-                          sizes="(min-width: 1024px) 38vw, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
-                      <figcaption className="border-t border-white/8 px-5 py-4">
-                        <div className="text-sm font-bold text-white">{proof.title}</div>
-                        <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">{proof.detail}</div>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
-              </div>
-            </div>
+                <h3 className="mt-10 font-display text-2xl leading-tight text-white">{title}</h3>
+                <p className="mt-4 text-sm leading-7 text-gray-400">{copy}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Methodology Section (The Mechanism) */}
-      <section id="methodology" className="py-24 relative bg-black/40 border-y border-white/5 sm:py-32">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="mb-14 sm:mb-20">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Our Mechanism</h2>
-            <h3 className="text-3xl md:text-5xl font-display font-bold text-white max-w-3xl leading-tight">The Catalyst Influence Architecture™</h3>
-            <p className="text-lg text-gray-400 mt-6 max-w-2xl font-serif italic sm:text-xl">We don&apos;t just &quot;run ads&quot;. We rebuild the four layers of your customer acquisition environment.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div data-reveal="card" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <Compass className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
-              <h4 className="text-xl font-bold text-white mb-4">1. Discovery</h4>
-              <p className="text-gray-400 leading-relaxed text-sm">Get the right person into the environment. We engineer targeted SEO, paid media, and content structures to capture high-value intent.</p>
-            </div>
-            
-            <div data-reveal="card" data-reveal-delay="1" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <ShieldCheck className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
-              <h4 className="text-xl font-bold text-white mb-4">2. Trust</h4>
-              <p className="text-gray-400 leading-relaxed text-sm">Immediately reduce uncertainty. We design your visual credibility, authority markers, and consistency to make them feel safe taking the next step.</p>
-            </div>
-
-            <div data-reveal="card" data-reveal-delay="2" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-all duration-500 group border-t-2 border-t-brand-indigo/50">
-              <MousePointerClick className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
-              <h4 className="text-xl font-bold text-white mb-4">3. Decision</h4>
-              <p className="text-gray-400 leading-relaxed text-sm">Structure information so taking action feels deeply logical. We rebuild offer architecture, messaging, and proactive objection resolution.</p>
-            </div>
-
-            <div data-reveal="card" data-reveal-delay="3" className="glass-panel p-8 rounded-lg hover:bg-white/5 transition-colors duration-200 group border-t-2 border-t-brand-accent/50 shadow-[0_-10px_30px_rgba(212,160,74,0.05)]">
-              <Zap className="w-8 h-8 text-brand-accent mb-6 transition-transform duration-200 group-hover:translate-y-[-2px]" />
-              <h4 className="text-xl font-bold text-white mb-4">4. Activation</h4>
-              <p className="text-gray-400 leading-relaxed text-sm">Convert intent into measurable action. We optimize forms, booking systems, automated follow-ups, and behavioral remarketing loops.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. The Flagship Offer (Execution Roadmap) */}
-      <section className="py-24 relative overflow-hidden sm:py-32">
-        <div className="premium-rule absolute left-1/2 top-0 h-px w-[min(760px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <div className="mb-14 text-center sm:mb-20">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Flagship Engagement</h2>
-            <h3 className="text-3xl md:text-5xl font-display font-bold text-white leading-tight">The 90-Day Growth Architecture</h3>
-            <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">A 90-day acquisition system for established service businesses that need more qualified opportunities—not more disconnected marketing activity.</p>
-          </div>
-
-          <div className="space-y-6">
-            <div data-reveal="panel" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
-              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
-                <span className="text-2xl font-bold">1</span>
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-white mb-3">Days 1–30: Architect & Diagnose</h4>
-                <p className="text-gray-400 leading-relaxed mb-4">We diagnose where prospects are being lost and rebuild the foundation. The major client-facing deliverable is your complete Growth Architecture Blueprint. After Month 1, you will feel: *&quot;These people understand my customer better than any agency I&apos;ve hired before.&quot;*</p>
-                <div className="flex flex-wrap gap-4">
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Competitor & Offer Analysis</span>
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Landing Page Strategy & Trust Architecture</span>
-                </div>
-              </div>
-            </div>
-
-            <div data-reveal="panel" data-reveal-delay="1" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
-              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
-                <span className="text-2xl font-bold">2</span>
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-white mb-3">Days 31–60: Deploy</h4>
-                <p className="text-gray-400 leading-relaxed mb-4">We build the acquisition machine. Not every client gets every channel. We deploy *only* the specific channels most likely to produce profitable customer acquisition for your unique business model.</p>
-                <div className="flex flex-wrap gap-4">
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Meta/Google Campaign Infrastructure</span>
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Automated Follow-up & CRM Integration</span>
-                </div>
-              </div>
-            </div>
-
-            <div data-reveal="panel" data-reveal-delay="2" className="roadmap-card glass-panel p-6 sm:p-8 rounded-lg border border-white/10 flex flex-col md:flex-row gap-6 md:gap-8 items-start relative">
-              <div className="roadmap-marker flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center border">
-                <span className="text-2xl font-bold">3</span>
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-white mb-3">Days 61–90: Optimize & Scale</h4>
-                <p className="text-gray-400 leading-relaxed mb-4">Working from real behavioral data, we identify winning traffic sources, messages, and variations. We shift resources toward what produces results and scale your profitable volume aggressively.</p>
-                <div className="flex flex-wrap gap-4">
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Executive Growth Review</span>
-                  <span className="text-sm font-medium text-brand-accent flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Aggressive Budget Scaling</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. The Brain Trust */}
-      <section id="leadership" className="py-24 bg-black/40 border-y border-white/5 sm:py-32">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="grid md:grid-cols-[0.88fr_1fr] gap-16 items-center">
-            <div data-reveal="panel" className="relative max-w-[520px]">
-              <div className="absolute -inset-3 border border-white/8 bg-white/[0.02]" />
-              <div className="premium-hover-image relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl">
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src="/founder-v2.jpg"
-                    alt="Abel V., Principal Architect at Catalyst"
-                    fill
-                    sizes="(min-width: 768px) 42vw, 100vw"
-                    className="object-cover object-[52%_26%] saturate-[0.9] contrast-[1.04]"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_54%,rgba(0,0,0,0.72)_100%)]" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="border-t border-white/12 pt-4">
-                    <p className="text-lg font-display font-bold text-white">Abel V.</p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand-accent">
-                      Principal Architect
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <section id="results" className="bg-white py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">The Brain Trust</h2>
-              <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">Direct senior strategy. <br/>Built close to the numbers.</h3>
-              <p className="text-lg text-gray-400 mb-8 font-serif italic leading-relaxed sm:text-xl">
-                &quot;When you work with Catalyst, the person diagnosing the acquisition path is the same person shaping the page system, offer architecture, and performance signal loop.&quot;
-              </p>
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-2xl sm:text-3xl font-display font-bold text-white mb-2">Abel V.</h4>
-                  <p className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-3">Principal Architect</p>
-                  <p className="text-gray-500 leading-relaxed">Architecting acquisition systems across programmatic SEO, paid media routing, landing page conversion, CRM follow-up, and executive reporting.</p>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {[
-                    "PSEO architecture",
-                    "Paid acquisition systems",
-                    "Conversion + follow-up",
-                  ].map((item) => (
-                    <div key={item} className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-4">
-                      <p className="text-sm font-bold uppercase tracking-[0.16em] text-gray-300">{item}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="glass-panel rounded-lg p-5">
-                  <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent">What that means for clients</p>
-                  <p className="text-gray-400 leading-relaxed">
-                    The work stays connected from search demand to sales follow-up, so strategy, page experience, form behavior, and reporting are not treated as separate problems.
-                  </p>
-                </div>
-                <ul className="space-y-4 text-gray-300 font-medium pt-2">
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Builds page systems around real buyer intent</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Connects acquisition channels to conversion behavior</li>
-                  <li className="flex items-center gap-4"><span className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(212,160,74,0.58)]"></span> Prioritizes measurable pipeline over vanity metrics</li>
-                </ul>
+              <p className="page-label mb-5">Documented proof</p>
+              <h2 className="section-display">The work leaves evidence.</h2>
+            </div>
+            <p className="max-w-2xl text-base leading-8 text-[#59655f] sm:text-lg">
+              Real reporting from acquisition environments where search coverage, paid demand, landing pages, and follow-up were designed to work together.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-7 lg:grid-cols-[1.35fr_0.65fr]">
+            <figure data-reveal="panel" className="premium-hover-image rounded-lg border border-[#d7ddd8] bg-[#edf0ed] shadow-[0_22px_60px_rgba(25,45,38,0.1)]">
+              <div className="relative aspect-[1400/650]">
+                <Image src="/proof-home-tech-search-console.webp" alt="Google Search Console report documenting 21.3K indexed pages" fill sizes="(min-width: 1024px) 70vw, 100vw" className="object-cover" />
               </div>
+              <figcaption className="flex flex-col gap-2 border-t border-[#d7ddd8] bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-sm font-extrabold">Programmatic search deployment</span>
+                <span className="text-xs font-bold uppercase text-[#68736e]">21.3K indexed pages</span>
+              </figcaption>
+            </figure>
+
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              {[
+                ["437", "qualified leads generated in 24 hours"],
+                ["$2.35", "documented cost per qualified lead"],
+                ["18,464", "paid-media click actions documented"],
+              ].map(([value, label], index) => (
+                <div key={label} data-reveal="metric" data-reveal-delay={index} className="light-panel flex flex-col justify-end rounded-lg p-6">
+                  <div className="font-display text-4xl text-brand-forest sm:text-5xl">{value}</div>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-[#5c6862]">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-7 grid gap-5 md:grid-cols-3">
+            {[
+              { src: "/proof-home-tech-meta.webp", alt: "Paid media report showing reach, impressions, spend, views, and clicks", title: "Paid acquisition" },
+              { src: "/proof-whitestone-meta.webp", alt: "Paid visibility report showing reach, impressions, views, clicks, and spend", title: "Visibility at scale" },
+              { src: "/proof-automation-flow-redacted-v2.webp", alt: "Redacted lead qualification and follow-up automation workflow", title: "Lead automation" },
+            ].map((proof, index) => (
+              <figure key={proof.src} data-reveal="card" data-reveal-delay={index} className="premium-hover-image rounded-lg border border-[#d7ddd8] bg-[#edf0ed]">
+                <div className="relative aspect-[16/8]">
+                  <Image src={proof.src} alt={proof.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                </div>
+                <figcaption className="border-t border-[#d7ddd8] bg-white px-5 py-4 text-sm font-extrabold">{proof.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="methodology" className="bg-brand-sage py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <p className="page-label mb-5">The first 90 days</p>
+          <h2 className="section-display">A disciplined path from diagnosis to signal.</h2>
+
+          <div className="mt-14 border-y border-[#b9c9c1]">
+            {methodology.map((phase, index) => (
+              <article key={phase.number} data-reveal="panel" data-reveal-delay={index} className="roadmap-card grid gap-5 border-b border-[#b9c9c1] py-8 last:border-b-0 md:grid-cols-[90px_0.7fr_1.3fr] md:items-center">
+                <div className="roadmap-marker flex h-14 w-14 items-center justify-center rounded-full text-sm font-extrabold">{phase.number}</div>
+                <div>
+                  <p className="text-xs font-extrabold uppercase text-brand-coral">{phase.window}</p>
+                  <h3 className="mt-2 font-display text-3xl">{phase.title}</h3>
+                </div>
+                <p className="max-w-2xl text-sm leading-7 text-[#52605a]">{phase.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="leadership" className="bg-[#101513] py-20 sm:py-28">
+        <div className="site-shell grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+          <div data-reveal="panel" className="premium-hover-image relative mx-auto w-full max-w-[480px] overflow-hidden rounded-lg border border-white/12 bg-[#171d1a]">
+            <div className="relative aspect-[4/5]">
+              <Image src="/founder-v2.jpg" alt="Abel V., Principal Architect at Catalyst Influence" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover object-[52%_26%] contrast-[1.02]" />
+            </div>
+            <div className="border-t border-white/10 bg-[#151b18] px-6 py-5">
+              <p className="text-lg font-extrabold text-white">Abel V.</p>
+              <p className="mt-1 text-xs font-bold uppercase text-brand-accent">Principal Architect</p>
+            </div>
+          </div>
+
+          <div>
+            <p className="page-label mb-5">Founder-led delivery</p>
+            <h2 className="section-display text-white">Senior judgment stays close to the work.</h2>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
+              Catalyst is built for operators who do not want strategy sold by one person and delegated through layers. The same principal who diagnoses the acquisition path shapes the website, search architecture, conversion logic, automation, and performance review.
+            </p>
+
+            <div className="mt-9 grid gap-3 sm:grid-cols-2">
+              {[
+                "Programmatic and technical SEO architecture",
+                "Conversion-first web design and development",
+                "Paid acquisition and landing-page alignment",
+                "CRM automation, lead routing, and attribution",
+              ].map((item) => (
+                <div key={item} className="flex gap-3 border-b border-white/10 py-4 text-sm font-semibold text-gray-300">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" />
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. Executive FAQ & Risk Reversal */}
-      <section className="py-24 relative sm:py-32">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6">
-          <div className="mb-16 text-center">
-            <h2 className="text-xs font-semibold text-brand-accent uppercase tracking-[0.2em] mb-4">Clarity & Accountability</h2>
-            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white">Executive Briefing</h3>
+      <section className="bg-brand-paper py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <p className="page-label mb-5">Executive briefing</p>
+            <h2 className="section-display">Questions serious buyers ask.</h2>
           </div>
-          
-          <div className="space-y-4">
+          <div className="border-t border-[#cfd7d2]">
             {executiveFaqs.map((faq, index) => (
-              <details key={faq.question} className="group glass-panel rounded-lg border border-white/10 [&_summary::-webkit-details-marker]:hidden" open={index === 0}>
-                <summary className="flex items-center justify-between gap-4 p-5 sm:p-6 cursor-pointer">
-                  <h4 className="text-lg font-bold text-white flex items-center gap-3">
-                    {index === 0 ? <ShieldCheck className="w-5 h-5 text-brand-accent" /> : null}
-                    {faq.question}
-                  </h4>
-                  <ChevronDown className="w-5 h-5 text-brand-accent group-open:-rotate-180 transition-transform" />
+              <details key={faq.question} className="group border-b border-[#cfd7d2]" open={index === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-6 [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-base font-extrabold sm:text-lg">{faq.question}</h3>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-brand-forest transition-transform group-open:rotate-180" />
                 </summary>
-                <div className="px-5 pb-5 text-gray-400 leading-relaxed sm:px-6 sm:pb-6">
-                  {faq.answer}
-                </div>
+                <p className="max-w-3xl pb-7 text-sm leading-7 text-[#5a6660]">{faq.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 8. CTA Section */}
-      <section id="contact" className="py-24 relative overflow-hidden bg-black/40 border-t border-white/5 sm:py-32">
-        <div className="absolute inset-0 bg-brand-accent/5"></div>
-        <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-6">
+      <section id="contact" className="bg-brand-forest py-20 sm:py-28">
+        <div className="site-shell">
           <div className="mb-12 max-w-3xl">
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">Partnership Application</h2>
-            <h3 className="mb-8 text-4xl font-display font-extrabold tracking-tight text-white md:text-6xl">Start a serious growth conversation.</h3>
-            <p className="font-serif text-lg italic leading-relaxed text-gray-400 sm:text-xl">
-              We partner with businesses that have at least $10K/month in marketing capacity and the operational ability to handle additional volume.
+            <p className="page-label mb-5 text-[#ead6ad]">Request a review</p>
+            <h2 className="section-display text-white">Give us the current system. We will find the constraint.</h2>
+            <p className="mt-6 text-base leading-8 text-[#c9d7d0] sm:text-lg">
+              Submit the website and current investment range. Catalyst will review the visible acquisition environment before recommending an engagement.
             </p>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[0.82fr_1fr] lg:items-start">
-            <div className="glass-panel rounded-lg p-6 sm:p-8">
-              <div className="mb-8 flex items-center gap-3">
-                <ShieldCheck className="h-6 w-6 text-brand-accent" />
-                <h4 className="text-2xl font-display font-bold text-white">What happens after you apply</h4>
-              </div>
-              <div className="space-y-5">
+          <div className="grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div className="rounded-lg border border-white/14 bg-[#193a32] p-6 sm:p-8">
+              <h3 className="font-display text-3xl text-white">What happens next</h3>
+              <div className="mt-7 space-y-6">
                 {[
-                  ["1", "We review your current digital footprint, offer clarity, and visible trust gaps."],
-                  ["2", "We identify whether your market can support profitable acquisition scale."],
-                  ["3", "If there is a fit, we invite you to a 15-minute strategic fit call."],
-                ].map(([step, copy]) => (
-                  <div key={step} className="flex gap-4 border-b border-white/8 pb-5 last:border-b-0 last:pb-0">
-                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-brand-accent/40 bg-brand-accent/10 text-sm font-bold text-brand-accent">
-                      {step}
-                    </div>
-                    <p className="leading-relaxed text-gray-300">{copy}</p>
+                  "We review the offer, visible trust, search footprint, and conversion path.",
+                  "We identify whether the market and economics can support a serious acquisition system.",
+                  "If there is a credible path, we respond with the most relevant next conversation.",
+                ].map((copy, index) => (
+                  <div key={copy} className="flex gap-4 border-b border-white/12 pb-6 last:border-b-0 last:pb-0">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ead6ad]/55 text-xs font-extrabold text-[#ead6ad]">{index + 1}</span>
+                    <p className="text-sm leading-7 text-[#d8e2dd]">{copy}</p>
                   </div>
                 ))}
               </div>
-              <div className="premium-hover-card mt-8 border border-white/8 bg-black/30 p-5">
-                <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">Fit Criteria</div>
-                <p className="mt-3 text-sm leading-relaxed text-gray-400">
-                  Established service businesses, proven demand, high customer value, and enough operational capacity to handle additional qualified opportunities.
-                </p>
+              <div className="mt-8 border-l-2 border-brand-accent bg-[#102d27] px-5 py-4">
+                <p className="text-xs font-extrabold uppercase text-brand-accent">Current availability</p>
+                <p suppressHydrationWarning className="mt-2 text-sm leading-6 text-[#c9d7d0]">Two established partner openings for {currentQuarter}.</p>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="glass-panel p-6 sm:p-8 md:p-12 rounded-lg text-left border border-white/10 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-accent to-brand-glow opacity-80"></div>
-            <div className="mb-8">
-              <h4 className="text-2xl font-display font-bold text-white">Request review</h4>
-              <p className="mt-3 text-sm leading-relaxed text-gray-500">
-                Submit your URL. We will review the acquisition environment before recommending any engagement.
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Executive Name</label>
-                <input name="executiveName" required type="text" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="e.g. John Doe" />
+            <form onSubmit={handleSubmit} className="rounded-lg bg-white p-6 text-[#18201d] shadow-[0_28px_80px_rgba(5,20,15,0.25)] sm:p-8 md:p-10">
+              <div className="mb-8">
+                <h3 className="font-display text-3xl">Acquisition review request</h3>
+                <p className="mt-3 text-sm leading-7 text-[#65716b]">No sales script. We assess fit before recommending work.</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Corporate Email</label>
-                <input name="email" required type="email" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="john@company.com" />
+
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="executiveName" className="mb-2 block text-sm font-bold">Executive name</label>
+                  <input id="executiveName" name="executiveName" required type="text" className="premium-input w-full rounded-md border border-[#cbd3ce] bg-[#f7f8f6] px-4 py-4 text-[#18201d] outline-none" placeholder="John Doe" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="mb-2 block text-sm font-bold">Corporate email</label>
+                  <input id="email" name="email" required type="email" className="premium-input w-full rounded-md border border-[#cbd3ce] bg-[#f7f8f6] px-4 py-4 text-[#18201d] outline-none" placeholder="john@company.com" />
+                </div>
+                <div>
+                  <label htmlFor="marketingCapacity" className="mb-2 block text-sm font-bold">Current acquisition investment</label>
+                  <select id="marketingCapacity" name="marketingCapacity" required defaultValue="" className="premium-input w-full rounded-md border border-[#cbd3ce] bg-[#f7f8f6] px-4 py-4 text-[#18201d] outline-none">
+                    <option value="" disabled>Select a range</option>
+                    <option value="under-10k">Under $10,000 / month</option>
+                    <option value="10k-25k">$10,000 - $25,000 / month</option>
+                    <option value="25k-50k">$25,000 - $50,000 / month</option>
+                    <option value="50k-100k">$50,000 - $100,000 / month</option>
+                    <option value="100k+">$100,000+ / month</option>
+                    <option value="not-sure">Not sure yet</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="websiteUrl" className="mb-2 block text-sm font-bold">Current website <span className="font-normal text-[#7b8580]">(optional)</span></label>
+                  <input id="websiteUrl" name="websiteUrl" type="text" inputMode="url" className="premium-input w-full rounded-md border border-[#cbd3ce] bg-[#f7f8f6] px-4 py-4 text-[#18201d] outline-none" placeholder="company.com" />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Current Acquisition Investment</label>
-                <select name="marketingCapacity" required className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none appearance-none">
-                  <option value="under-10k">Under $10,000 / month</option>
-                  <option value="10k-25k">$10,000 - $25,000 / month</option>
-                  <option value="25k-50k">$25,000 - $50,000 / month</option>
-                  <option value="50k-100k">$50,000 - $100,000 / month</option>
-                  <option value="100k+">$100,000+ / month</option>
-                  <option value="not-sure">Not sure yet</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Current Website <span className="text-gray-600">(optional)</span></label>
-                <input name="websiteUrl" type="text" inputMode="url" className="premium-input w-full bg-black/50 border border-white/10 rounded-lg px-5 py-4 text-white focus:outline-none" placeholder="company.com" />
-              </div>
-              <button disabled={formState === "submitting"} type="submit" className="button-primary w-full text-black text-lg font-bold py-4 rounded-lg mt-4 disabled:opacity-60">
-                {formState === "submitting" ? "Submitting..." : "Submit Application"}
+
+              <button disabled={formState === "submitting"} type="submit" className="button-primary mt-7 inline-flex w-full items-center justify-center gap-3 rounded-md px-6 py-4 text-base font-extrabold disabled:opacity-60">
+                {formState === "submitting" ? "Submitting..." : "Submit for review"}
+                {formState !== "submitting" ? <ArrowRight className="h-4 w-4" /> : null}
               </button>
               {formMessage ? (
-                <p className={`text-sm text-center leading-relaxed ${formState === "success" ? "text-green-400" : "text-red-400"}`}>
-                  {formMessage}
-                </p>
+                <p className={`mt-4 text-center text-sm ${formState === "success" ? "text-brand-forest" : "text-red-700"}`}>{formMessage}</p>
               ) : null}
-              <p suppressHydrationWarning className="text-xs text-center text-gray-500 mt-6 uppercase tracking-wider leading-relaxed">
-                <span className="text-brand-accent font-bold">Availability:</span> We only onboard 2 new established partners per {currentQuarter}.
-              </p>
-            </div>
-          </form>
+              <div className="mt-5 flex items-center justify-center gap-2 text-xs text-[#77817c]">
+                <ShieldCheck className="h-4 w-4" /> Your information is used only to review this request.
+              </div>
+            </form>
           </div>
+
+          {formattedCity && relatedCityServiceLinks.length ? (
+            <div className="mt-14 border-t border-white/14 pt-8">
+              <p className="mb-4 text-xs font-extrabold uppercase text-[#a9beb5]">Related acquisition paths in {formattedCity}</p>
+              <div className="flex flex-wrap gap-2">
+                {relatedCityServiceLinks.slice(0, 8).map((link) => (
+                  <Link key={link.href} href={link.href} className="rounded-md border border-white/14 px-4 py-2 text-xs font-semibold text-[#d8e2dd] transition-colors hover:border-brand-accent hover:text-white">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
     </main>

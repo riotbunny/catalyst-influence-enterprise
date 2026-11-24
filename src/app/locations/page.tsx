@@ -5,9 +5,9 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import { getStateHubs } from "@/content/localMarket";
 import { getIndexableLocations } from "@/content/locations";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
+import { ArrowRight, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
   title: "Customer Acquisition Agency by City | Catalyst Influence",
@@ -23,73 +23,53 @@ export default function LocationsPage() {
   return (
     <main className="min-h-screen">
       <RevealOnScroll />
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Locations", path: "/locations" },
-        ])}
-      />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Locations", path: "/locations" }])} />
       <Background />
       <Navbar />
 
-      <section className="relative pt-32 pb-14 md:pt-48 md:pb-16">
-        <div className="premium-rule absolute left-1/2 top-20 h-px w-[min(900px,calc(100%-3rem))] -translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold text-brand-accent uppercase tracking-[0.18em] mb-5 sm:text-xs sm:tracking-[0.22em]">
-            Major U.S. Markets
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-display font-black text-white leading-tight max-w-4xl mb-6">
-            Customer acquisition systems for established service businesses by city.
+      <section className="relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-44">
+        <div className="executive-grid absolute inset-0 -z-10" />
+        <div className="site-shell">
+          <p className="page-label mb-6">Priority markets</p>
+          <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.98] text-white sm:text-6xl lg:text-7xl">
+            Local acquisition built around markets that can support growth.
           </h1>
-          <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
-            Explore the priority markets where Catalyst evaluates local demand, competitive pressure, conversion friction, and follow-up as one connected acquisition system.
+          <p className="mt-7 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
+            Catalyst focuses indexation and content depth on priority markets where demand, service coverage, buyer intent, and commercial opportunity justify dedicated acquisition architecture.
           </p>
         </div>
       </section>
 
-      <section className="pb-20 sm:pb-28">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="mb-10 grid gap-4 md:grid-cols-3">
-            {[
-              ["Demand", "commercial search intent mapped by market"],
-              ["Proof", "trust and conversion requirements evaluated"],
-              ["Pipeline", "follow-up and attribution connected"],
-            ].map(([value, label]) => (
-              <div key={label} className="premium-hover-card border border-white/8 bg-white/[0.025] p-5">
-                <div className="text-3xl font-display font-bold text-white">{value}</div>
-                <div className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{label}</div>
-              </div>
+      <section className="bg-brand-paper py-20 text-[#18201d] sm:py-28">
+        <div className="site-shell">
+          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="page-label mb-5">Market directory</p>
+              <h2 className="section-display">Focused coverage, not city-name swaps.</h2>
+            </div>
+            <p className="max-w-2xl text-base leading-8 text-[#5b6761]">
+              Priority pages receive market-specific signals, useful service context, clean internal paths, and conversion logic that reflects how local buyers compare providers.
+            </p>
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-2 border-y border-[#d2dad5] py-6">
+            {stateHubs.map((hub) => (
+              <Link key={hub.slug} href={`/locations/states/${hub.slug}`} className="rounded-md border border-[#c8d1cb] bg-white px-4 py-2 text-sm font-bold text-[#3d4b45] transition-colors hover:border-brand-forest hover:text-brand-forest">
+                {hub.state} <span className="ml-1 text-[#8a948f]">{hub.locations.length}</span>
+              </Link>
             ))}
           </div>
-          <div className="mb-10">
-            <h2 className="mb-4 text-xl font-display font-bold text-white">Regional service-area hubs</h2>
-            <div className="flex flex-wrap gap-3">
-              {stateHubs.map((hub) => (
-                <Link
-                  key={hub.slug}
-                  href={`/locations/states/${hub.slug}`}
-                  className="premium-hover-card rounded-md border border-white/10 bg-black/24 px-4 py-2 text-sm font-semibold text-gray-300 transition-colors hover:border-brand-accent/60 hover:text-white"
-                >
-                  {hub.state} ({hub.locations.length})
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {locations.map((location, index) => (
-              <Link
-                key={location.slug}
-              href={`/locations/${location.marketSlug}`}
-                data-reveal="card"
-                data-reveal-delay={index % 4}
-                className="glass-panel rounded-lg p-5 hover:border-brand-accent/60 hover:bg-white/5 transition-colors"
-              >
-                <MapPin className="w-5 h-5 text-brand-accent mb-4" />
-                <h2 className="text-lg font-bold text-white">{location.city}</h2>
-                <p className="text-sm text-gray-500 mt-1">{location.stateCode}</p>
-                <p className="mt-4 text-sm leading-relaxed text-gray-400">
-                  Customer acquisition, local SEO, PSEO, paid media, and conversion architecture for {location.city} service businesses.
-                </p>
+              <Link key={location.marketSlug} href={`/locations/${location.marketSlug}`} data-reveal="card" data-reveal-delay={index % 4} className="premium-hover-card light-panel group rounded-lg p-6">
+                <div className="flex items-center justify-between">
+                  <MapPin className="h-5 w-5 text-brand-forest" />
+                  <ArrowRight className="h-4 w-4 text-brand-forest transition-transform group-hover:translate-x-1" />
+                </div>
+                <h2 className="mt-7 font-display text-3xl">{location.city}</h2>
+                <p className="mt-1 text-xs font-extrabold uppercase text-brand-coral">{location.state}</p>
+                <p className="mt-4 text-sm leading-7 text-[#5b6761]">Customer acquisition, local SEO, paid demand, conversion, and follow-up for established service businesses.</p>
               </Link>
             ))}
           </div>
