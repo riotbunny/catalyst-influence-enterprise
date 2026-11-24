@@ -128,23 +128,57 @@ const majorCities: CityRecord[] = [
   { slug: "des-moines", city: "Des Moines", state: "Iowa" },
 ];
 
-export const locations: LocationPage[] = majorCities.map((location, index) => ({
-  ...location,
-  stateCode: getStateCode(location.state),
-  marketSlug: buildMarketSlug(location),
-  title: `Customer Acquisition Agency in ${location.city}, ${getStateCode(location.state)} | Catalyst Influence`,
-  metaDescription: `Customer acquisition agency in ${location.city}, ${getStateCode(location.state)} for established service businesses. Catalyst connects local SEO, lead generation, paid media, landing pages, automation, and lead attribution.`,
-  marketAngle: buildMarketAngle(location),
-  localBuyerIntent: buildBuyerIntent(location),
-  localSearchFocus: buildSearchFocus(location),
-  localServices: buildLocalServices(location),
-  serviceAreaCopy: buildServiceAreaCopy(location),
-  priorityServices: ["customer-acquisition-system", "programmatic-seo", "conversion-architecture"],
-  priorityIndustries: ["law-firms", "home-services", "dental-practices"],
-  priority: index < 20 ? 0.7 : index < 50 ? 0.6 : 0.5,
-  indexable: true,
-  lastModified: "2026-09-18",
-}));
+// Keep every market available to visitors while limiting Google-facing inventory
+// to markets with meaningful demand, strategic priority, or Search Console signal.
+const searchPriorityMarkets = new Set([
+  "new-york-ny",
+  "los-angeles-ca",
+  "chicago-il",
+  "houston-tx",
+  "phoenix-az",
+  "philadelphia-pa",
+  "san-antonio-tx",
+  "san-diego-ca",
+  "dallas-tx",
+  "san-jose-ca",
+  "austin-tx",
+  "jacksonville-fl",
+  "fort-worth-tx",
+  "columbus-oh",
+  "san-francisco-ca",
+  "charlotte-nc",
+  "indianapolis-in",
+  "seattle-wa",
+  "denver-co",
+  "washington-dc",
+  "baltimore-md",
+  "chula-vista-ca",
+  "jersey-city-nj",
+  "richmond-va",
+  "st-louis-mo",
+]);
+
+export const locations: LocationPage[] = majorCities.map((location, index) => {
+  const marketSlug = buildMarketSlug(location);
+
+  return {
+    ...location,
+    stateCode: getStateCode(location.state),
+    marketSlug,
+    title: `Customer Acquisition Agency in ${location.city}, ${getStateCode(location.state)} | Catalyst Influence`,
+    metaDescription: `Customer acquisition agency in ${location.city}, ${getStateCode(location.state)} for established service businesses. Catalyst connects local SEO, lead generation, paid media, landing pages, automation, and lead attribution.`,
+    marketAngle: buildMarketAngle(location),
+    localBuyerIntent: buildBuyerIntent(location),
+    localSearchFocus: buildSearchFocus(location),
+    localServices: buildLocalServices(location),
+    serviceAreaCopy: buildServiceAreaCopy(location),
+    priorityServices: ["customer-acquisition-system", "programmatic-seo", "conversion-architecture"],
+    priorityIndustries: ["law-firms", "home-services", "dental-practices"],
+    priority: index < 20 ? 0.7 : index < 50 ? 0.6 : 0.5,
+    indexable: searchPriorityMarkets.has(marketSlug),
+    lastModified: "2026-11-24",
+  };
+});
 
 export function getLocation(slug: string) {
   return locations.find((location) => location.slug === slug || location.marketSlug === slug);
@@ -152,6 +186,10 @@ export function getLocation(slug: string) {
 
 export function getIndexableLocations() {
   return locations.filter((location) => location.indexable);
+}
+
+export function getAllLocations() {
+  return locations;
 }
 
 function buildMarketSlug(location: CityRecord) {

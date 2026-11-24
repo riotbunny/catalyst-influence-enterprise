@@ -10,9 +10,9 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
-  title: "Customer Acquisition Agency Locations | Major U.S. City PSEO Pages",
+  title: "Customer Acquisition Agency by City | Catalyst Influence",
   description:
-    "Browse Catalyst Influence customer acquisition, programmatic SEO, local SEO, paid acquisition, and conversion architecture pages for major U.S. cities.",
+    "Explore customer acquisition strategy, local SEO, paid media, conversion, and follow-up support for established service businesses in priority U.S. markets.",
   path: "/locations",
 });
 
@@ -42,7 +42,7 @@ export default function LocationsPage() {
             Customer acquisition systems for established service businesses by city.
           </h1>
           <p className="text-lg sm:text-xl text-gray-400 font-serif italic leading-relaxed max-w-3xl">
-            Each city page uses the same conversion-focused Catalyst architecture, with local metadata, customer acquisition keywords, service-area language, and market copy for established service businesses competing in that market.
+            Explore the priority markets where Catalyst evaluates local demand, competitive pressure, conversion friction, and follow-up as one connected acquisition system.
           </p>
         </div>
       </section>
@@ -51,9 +51,9 @@ export default function LocationsPage() {
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="mb-10 grid gap-4 md:grid-cols-3">
             {[
-              ["100+", "major U.S. markets"],
-              ["6", "local acquisition keyword clusters per city"],
-              ["5", "core acquisition services mapped per city"],
+              ["Demand", "commercial search intent mapped by market"],
+              ["Proof", "trust and conversion requirements evaluated"],
+              ["Pipeline", "follow-up and attribution connected"],
             ].map(([value, label]) => (
               <div key={label} className="premium-hover-card border border-white/8 bg-white/[0.025] p-5">
                 <div className="text-3xl font-display font-bold text-white">{value}</div>

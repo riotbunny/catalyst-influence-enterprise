@@ -157,7 +157,7 @@ export default function LandingPage({
             {[
               ["Salesnet LLC", "B2B acquisition systems"],
               ["McMaster Lawfirm", "Legal demand capture"],
-              ["Home Tech Dealer Inc.", "Programmatic SEO + paid media"],
+              ["Consumer Connectivity Marketplace", "Programmatic SEO + paid media"],
             ].map(([name, detail], index) => (
               <div key={name} data-reveal="card" data-reveal-delay={index} className="premium-hover-card border border-white/8 bg-white/[0.025] px-5 py-5 sm:px-6">
                 <div className="flex items-center justify-between gap-4">
@@ -310,7 +310,7 @@ export default function LandingPage({
                   <div className="mb-8 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-md sm:px-4">
                     <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-accent sm:text-xs sm:tracking-widest">Enterprise Case Study</span>
                   </div>
-                  <h4 className="mb-6 text-2xl font-display font-bold text-white md:text-4xl">Home Tech Dealer</h4>
+                  <h4 className="mb-6 text-2xl font-display font-bold text-white md:text-4xl">National Connectivity Marketplace</h4>
                   <p className="text-base leading-relaxed text-gray-400 sm:text-lg">
                     A multi-channel acquisition rebuild combining programmatic SEO, paid traffic routing, landing-page trust architecture, and lead follow-up measurement.
                   </p>
@@ -464,14 +464,14 @@ export default function LandingPage({
                   <div className="relative aspect-[1400/650]">
                     <Image
                       src="/proof-home-tech-search-console.webp"
-                      alt="Google Search Console page indexing screenshot showing 21.3K indexed pages for Home Tech Dealer"
+                      alt="Google Search Console screenshot showing 21.3K indexed pages for a national connectivity marketplace"
                       fill
                       sizes="(min-width: 1024px) 58vw, 100vw"
                       className="object-cover"
                     />
                   </div>
                   <figcaption className="border-t border-white/8 px-5 py-4">
-                    <div className="text-sm font-bold text-white">Home Tech Dealer | Programmatic SEO</div>
+                    <div className="text-sm font-bold text-white">Connectivity Marketplace | Programmatic SEO</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-600">21.3K indexed pages in Google Search Console</div>
                   </figcaption>
                 </figure>
@@ -480,15 +480,15 @@ export default function LandingPage({
                   {[
                     {
                       src: "/proof-home-tech-meta.webp",
-                      alt: "Meta Ads reporting screenshot for Home Tech Dealer showing reach, impressions, spend, views, and clicks",
-                      title: "Home Tech Dealer | Paid Acquisition",
+                      alt: "Meta Ads reporting screenshot for a connectivity marketplace showing reach, impressions, spend, views, and clicks",
+                      title: "Connectivity Marketplace | Paid Acquisition",
                       detail: "18,464 clicks from 297,895 impressions",
                       aspect: "aspect-[1400/342]",
                     },
                     {
                       src: "/proof-whitestone-meta.webp",
-                      alt: "Meta Ads reporting screenshot for Whitestone Capital Advisors showing reach, impressions, views, link clicks, and spend",
-                      title: "Whitestone Capital Advisors | Paid Visibility",
+                      alt: "Meta Ads reporting screenshot for a financial advisory firm showing reach, impressions, views, link clicks, and spend",
+                      title: "Financial Advisory Firm | Paid Visibility",
                       detail: "952,009 impressions and 9,090 link clicks",
                       aspect: "aspect-[1400/362]",
                     },

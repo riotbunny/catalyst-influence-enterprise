@@ -1,5 +1,5 @@
 import { getIndexableIndustries, type IndustryPage } from "@/content/industries";
-import { getIndexableLocations, getStateCode, type LocationPage } from "@/content/locations";
+import { getAllLocations, getIndexableLocations, getStateCode, type LocationPage } from "@/content/locations";
 
 export type StateHub = {
   slug: string;
@@ -8,6 +8,134 @@ export type StateHub = {
   locations: LocationPage[];
   priority: number;
   lastModified: string;
+};
+
+const cityMarketSignals: Record<string, string[]> = {
+  "new-york-ny": [
+    "New York buyers compare dense sets of local specialists, established firms, and national providers in the same search results.",
+    "Borough and service-area differences make one generic metro message less useful than a clearly segmented acquisition path.",
+    "High media costs put more pressure on proof, qualification, and conversion before traffic is scaled.",
+  ],
+  "los-angeles-ca": [
+    "Los Angeles is a wide, fragmented service market where coverage, response time, and location relevance need to be explicit.",
+    "Prospects often compare polished competitors, making credible proof and a clear point of difference essential.",
+    "Campaigns perform better when landing pages match the service, audience, and part of the metro being targeted.",
+  ],
+  "chicago-il": [
+    "Chicago demand spans the city and a large suburban service area, so geographic qualification needs to happen early.",
+    "Established regional competitors raise the importance of authority signals and concrete operating proof.",
+    "Seasonality and service economics should influence which search themes and offers receive budget first.",
+  ],
+  "houston-tx": [
+    "Houston's large service footprint rewards clear coverage boundaries and fast mobile lead handling.",
+    "Competitive paid traffic makes source quality and booked-opportunity reporting more useful than raw lead volume.",
+    "Local pages need to connect market relevance with visible proof instead of relying on city-name repetition.",
+  ],
+  "phoenix-az": [
+    "Phoenix growth creates opportunity across a broad metro, but service-area clarity is necessary to protect lead quality.",
+    "Mobile prospects need fast proof, clear next steps, and minimal friction before contacting a provider.",
+    "Seasonal demand changes which services and messages deserve the strongest acquisition support.",
+  ],
+  "philadelphia-pa": [
+    "Philadelphia buyers can compare long-established local firms with newer specialists, increasing the value of visible credibility.",
+    "City and suburban demand should be segmented so pages and campaigns do not blur distinct service areas.",
+    "Strong conversion paths need to explain fit quickly before asking for a sales conversation.",
+  ],
+  "san-antonio-tx": [
+    "San Antonio service demand favors businesses that make local fit, response expectations, and proof easy to evaluate.",
+    "A growing competitive set makes reliable attribution important before expanding spend.",
+    "Local search and paid acquisition should share the same service priorities and qualification rules.",
+  ],
+  "san-diego-ca": [
+    "San Diego's spread-out metro requires precise service-area and audience targeting.",
+    "High buyer expectations make strong proof and polished mobile conversion paths especially important.",
+    "Organic and paid programs should be measured against qualified inquiries rather than broad traffic growth.",
+  ],
+  "dallas-tx": [
+    "Dallas-Fort Worth is a multi-city market where service-area pages need a clear hierarchy instead of competing with one another.",
+    "Rapid competition for high-value demand makes qualification and source-to-revenue reporting essential.",
+    "The strongest pages pair metro relevance with concrete proof, offer clarity, and fast follow-up.",
+  ],
+  "san-jose-ca": [
+    "San Jose buyers tend to expect technical clarity, credible expertise, and a low-friction evaluation path.",
+    "Expensive acquisition channels increase the value of conversion improvements before budget expansion.",
+    "Specific service and buyer-intent pages can outperform broad agency positioning when they provide real decision support.",
+  ],
+  "austin-tx": [
+    "Austin's mix of fast-growing and established businesses creates demand for both local and B2B acquisition systems.",
+    "Sophisticated buyers respond better to specific operating evidence than generic growth claims.",
+    "Search, paid media, and follow-up need shared qualification criteria to protect pipeline quality.",
+  ],
+  "jacksonville-fl": [
+    "Jacksonville's broad service footprint makes coverage and response expectations important conversion details.",
+    "Mobile local demand rewards pages that establish trust and make the next action obvious quickly.",
+    "Channel reporting should separate inexpensive inquiries from economically useful opportunities.",
+  ],
+  "fort-worth-tx": [
+    "Fort Worth needs distinct market positioning even when campaigns also serve the wider Dallas-Fort Worth area.",
+    "Local proof and service-area clarity help avoid generic metro messaging.",
+    "Lead routing should preserve the source and market context needed to judge opportunity quality.",
+  ],
+  "columbus-oh": [
+    "Columbus combines established local competition with expanding service demand across the metro.",
+    "Clear service specialization can be more persuasive than broad full-service claims.",
+    "Pages should connect search intent to proof and a measurable follow-up path.",
+  ],
+  "san-francisco-ca": [
+    "San Francisco buyers expect concise differentiation, strong evidence, and a sophisticated digital experience.",
+    "High acquisition costs make landing-page and qualification efficiency commercially important.",
+    "Specific expertise should be visible before the visitor reaches the inquiry form.",
+  ],
+  "charlotte-nc": [
+    "Charlotte's growth across professional and local services increases competition for high-value search demand.",
+    "Regional credibility and clear commercial fit matter when buyers compare local and national providers.",
+    "Acquisition reporting should connect channel activity to booked opportunities and pipeline quality.",
+  ],
+  "indianapolis-in": [
+    "Indianapolis service markets reward practical proof, clear coverage, and straightforward offers.",
+    "A focused set of high-intent pages can be more effective than broad undifferentiated content.",
+    "Fast lead handling and source visibility help turn local demand into measurable pipeline.",
+  ],
+  "seattle-wa": [
+    "Seattle buyers often expect a strong digital experience and evidence of operational competence before contacting a provider.",
+    "Specific expertise and credible proof help separate specialists from broad agency alternatives.",
+    "Paid and organic acquisition should use the same conversion and qualification standards.",
+  ],
+  "denver-co": [
+    "Denver's competitive regional market rewards clear local relevance without sacrificing specialist positioning.",
+    "Buyers need enough proof and process clarity to compare local firms with national providers.",
+    "Page and campaign performance should be measured by qualified actions, not visibility alone.",
+  ],
+  "washington-dc": [
+    "Washington buyers often evaluate credibility, specialization, and risk before agreeing to a conversation.",
+    "The regional market crosses jurisdictional boundaries, making service-area language and qualification important.",
+    "Authority signals and precise offers carry more weight than generic claims of full-service capability.",
+  ],
+  "baltimore-md": [
+    "Baltimore search demand includes both city and surrounding-market intent, requiring clear geographic qualification.",
+    "Established local providers make visible trust and service specialization important competitive signals.",
+    "HVAC and home-service acquisition should separate urgent, replacement, and research intent before routing leads.",
+  ],
+  "chula-vista-ca": [
+    "Chula Vista demand should be positioned distinctly from broader San Diego targeting where service coverage differs.",
+    "Local relevance, mobile speed, and clear next steps matter when prospects compare nearby providers quickly.",
+    "Pages need useful market and service context beyond a swapped city name.",
+  ],
+  "jersey-city-nj": [
+    "Jersey City buyers compare local firms with providers across the wider New York metro.",
+    "Clear service boundaries and differentiation help prevent the page from reading like a generic New York alternative.",
+    "High competition makes proof and conversion efficiency important before traffic is expanded.",
+  ],
+  "richmond-va": [
+    "Richmond is producing the site's clearest current local SEO search signal, so this market deserves deeper supporting content and proof.",
+    "Regional service businesses need pages that connect local relevance with commercial fit and measurable follow-up.",
+    "Search visibility should be converted with specific expertise, credible evidence, and a direct next step.",
+  ],
+  "st-louis-mo": [
+    "St. Louis buyers often compare established regional firms, making specialization and visible operating proof important.",
+    "City and surrounding-county demand should be qualified through clear service-area and offer language.",
+    "Thought-leadership positioning works best when it is tied to a concrete acquisition outcome and next step.",
+  ],
 };
 
 const stateMarketSignals: Record<string, string[]> = {
@@ -88,7 +216,7 @@ const industryLocalAngles: Record<string, string[]> = {
 };
 
 export function getLocalMarketSignals(location: LocationPage) {
-  return stateMarketSignals[location.state] ?? defaultSignals;
+  return cityMarketSignals[location.marketSlug] ?? stateMarketSignals[location.state] ?? defaultSignals;
 }
 
 export function getLocalMarketSummary(location: LocationPage) {
@@ -139,8 +267,8 @@ export function getIndustryLocalAngles(industry: IndustryPage) {
   ];
 }
 
-export function getStateHubs(): StateHub[] {
-  const grouped = getIndexableLocations().reduce<Record<string, LocationPage[]>>((groups, location) => {
+function buildStateHubs(sourceLocations: LocationPage[]): StateHub[] {
+  const grouped = sourceLocations.reduce<Record<string, LocationPage[]>>((groups, location) => {
     groups[location.state] = groups[location.state] ?? [];
     groups[location.state].push(location);
     return groups;
@@ -161,8 +289,16 @@ export function getStateHubs(): StateHub[] {
     .sort((a, b) => b.priority - a.priority || a.state.localeCompare(b.state));
 }
 
+export function getStateHubs(): StateHub[] {
+  return buildStateHubs(getIndexableLocations());
+}
+
+export function getAllStateHubs(): StateHub[] {
+  return buildStateHubs(getAllLocations());
+}
+
 export function getStateHub(slug: string) {
-  return getStateHubs().find((hub) => hub.slug === slug || hub.stateCode.toLowerCase() === slug);
+  return getAllStateHubs().find((hub) => hub.slug === slug || hub.stateCode.toLowerCase() === slug);
 }
 
 export function getIndustryMarketPages() {

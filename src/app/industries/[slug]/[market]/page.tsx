@@ -3,11 +3,10 @@ import PseoPage from "@/components/PseoPage";
 import {
   getIndustryLocalAngles,
   getIndustryLocationFaqs,
-  getIndustryMarketPages,
   getLocalMarketSignals,
   getLocalMarketSummary,
 } from "@/content/localMarket";
-import { getLocation } from "@/content/locations";
+import { getAllLocations, getLocation } from "@/content/locations";
 import { getIndexableIndustries, getIndustry } from "@/content/industries";
 import { breadcrumbJsonLd, createMetadata, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -20,10 +19,12 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getIndustryMarketPages().map((page) => ({
-    slug: page.industrySlug,
-    market: page.marketSlug,
-  }));
+  return getIndexableIndustries().flatMap((industry) =>
+    getAllLocations().map((location) => ({
+      slug: industry.slug,
+      market: location.marketSlug,
+    })),
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -2,13 +2,13 @@ import JsonLd from "@/components/JsonLd";
 import PseoPage from "@/components/PseoPage";
 import { getExecutiveFaqs } from "@/content/faqs";
 import { getLocalMarketSignals, getLocalMarketSummary } from "@/content/localMarket";
-import { getIndexableLocations, getLocation } from "@/content/locations";
+import { getAllLocations, getIndexableLocations, getLocation } from "@/content/locations";
 import { getMarketIntent, marketIntents } from "@/content/marketIntents";
 import { breadcrumbJsonLd, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
 export function generateMarketStaticParams() {
-  return getIndexableLocations().map((location) => ({
+  return getAllLocations().map((location) => ({
     market: location.marketSlug,
   }));
 }

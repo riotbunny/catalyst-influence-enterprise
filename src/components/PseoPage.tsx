@@ -77,10 +77,10 @@ export default function PseoPage({
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/services/programmatic-seo"
+                href="/services"
                 className="px-7 py-4 rounded-lg font-bold tracking-wide text-white border border-white/20 hover:bg-white/10 transition-colors inline-flex items-center justify-center"
               >
-                Explore PSEO
+                Review Services
               </Link>
             </div>
           </div>

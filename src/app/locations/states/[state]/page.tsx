@@ -2,7 +2,7 @@ import Background from "@/components/Background";
 import JsonLd from "@/components/JsonLd";
 import Navbar from "@/components/Navbar";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import { getLocalMarketSignals, getStateHub, getStateHubs } from "@/content/localMarket";
+import { getAllStateHubs, getLocalMarketSignals, getStateHub } from "@/content/localMarket";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -16,7 +16,7 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getStateHubs().map((hub) => ({ state: hub.slug }));
+  return getAllStateHubs().map((hub) => ({ state: hub.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Customer Acquisition Agency in ${hub.state} | Catalyst Influence`,
     description: `Customer acquisition, lead generation, and local SEO strategy for established service businesses across ${hub.state}.`,
     path: `/locations/states/${hub.slug}`,
+    indexable: hub.locations.some((location) => location.indexable),
   });
 }
 
@@ -43,6 +44,9 @@ export default async function StateLocationPage({ params }: Props) {
   }
 
   const signals = getLocalMarketSignals(hub.locations[0]);
+  const visibleLocations = hub.locations.some((location) => location.indexable)
+    ? hub.locations.filter((location) => location.indexable)
+    : hub.locations;
 
   return (
     <main className="min-h-screen">
@@ -83,7 +87,7 @@ export default async function StateLocationPage({ params }: Props) {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {hub.locations.map((location, index) => (
+            {visibleLocations.map((location, index) => (
               <Link
                 key={location.marketSlug}
                 href={`/locations/${location.marketSlug}`}

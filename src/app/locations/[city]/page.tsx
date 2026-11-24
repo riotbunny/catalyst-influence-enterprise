@@ -3,11 +3,11 @@ import LandingPage from "@/components/LandingPage";
 import { getExecutiveFaqs } from "@/content/faqs";
 import { getIndexableIndustries } from "@/content/industries";
 import { getLocalMarketSignals, getLocalMarketSummary, getLocationFaqs } from "@/content/localMarket";
-import { getIndexableLocations, getLocation } from "@/content/locations";
+import { getAllLocations, getLocation } from "@/content/locations";
 import { marketIntents } from "@/content/marketIntents";
 import { breadcrumbJsonLd, createMetadata, faqJsonLd, localServiceJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 type Props = {
   params: Promise<{ city: string }>;
@@ -16,9 +16,10 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getIndexableLocations().map((location) => ({
-    city: location.marketSlug,
-  }));
+  return getAllLocations().flatMap((location) => [
+    { city: location.marketSlug },
+    { city: location.slug },
+  ]);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -43,6 +44,10 @@ export default async function LocationPage({ params }: Props) {
 
   if (!location) {
     notFound();
+  }
+
+  if (city === location.slug && city !== location.marketSlug) {
+    redirect(`/locations/${location.marketSlug}`);
   }
 
   const relatedCityServiceLinks = marketIntents.map((intent) => ({
